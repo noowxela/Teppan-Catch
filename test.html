@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>stars</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.js"></script>
+
+    <style type="text/css">
+        head{
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+    
+    var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+
+var cursors;
+
+var foods;
+var bombs;
+
+
+var score = 0;
+
+
+var caption;
+
+var captionStyle = {
+    fill: '#7fdbff',
+    fontFamily: 'monospace',
+    lineSpacing: 4
+};
+
+var captionTextFormat = (
+    'Total:    %1\n' +
+    'Max:      %2\n' +
+    'Active:   %3\n' +
+    'Inactive: %4\n' +
+    'Used:     %5\n' +
+    'Free:     %6\n' +
+    'Full:     %7\n' +
+    'Score:    %8\n'
+);
+
+var game = new Phaser.Game(config);
+
+function preload () {
+    this.load.image('space', 'assets/space.jpg');
+    // this.load.spritesheet('alien', 'http://labs.phaser.io/assets/tests/invaders/invader1.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+    this.load.image('teppan', 'assets/teppan.png');
+    this.load.image('crumpled_papera', 'assets/crumpled_papera.png');
+
+}
+
+// assets\tests\invaders\invader1.png
+
+function create () {
+
+    this.anims.create({
+        key: 'creep',
+        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 8 }),
+        frameRate: 3,
+        repeat: -1
+    });
+
+    this.add.image(400, 300, 'space');
+
+    foods = this.physics.add.group({
+        defaultKey: 'dude',
+        maxSize: 100,
+        createCallback: function (dude) {
+            dude.setName('dude' + this.getLength());
+            console.log('Created', dude.name);
+        },
+        removeCallback: function (dude) {
+            console.log('Removed', dude.name);
+        }
+    });
+    console.log('how:');
+    console.log(score);
+
+    // player = this.physics.add.sprite(config.weight/2, config.height-100, 'teppan').setScale(0.5);
+    player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.5);
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    // You could also fill the group first:
+    // group.createMultiple({
+    //     active: false,
+    //     key: group.defaultKey,
+    //     repeat: group.maxSize - 1
+    // });
+
+    caption = this.add.text(16, 16, '', captionStyle);
+
+    this.time.addEvent({
+        delay: 400,
+        loop: true,
+        callback: addAlien
+    });
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+    bombs = this.physics.add.group();
+
+    this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.collider(player, foods, collectStar, null, this);
+
+}
+
+function update () {
+    Phaser.Actions.IncY(foods.getChildren(), 1);
+
+    foods.children.iterate(function (dude) {
+        if (dude.y > 600) {
+            foods.killAndHide(dude);
+        }
+    });
+
+    caption.setText(Phaser.Utils.String.Format(captionTextFormat, [
+        foods.getLength(),
+        foods.maxSize,
+        foods.countActive(true),
+        foods.countActive(false),
+        foods.getTotalUsed(),
+        foods.getTotalFree(),
+        foods.isFull(),
+        score
+    ]));
+
+    if (cursors.left.isDown)
+    {
+        player.setVelocityX(-300);
+    }
+    else if (cursors.right.isDown)
+    {
+        player.setVelocityX(300);
+    }
+    else if (cursors.down.isDown)
+    {
+        player.setVelocityY(+200);
+    }
+    else 
+    {
+        player.setVelocityX(0);
+    }
+
+
+}
+
+function activateAlien (dude) {
+    dude
+    .setActive(true)
+    .setVisible(true)
+    .setTint(Phaser.Display.Color.RandomRGB().color)
+    .play('creep');
+}
+
+function addAlien () {
+    var dude = foods.get(Phaser.Math.Between(250, 800), Phaser.Math.Between(-64, 0));
+
+    if (!dude) return; // None free
+
+    activateAlien(dude);
+}
+
+function createBombs (){
+        
+    var x = Phaser.Math.Between(20, 360);
+    
+    var bomb = bombs.create(x,-20,'crumpled_paper').setScale(0.1);
+    
+}
+
+function collectStar (player, foods)
+{
+    console.log('collectStar');
+    foods.disableBody(true, true);
+
+    score += 10;
+    // scoreText.setText('Score: ' + score);
+
+    // if (stars.countActive(true) === 0)
+    // {
+    //     //  A new batch of stars to collect
+    //     stars.children.iterate(function (child) {
+
+    //         child.enableBody(true, child.x, 0, true, true);
+
+    //     });
+
+    //     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    //     var bomb = bombs.create(x, 16, 'bomb');
+    //     bomb.setBounce(1);
+    //     bomb.setCollideWorldBounds(true);
+    //     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    //     bomb.allowGravity = false;
+
+    // }
+
+}
+    
+function hitBomb (player, bomb)
+{
+    console.log('hitBomb');
+    bomb.disableBody(true, true);
+    hp -= 20;
+    hpText.setText('HP: ' + hp);
+
+    // this.physics.pause();
+
+    // player.setTint(0xff0000);
+
+    // player.anims.play('turn');
+
+    // gameOver = true;
+
+}
+</script>
+
+</body>
+</html>

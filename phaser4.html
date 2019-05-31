@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PEPPER LUNCH</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.js"></script>
+
+    <style type="text/css">
+        head{
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+        }
+        .responsive {
+        width: 100%;
+        height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        // width: window.innerWidth-5,
+        // height: window.innerHeight-3,
+        width: 380,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 300 },
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update,
+            // render: render,
+
+        }
+    };
+
+    var player;
+    var stars;
+
+    var foods;
+    var bombs;
+    var item_appear=0;
+
+    var score = 0;
+    var scoreText;  
+    var hp = 100;
+    var hpText;
+    var hpbar;
+    // var platforms;
+
+    var cursors;
+    var timer;
+    var total = 0;
+    var timedEvent;
+
+    var counter  = 0;
+    var text = 0;
+    
+    
+    
+    var game = new Phaser.Game(config);
+    var timer = Phaser.timer;
+    var time = Phaser.time;
+
+    console.log("timer: ");
+    console.log(game.width);
+    console.log("time: ");
+    console.log(game);
+    
+    function preload ()
+    {
+        
+        // this.load.image('sky', 'assets/sky.png');
+        this.load.image('background', 'assets/background.png');
+        this.load.image('balck_bg', 'assets/balck_bg.png');
+
+        this.load.image('logo', 'assets/logo.png');
+        this.load.image('logo_edge', 'assets/logo_edge.png');
+        this.load.image('heatlhbar', 'assets/heatlhbar.png');
+        this.load.image('20bar', 'assets/20bar.png');
+        this.load.image('40bar', 'assets/40bar.png');
+        this.load.image('60bar', 'assets/60bar.png');
+        this.load.image('80bar', 'assets/80bar.png');
+        this.load.image('100bar', 'assets/100bar.png');
+        this.load.image('product_homepage', 'assets/product_homepage.png');
+        this.load.image('product_formPage', 'assets/product_formPage.png');
+
+        this.load.image('minus', 'assets/minus.png');
+        
+      
+        //item image
+        this.load.image('crumpled_papera', 'assets/crumpled_papera.png');
+        this.load.image('Steak_bites', 'assets/Steak_bites.png');
+        this.load.image('french_beans', 'assets/french_beans.png');
+        this.load.image('pepper_margarine', 'assets/pepper_margarine.png');
+        this.load.image('Steak', 'assets/Steak.png');
+        this.load.image('Broccoli', 'assets/Broccoli.png');
+        this.load.image('Corn', 'assets/Corn.png');
+        this.load.image('Cheese', 'assets/Cheese.png');
+        this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
+
+        //player image
+
+
+        cursors = this.input.keyboard.createCursorKeys();
+
+
+
+    }
+
+    function create ()
+    {
+        console.log('create');
+
+        this.add.image(0,0, 'background').setScale(1);
+        // this.add.image(config.width/2,config.height-200, 'product_formPage').setScale(0.1);
+        // this.add.image(config.width/2,config.height-400, 'crumpled_papera').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'french_beans').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'Cheese').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'Broccoli').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'Steak').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'pepper_margarine').setScale(0.5);
+        // this.add.image(config.width/2,config.height-400, 'Steak_bites').setScale(0.5);
+
+
+        // this.add.image(config.width/2,config.height-400, 'heatlhbar').setScale(0.5);
+        
+        // this.add.image(config.width/2,config.height-100, 'teppan').setScale(0.5);
+        timedEvent = this.time.addEvent({ delay: 500, callback: createBombs, callbackScope: this, loop: true });
+
+
+        player = this.physics.add.sprite(100, 450, 'teppan').setScale(0.5);
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+        
+        hpbar = this.add.image(90, 25, 'heatlhbar').setScale(0.1);
+        hpbar = this.add.image(90, 25, '100bar').setScale(0.1);
+
+        scoreText = this.add.text(250, 20, 'score: 0', { fontSize: '20px', fill: '#000' });
+        hpText = this.add.text(250, 40, 'HP: 100', { fontSize: '20px', fill: '#000' });
+        text = this.add.text(100, 60, 'Counter: 0', { fontSize: '20px', fill: '#000' });
+
+        bombs = this.physics.add.group();
+
+        this.physics.add.collider(player, bombs, hitBomb, null, this);
+
+
+
+    }
+
+    function createBombs (){
+        
+        var x = Phaser.Math.Between(20, 360);
+        
+        var bomb =bombs.create(x,-20,'crumpled_paper').setScale(0.1);
+        
+    }
+    function update ()
+    {
+        if (cursors.left.isDown)
+        {
+            player.setVelocityX(-300);
+        }
+        else if (cursors.right.isDown)
+        {
+            player.setVelocityX(300);
+        }
+        else if (cursors.down.isDown)
+        {
+            player.setVelocityY(+200);
+        }
+        else 
+        {
+            player.setVelocityX(0);
+        }
+        text.setText('Event.progress: ' + timedEvent.getProgress().toString().substr(0, 4));
+
+        // if(hp !== 0 && item_appear < 10){
+
+        //     var x = Phaser.Math.Between(20, 360);
+        
+        //     var bomb =bombs.create(x,0,'crumpled_paper').setScale(0.1);
+        //     item_appear+=1;
+        //     // bomb.setVelocity(Phaser.Math.Between(-200, 200), 0);
+            
+        // }
+
+    }
+
+    function collectStar (player, star)
+    {
+        // star.disableBody(true, true);
+
+        score += 10;
+        scoreText.setText('Score: ' + score);
+
+        // if (stars.countActive(true) === 0)
+        // {
+        //     //  A new batch of stars to collect
+        //     stars.children.iterate(function (child) {
+
+        //         child.enableBody(true, child.x, 0, true, true);
+
+        //     });
+
+        //     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+        //     var bomb = bombs.create(x, 16, 'bomb');
+        //     bomb.setBounce(1);
+        //     bomb.setCollideWorldBounds(true);
+        //     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        //     bomb.allowGravity = false;
+
+        // }
+
+    }
+
+    function hitBomb (player, bomb)
+    {
+        bomb.disableBody(true, true);
+        hp -= 20;
+        hpText.setText('HP: ' + hp);
+
+        // this.physics.pause();
+
+        // player.setTint(0xff0000);
+
+        // player.anims.play('turn');
+
+        // gameOver = true;
+
+    }
+    function updateCounter() {
+
+        counter++;
+        text.setText('Counter: ' + counter);
+    }
+    function render() {
+
+        // game.debug.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
+        // game.debug.text('Loop Count: ' + total, 32, 64);
+
+        game.setText.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
+        game.debug.text('Loop Count: ' + total, 32, 64);
+
+    }
+
+    function startGame(){
+
+
+    }
+
+
+</script>
+
+</body>
+</html>
