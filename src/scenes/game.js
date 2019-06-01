@@ -4,10 +4,15 @@ export default class Game extends Phaser.Scene {
     this.cursors = null;
     this.foods = null;
     this.bombs = null;
+    this.hpBar = null;
+    this.hpBG = null;
     this.score = 0;
+    this.gameWidth = null;
+    this.gameHeight= null;
     this.caption = null;
+
     this.captionStyle = {
-      fill: '#7fdbff',
+      fill: '#000000',
       fontFamily: 'monospace',
       lineSpacing: 4
     };
@@ -31,6 +36,9 @@ export default class Game extends Phaser.Scene {
     
     this.load.image('buttonBG', 'assets/button-bg.png');
     this.load.image('buttonText', 'assets/button-text.png');
+
+    this.load.image('heatlhbar', 'assets/heatlhbar.png');
+    this.load.image('100bar', 'assets/100bar.png');
     
     this.load.image('teppan', 'assets/teppan.png');
     this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
@@ -40,20 +48,29 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.gameWidth = this.sys.game.canvas.getAttribute("width");
+    this.gameHeight = this.sys.game.canvas.getAttribute("height");
 
     this.add.image(
-      this.sys.game.canvas.getAttribute("width")/2,
-      this.sys.game.canvas.getAttribute("height")/2, 'background').setScale(1.3);
-    this.caption = this.add.text(16, 16, '', this.captionStyle);
+      this.gameWidth/2,
+      this.gameHeight/2, 'background').setScale(1.5);
 
-    this.bombs = this.physics.add.group();
+      this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
+      this.shpBar = this.add.image(250, 100, '100bar').setScale(0.3);
+
+    this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
+
+    this.bombs = this.physics.add.group({
+      // defaultKey: 'foodpack',
+      maxSize: 100,
+    });
     this.foods = this.physics.add.group({
       defaultKey: 'foodpack',
       maxSize: 100,
     });
 
     // create player tappen
-    this.player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.1);
+    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight-200, 'teppan').setScale(0.3);
     this.player.setCollideWorldBounds(true);
 
     // create low_point_food
@@ -62,7 +79,7 @@ export default class Game extends Phaser.Scene {
       loop: true,
       callback: () => {
         var foodpack = this.foods.get(
-            Phaser.Math.Between(250, 800), 
+            Phaser.Math.Between(0, this.gameWidth), 
             Phaser.Math.Between(-64, 0),
             'foodpack',Phaser.Math.Between(0, 3)
         );
@@ -75,10 +92,10 @@ export default class Game extends Phaser.Scene {
         delay: 800,
         loop: true,
         callback: () => {
-            var x = Phaser.Math.Between(250, 800);
+            var x = Phaser.Math.Between(0, this.gameWidth);
             var y = Phaser.Math.Between(-64, 0);
             
-            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.1);
+            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
           }        
 
 
@@ -105,7 +122,7 @@ export default class Game extends Phaser.Scene {
     ]));
 
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-300);
+      this.player.setVelocityX(-this.gameWidth/2);
     }
     else if (this.cursors.right.isDown) {
       this.player.setVelocityX(300);
