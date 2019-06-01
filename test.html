@@ -49,6 +49,8 @@ var config = {
 var cursors;
 
 var foods;
+var foobos;
+var foobpack;
 var bombs;
 
 
@@ -83,7 +85,14 @@ function preload () {
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
     this.load.image('teppan', 'assets/teppan.png');
-    this.load.image('crumpled_papera', 'assets/crumpled_papera.png');
+    // this.load.image('teppan', 'assets/teppana.png');
+    this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
+
+    this.load.spritesheet('foodpack', 'assets/foodpack.png',
+            { frameWidth: 40, frameHeight: 40 }
+        );
+
+    // this.load.audio('music_01', 'Adrea.mp3');
 
 }
 
@@ -99,6 +108,7 @@ function create () {
     });
 
     this.add.image(400, 300, 'space');
+    Phaser.Math.Between(-200, 200)
 
     foods = this.physics.add.group({
         defaultKey: 'dude',
@@ -114,32 +124,32 @@ function create () {
     console.log('how:');
     console.log(score);
 
-    // player = this.physics.add.sprite(config.weight/2, config.height-100, 'teppan').setScale(0.5);
-    player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.5);
-    player.setBounce(0.2);
+    bombs = this.physics.add.group();
+    player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.1);
     player.setCollideWorldBounds(true);
+    cursors = this.input.keyboard.createCursorKeys();
 
-    // You could also fill the group first:
-    // group.createMultiple({
-    //     active: false,
-    //     key: group.defaultKey,
-    //     repeat: group.maxSize - 1
-    // });
-
-    caption = this.add.text(16, 16, '', captionStyle);
-
+    // create low_point_food
     this.time.addEvent({
         delay: 400,
         loop: true,
-        callback: addAlien
+        callback: createFoods,
     });
 
-    cursors = this.input.keyboard.createCursorKeys();
+    // bomb creation
+    // this.time.addEvent({
+    //     delay: 400,
+    //     loop: true,
+    //     callback: createBombs
+    // });
+    
+    caption = this.add.text(16, 16, '', captionStyle);
+
 
     bombs = this.physics.add.group();
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-    this.physics.add.collider(player, foods, collectStar, null, this);
+    this.physics.add.collider(player, foods, collectFood, null, this);
 
 }
 
@@ -189,7 +199,15 @@ function activateAlien (dude) {
     .play('creep');
 }
 
-function addAlien () {
+
+function creation(){
+
+
+
+
+}
+
+function createFoods () {
     var dude = foods.get(Phaser.Math.Between(250, 800), Phaser.Math.Between(-64, 0));
 
     if (!dude) return; // None free
@@ -197,17 +215,9 @@ function addAlien () {
     activateAlien(dude);
 }
 
-function createBombs (){
-        
-    var x = Phaser.Math.Between(20, 360);
-    
-    var bomb = bombs.create(x,-20,'crumpled_paper').setScale(0.1);
-    
-}
-
-function collectStar (player, foods)
+function collectFood (player, foods)
 {
-    console.log('collectStar');
+    // console.log('collectFood');
     foods.disableBody(true, true);
 
     score += 10;
