@@ -42,6 +42,7 @@ var cursors;
 
 var foods;
 var foobos;
+var foobpack;
 
 var bombs;
 
@@ -90,6 +91,9 @@ function preload () {
     // this.load.image('teppan', 'assets/teppana.png');
     this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
 
+    this.load.spritesheet('foodpack', 'assets/foodpack.png',
+            { frameWidth: 40, frameHeight: 40 }
+        );
 
     // this.load.audio('music_01', 'Adrea.mp3');
 
@@ -121,7 +125,7 @@ function create () {
         repeat: -1
     });
 
-
+    Phaser.Math.Between(-200, 200)
 
     foods = this.physics.add.group({
         defaultKey: 'dude',
@@ -136,33 +140,30 @@ function create () {
     });
 
     bombs = this.physics.add.group();
-
-    // bomb creation
-    this.time.addEvent({
-        delay: 400,
-        loop: true,
-        callback: createBombs
-    });
-
-    // console.log('how:');
-    // console.log(score);
-    
-    caption = this.add.text(16, 16, '', captionStyle);
-
-    // this.time.addEvent({
-    //     delay: 400,
-    //     loop: true,
-    //     callback: addAlien,
-    // });
-
-
     player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.1);
-    // player = this.physics.add.image(400, 500,'teppan');
     player.setCollideWorldBounds(true);
     cursors = this.input.keyboard.createCursorKeys();
 
+    // create low_point_food
+    this.time.addEvent({
+        delay: 400,
+        loop: true,
+        callback: createFoods,
+    });
+
+    // bomb creation
+    // this.time.addEvent({
+    //     delay: 400,
+    //     loop: true,
+    //     callback: createBombs
+    // });
+    
+    caption = this.add.text(16, 16, '', captionStyle);
+
+
+
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-    this.physics.add.collider(player, foods, collectStar, null, this);
+    this.physics.add.collider(player, foods, collectFood, null, this);
 
 }
 
@@ -214,7 +215,15 @@ function activateAlien (dude) {
     .play('creep');
 }
 
-function addAlien () {
+
+function creation(){
+
+
+
+
+}
+
+function createFoods () {
     var dude = foods.get(Phaser.Math.Between(250, 800), Phaser.Math.Between(-64, 0));
 
     if (!dude) return; // None free
@@ -222,11 +231,9 @@ function addAlien () {
     activateAlien(dude);
 }
 
-
-
-function collectStar (player, foods)
+function collectFood (player, foods)
 {
-    // console.log('collectStar');
+    // console.log('collectFood');
     foods.disableBody(true, true);
 
     score += 10;
