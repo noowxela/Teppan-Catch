@@ -41,7 +41,9 @@ export default class Game extends Phaser.Scene {
 
   create() {
 
-    this.add.image(400, 300, 'space');
+    this.add.image(
+      this.sys.game.canvas.getAttribute("width")/2,
+      this.sys.game.canvas.getAttribute("height")/2, 'background').setScale(1.3);
     this.caption = this.add.text(16, 16, '', this.captionStyle);
 
     this.bombs = this.physics.add.group();
