@@ -2,7 +2,8 @@ export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' })
     this.cursors = null;
-    this.foods = null;
+    this.veges = null;
+    this.meats = null;
     this.bombs = null;
     this.hpBar = null;
     this.hpBG = null;
@@ -43,11 +44,15 @@ export default class Game extends Phaser.Scene {
     this.load.image('teppan', 'assets/teppan.png');
     this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
 
-    this.load.spritesheet('foodpack', 'assets/foodpack.png',
-         { frameWidth: 78, frameHeight: 72 }    );
+    this.load.spritesheet('vegepack', 'assets/vegepack.png',
+         { frameWidth: 237, frameHeight: 203 }    );
+    this.load.spritesheet('meatpack', 'assets/meatpack.png',
+         { frameWidth: 240, frameHeight: 249 }    );
   }
 
   create() {
+
+    //get canvas size
     this.gameWidth = this.sys.game.canvas.getAttribute("width");
     this.gameHeight = this.sys.game.canvas.getAttribute("height");
 
@@ -56,7 +61,7 @@ export default class Game extends Phaser.Scene {
       this.gameHeight/2, 'background').setScale(1.5);
 
       this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
-      this.shpBar = this.add.image(250, 100, '100bar').setScale(0.3);
+      this.hpBar = this.add.image(250, 100, '100bar').setScale(0.3);
 
     this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
 
@@ -64,8 +69,12 @@ export default class Game extends Phaser.Scene {
       // defaultKey: 'foodpack',
       maxSize: 100,
     });
-    this.foods = this.physics.add.group({
-      defaultKey: 'foodpack',
+    this.veges = this.physics.add.group({
+      defaultKey: 'vegepack',
+      maxSize: 100,
+    });
+    this.meats = this.physics.add.group({
+      defaultKey: 'meatpack',
       maxSize: 100,
     });
 
@@ -78,10 +87,22 @@ export default class Game extends Phaser.Scene {
       delay: 600,
       loop: true,
       callback: () => {
-        var foodpack = this.foods.get(
-            Phaser.Math.Between(0, this.gameWidth), 
+        var vegepack = this.veges.get(
+            Phaser.Math.Between(120, this.gameWidth-120), 
             Phaser.Math.Between(-64, 0),
-            'foodpack',Phaser.Math.Between(0, 3)
+            'vegepack',Phaser.Math.Between(0, 3)
+        );
+      }
+
+    });
+    this.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        var meatpack = this.meats.get(
+            Phaser.Math.Between(120, this.gameWidth-120), 
+            Phaser.Math.Between(-64, 0),
+            'meatpack',Phaser.Math.Between(0, 1)
         );
       }
 
@@ -89,10 +110,10 @@ export default class Game extends Phaser.Scene {
 
     // bomb creation
     this.time.addEvent({
-        delay: 800,
+        delay: 1200,
         loop: true,
         callback: () => {
-            var x = Phaser.Math.Between(0, this.gameWidth);
+            var x = Phaser.Math.Between(120, this.gameWidth);
             var y = Phaser.Math.Between(-64, 0);
             
             var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
@@ -105,27 +126,28 @@ export default class Game extends Phaser.Scene {
 
     //player collide with bombs and foods
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
-    this.physics.add.collider(this.player, this.foods, this.collectFood, null, this);
+    this.physics.add.collider(this.player, this.veges, this.collectVeges, null, this);
+    this.physics.add.collider(this.player, this.meats, this.collectMeats, null, this);
   }
 
   update() {
 
     this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
-      this.foods.getLength(),
-      this.foods.maxSize,
-      this.foods.countActive(true),
-      this.foods.countActive(false),
-      this.foods.getTotalUsed(),
-      this.foods.getTotalFree(),
-      this.foods.isFull(),
+      this.veges.getLength(),
+      this.veges.maxSize,
+      this.veges.countActive(true),
+      this.veges.countActive(false),
+      this.veges.getTotalUsed(),
+      this.veges.getTotalFree(),
+      this.veges.isFull(),
       this.score
     ]));
 
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-this.gameWidth/2);
+      this.player.setVelocityX(-this.gameWidth/4*3);
     }
     else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(300);
+      this.player.setVelocityX(this.gameWidth/4*3);
     }
 
     else {
@@ -133,10 +155,16 @@ export default class Game extends Phaser.Scene {
     }
   }
 
-  collectFood(player, foods) {
+  collectVeges(player, veges) {
 
-    foods.disableBody(false, true);
+    veges.disableBody(false, true);
     this.score += 10;
+
+  }
+  collectMeats(player, meats) {
+
+    meats.disableBody(false, true);
+    this.score += 30;
 
   }
 

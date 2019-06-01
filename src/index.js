@@ -17,8 +17,8 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  scene: [Game],
-  // scene: [Welcome, Register, PlayInstruction, Game],
+  // scene: [Game],
+  scene: [Welcome, Register, PlayInstruction, Game],
 })
 
 // set maximum number of pointers allowed to be active at any one time
