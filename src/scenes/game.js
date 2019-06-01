@@ -3,8 +3,6 @@ export default class Game extends Phaser.Scene {
     super({ key: 'Game' })
     this.cursors = null;
     this.foods = null;
-    this.foobos = null;
-    this.foobpack = null;
     this.bombs = null;
     this.score = 0;
     this.caption = null;
@@ -27,84 +25,71 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
+
+    this.load.image('background', 'assets/background.png');
     this.load.image('space', 'assets/space.jpg');
-    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+    
+    this.load.image('buttonBG', 'assets/button-bg.png');
+    this.load.image('buttonText', 'assets/button-text.png');
+    
     this.load.image('teppan', 'assets/teppan.png');
     this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
+
     this.load.spritesheet('foodpack', 'assets/foodpack.png',
-      { frameWidth: 40, frameHeight: 40 }
-    );
+         { frameWidth: 78, frameHeight: 72 }    );
   }
 
   create() {
-    this.anims.create({
-      key: 'creep',
-      frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 8 }),
-      frameRate: 3,
-      repeat: -1
-    });
 
     this.add.image(400, 300, 'space');
-    Phaser.Math.Between(-200, 200)
-
-    this.foods = this.physics.add.group({
-      defaultKey: 'dude',
-      maxSize: 100,
-      createCallback: function (dude) {
-        dude.setName('dude' + this.getLength());
-        console.log('Created', dude.name);
-      },
-      removeCallback: function (dude) {
-        console.log('Removed', dude.name);
-      }
-    });
-    console.log(this.foods)
-    console.log('how:');
-    console.log(this.score);
+    this.caption = this.add.text(16, 16, '', this.captionStyle);
 
     this.bombs = this.physics.add.group();
+    this.foods = this.physics.add.group({
+      defaultKey: 'foodpack',
+      maxSize: 100,
+    });
+
+    // create player tappen
     this.player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.1);
     this.player.setCollideWorldBounds(true);
-    this.cursors = this.input.keyboard.createCursorKeys();
 
-    var vm = this
     // create low_point_food
     this.time.addEvent({
-      delay: 400,
+      delay: 600,
       loop: true,
       callback: () => {
-        var dude = this.foods.get(Phaser.Math.Between(250, 800), Phaser.Math.Between(-64, 0));
-
-        if (!dude) return; // None free
-
-        this.activateAlien(dude);
+        var foodpack = this.foods.get(
+            Phaser.Math.Between(250, 800), 
+            Phaser.Math.Between(-64, 0),
+            'foodpack',Phaser.Math.Between(0, 3)
+        );
       }
+
     });
 
     // bomb creation
-    // this.time.addEvent({
-    //     delay: 400,
-    //     loop: true,
-    //     callback: createBombs
-    // });
+    this.time.addEvent({
+        delay: 800,
+        loop: true,
+        callback: () => {
+            var x = Phaser.Math.Between(250, 800);
+            var y = Phaser.Math.Between(-64, 0);
+            
+            var bomb = bombs.create(x,y,'crumpled_paper').setScale(0.1);
+          }        
 
-    this.caption = this.add.text(16, 16, '', this.captionStyle);
 
+    });
 
-    this.bombs = this.physics.add.group();
+    this.cursors = this.input.keyboard.createCursorKeys();
 
+    //player collide with bombs and foods
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     this.physics.add.collider(this.player, this.foods, this.collectFood, null, this);
   }
 
   update() {
-    Phaser.Actions.IncY(this.foods.getChildren(), 1);
-
-    this.foods.children.iterate((dude) => {
-      if (dude.y > 600) {
-        this.foods.killAndHide(dude);
-      }
-    });
 
     this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
       this.foods.getLength(),
@@ -123,68 +108,24 @@ export default class Game extends Phaser.Scene {
     else if (this.cursors.right.isDown) {
       this.player.setVelocityX(300);
     }
-    else if (this.cursors.down.isDown) {
-      this.player.setVelocityY(+200);
-    }
+
     else {
       this.player.setVelocityX(0);
     }
   }
 
-  activateAlien(dude) {
-    dude
-      .setActive(true)
-      .setVisible(true)
-      .setTint(Phaser.Display.Color.RandomRGB().color)
-      .play('creep');
-  }
-
-
-  creation() {
-
-  }
-
   collectFood(player, foods) {
-    // console.log('collectFood');
-    foods.disableBody(true, true);
 
-    this.score += 10;
-    // scoreText.setText('Score: ' + score);
-
-    // if (stars.countActive(true) === 0)
-    // {
-    //     //  A new batch of stars to collect
-    //     stars.children.iterate(function (child) {
-
-    //         child.enableBody(true, child.x, 0, true, true);
-
-    //     });
-
-    //     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    //     var bomb = bombs.create(x, 16, 'bomb');
-    //     bomb.setBounce(1);
-    //     bomb.setCollideWorldBounds(true);
-    //     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    //     bomb.allowGravity = false;
-
-    // }
+    foods.disableBody(false, true);
+    score += 10;
 
   }
 
   hitBomb(player, bomb) {
-    console.log('hitBomb');
+      
+    // console.log('hitBomb');
     bomb.disableBody(true, true);
-    this.hp -= 20;
-    this.hpText.setText('HP: ' + hp);
-
-    // this.physics.pause();
-
-    // player.setTint(0xff0000);
-
-    // player.anims.play('turn');
-
-    // gameOver = true;
+    score -= 10;
 
   }
 }
