@@ -76,7 +76,7 @@ export default class Game extends Phaser.Scene {
             var x = Phaser.Math.Between(250, 800);
             var y = Phaser.Math.Between(-64, 0);
             
-            var bomb = bombs.create(x,y,'crumpled_paper').setScale(0.1);
+            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.1);
           }        
 
 
@@ -117,7 +117,7 @@ export default class Game extends Phaser.Scene {
   collectFood(player, foods) {
 
     foods.disableBody(false, true);
-    score += 10;
+    this.score += 10;
 
   }
 
@@ -125,7 +125,7 @@ export default class Game extends Phaser.Scene {
       
     // console.log('hitBomb');
     bomb.disableBody(true, true);
-    score -= 10;
+    this.score -= 10;
 
   }
 }
