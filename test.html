@@ -41,13 +41,17 @@
 var cursors;
 
 var foods;
+var foobos;
+
 var bombs;
 
 
 var score = 0;
 
-
 var caption;
+var button;
+var game_run = 0;
+
 
 var captionStyle = {
     fill: '#7fdbff',
@@ -69,19 +73,47 @@ var captionTextFormat = (
 var game = new Phaser.Game(config);
 
 function preload () {
+
+    
     this.load.image('space', 'assets/space.jpg');
     // this.load.spritesheet('alien', 'http://labs.phaser.io/assets/tests/invaders/invader1.png', { frameWidth: 32, frameHeight: 32 });
+    
+    this.load.image('buttonBG', 'assets/button-bg.png');
+    this.load.image('buttonText', 'assets/button-text.png');
+    
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
+    this.load.image('Cheese', 'assets/Cheese.png');
+
+
     this.load.image('teppan', 'assets/teppan.png');
-    this.load.image('crumpled_papera', 'assets/crumpled_papera.png');
+    // this.load.image('teppan', 'assets/teppana.png');
+    this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
+
+
+    // this.load.audio('music_01', 'Adrea.mp3');
 
 }
 
-// assets\tests\invaders\invader1.png
 
 function create () {
 
+    //background imgae
+    this.add.image(400, 300, 'space');
+
+   
+    var bg = this.add.image(16, 50, 'buttonBG').setInteractive();
+    var text = this.add.image(16, 50, 'buttonText');
+
+    var container = this.add.container(80, 200, [ bg, text ]).setScale(0.5);
+
+    // button = this.add.button(80, 200);
+    // button = this.add.button(80, 200, container, buttonPress, this);
+
+    // bg.once('pointerup', loadImage, this);
+
+
+    //create a animetion of image
     this.anims.create({
         key: 'creep',
         frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 8 }),
@@ -89,7 +121,7 @@ function create () {
         repeat: -1
     });
 
-    this.add.image(400, 300, 'space');
+
 
     foods = this.physics.add.group({
         defaultKey: 'dude',
@@ -102,32 +134,32 @@ function create () {
             console.log('Removed', dude.name);
         }
     });
-    console.log('how:');
-    console.log(score);
 
-    // player = this.physics.add.sprite(config.weight/2, config.height-100, 'teppan').setScale(0.5);
-    player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.5);
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
+    bombs = this.physics.add.group();
 
-    // You could also fill the group first:
-    // group.createMultiple({
-    //     active: false,
-    //     key: group.defaultKey,
-    //     repeat: group.maxSize - 1
-    // });
-
-    caption = this.add.text(16, 16, '', captionStyle);
-
+    // bomb creation
     this.time.addEvent({
         delay: 400,
         loop: true,
-        callback: addAlien
+        callback: createBombs
     });
 
-    cursors = this.input.keyboard.createCursorKeys();
+    // console.log('how:');
+    // console.log(score);
+    
+    caption = this.add.text(16, 16, '', captionStyle);
 
-    bombs = this.physics.add.group();
+    // this.time.addEvent({
+    //     delay: 400,
+    //     loop: true,
+    //     callback: addAlien,
+    // });
+
+
+    player = this.physics.add.sprite(400, 500, 'teppan').setScale(0.1);
+    // player = this.physics.add.image(400, 500,'teppan');
+    player.setCollideWorldBounds(true);
+    cursors = this.input.keyboard.createCursorKeys();
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
     this.physics.add.collider(player, foods, collectStar, null, this);
@@ -190,59 +222,38 @@ function addAlien () {
     activateAlien(dude);
 }
 
-function createBombs (){
-        
-    var x = Phaser.Math.Between(20, 360);
-    
-    var bomb = bombs.create(x,-20,'crumpled_paper').setScale(0.1);
-    
-}
+
 
 function collectStar (player, foods)
 {
-    console.log('collectStar');
+    // console.log('collectStar');
     foods.disableBody(true, true);
 
     score += 10;
-    // scoreText.setText('Score: ' + score);
-
-    // if (stars.countActive(true) === 0)
-    // {
-    //     //  A new batch of stars to collect
-    //     stars.children.iterate(function (child) {
-
-    //         child.enableBody(true, child.x, 0, true, true);
-
-    //     });
-
-    //     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    //     var bomb = bombs.create(x, 16, 'bomb');
-    //     bomb.setBounce(1);
-    //     bomb.setCollideWorldBounds(true);
-    //     bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    //     bomb.allowGravity = false;
-
-    // }
 
 }
+
+function createBombs (){
+        
+    // console.log('createBombs');
+    var x = Phaser.Math.Between(250, 800);
+    var y = Phaser.Math.Between(-64, 0);
     
+    var bomb = bombs.create(x,y,'crumpled_paper').setScale(0.1);
+    
+}   
 function hitBomb (player, bomb)
 {
-    console.log('hitBomb');
+    // console.log('hitBomb');
     bomb.disableBody(true, true);
-    hp -= 20;
-    hpText.setText('HP: ' + hp);
-
-    // this.physics.pause();
-
-    // player.setTint(0xff0000);
-
-    // player.anims.play('turn');
-
-    // gameOver = true;
+    score -= 10;
 
 }
+
+function buttonPress(){
+    
+}
+
 </script>
 
 </body>

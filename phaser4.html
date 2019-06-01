@@ -60,6 +60,7 @@
     // var platforms;
 
     var cursors;
+    var pause = 0;
     var timer;
     var total = 0;
     var timedEvent;
@@ -111,9 +112,9 @@
         this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
 
         //player image
+        this.load.image('teppan', 'assets/teppan.png');
 
 
-        cursors = this.input.keyboard.createCursorKeys();
 
 
 
@@ -153,19 +154,14 @@
 
         bombs = this.physics.add.group();
 
+        cursors = this.input.keyboard.createCursorKeys();
+
         this.physics.add.collider(player, bombs, hitBomb, null, this);
 
 
 
     }
 
-    function createBombs (){
-        
-        var x = Phaser.Math.Between(20, 360);
-        
-        var bomb =bombs.create(x,-20,'crumpled_paper').setScale(0.1);
-        
-    }
     function update ()
     {
         if (cursors.left.isDown)
@@ -184,6 +180,22 @@
         {
             player.setVelocityX(0);
         }
+
+        // if (cursors.space.isDown)
+        // {
+        //     console.log(pause);
+        //     if(pause === 0){
+        //         this.scene.pause();               
+        //         pause = 1;
+        //     }else{
+        //         this.scene.start();
+        //         pause = 0;
+        //     }
+        //     console.log(pause);
+
+        // }
+
+
         text.setText('Event.progress: ' + timedEvent.getProgress().toString().substr(0, 4));
 
         // if(hp !== 0 && item_appear < 10){
@@ -226,6 +238,14 @@
 
     }
 
+
+    function createBombs (){
+        
+        var x = Phaser.Math.Between(20, 360);
+        
+        var bomb =bombs.create(x,-20,'crumpled_paper').setScale(0.1);
+        
+    }
     function hitBomb (player, bomb)
     {
         bomb.disableBody(true, true);
