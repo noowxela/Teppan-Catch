@@ -72,15 +72,15 @@ export default class Game extends Phaser.Scene {
 
     this.bombs = this.physics.add.group({
       // defaultKey: 'foodpack',
-      maxSize: 100,
+      maxSize: 10000,
     });
     this.veges = this.physics.add.group({
       defaultKey: 'vegepack',
-      maxSize: 1000,
+      maxSize: 10000,
     });
     this.meats = this.physics.add.group({
       defaultKey: 'meatpack',
-      maxSize: 1000,
+      maxSize: 10000,
     });
 
     // create player tappen
@@ -150,39 +150,31 @@ export default class Game extends Phaser.Scene {
     // ]));
 
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-this.gameWidth/4*3);
+      this.player.setVelocityX(-this.gameWidth/10*9*2);
     }
     else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(this.gameWidth/4*3);
+      this.player.setVelocityX(this.gameWidth/10*9*2);
     }
 
     else {
       this.player.setVelocityX(0);
     }
-<<<<<<< HEAD
     
     this.pointer = this.input.activePointer;
     if (this.pointer.isDown) {
 
 
-      // console.log('DOWN');
       console.log("touch location :"+this.pointer.x);
       console.log("tappen location :"+this.player.x);
 
-=======
-
-    this.pointer = this.input.activePointer;
-    if (this.pointer.isDown) {
-
->>>>>>> d63415d522289fd0c716a259605cabf11338cca7
       var touchPoint = this.pointer.x;
       var tappen_location = this.player.x;
 
       if (touchPoint<tappen_location){
-        this.player.setVelocityX(-this.gameWidth/4*3);
+        this.player.setVelocityX(-this.gameWidth/6*5);
       }
       else if (touchPoint>tappen_location){
-        this.player.setVelocityX(this.gameWidth/4*3);
+        this.player.setVelocityX(this.gameWidth/6*5);
       }
       else if(touchPoint == tappen_location){
         this.player.setVelocityX(0);
