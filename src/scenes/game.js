@@ -84,7 +84,7 @@ export default class Game extends Phaser.Scene {
     });
 
     // create player tappen
-    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight-200, 'teppan').setScale(0.2);
+    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight - 10, 'teppan').setScale(0.2);
     this.player.setCollideWorldBounds(true);
 
     // create low_point_food
@@ -163,22 +163,17 @@ export default class Game extends Phaser.Scene {
     this.pointer = this.input.activePointer;
     if (this.pointer.isDown) {
 
-
-      console.log("touch location :"+this.pointer.x);
-      console.log("tappen location :"+this.player.x);
-
       var touchPoint = this.pointer.x;
       var tappen_location = this.player.x;
 
-      if (touchPoint<tappen_location){
-        this.player.setVelocityX(-this.gameWidth/6*5);
+      if ((touchPoint + 15) < tappen_location){
+        this.player.setVelocityX(-this.gameWidth/6*4.5);
       }
-      else if (touchPoint>tappen_location){
-        this.player.setVelocityX(this.gameWidth/6*5);
+      else if ((touchPoint - 15)> tappen_location){
+        this.player.setVelocityX(this.gameWidth/6*4.5);
       }
-      else if(touchPoint == tappen_location){
+      else{
         this.player.setVelocityX(0);
-
       }
 
 

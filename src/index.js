@@ -21,4 +21,4 @@ const game = new Phaser.Game({
 })
 
 // set maximum number of pointers allowed to be active at any one time
-game.input.maxPointers = 1;
+// game.input.maxPointers = 1;
