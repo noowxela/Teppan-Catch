@@ -64,8 +64,8 @@ export default class Game extends Phaser.Scene {
       this.gameWidth/2,
       this.gameHeight/2, 'background').setScale(1.5);
 
-      this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
-      this.hpBar = this.add.image(250, 100, '100bar').setScale(0.3);
+      // this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
+      // this.hpBar = this.add.image(250, 100, '100bar').setScale(0.3);
 
     // foods produce logic
     // this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
@@ -76,33 +76,33 @@ export default class Game extends Phaser.Scene {
     });
     this.veges = this.physics.add.group({
       defaultKey: 'vegepack',
-      maxSize: 100,
+      maxSize: 1000,
     });
     this.meats = this.physics.add.group({
       defaultKey: 'meatpack',
-      maxSize: 100,
+      maxSize: 1000,
     });
 
     // create player tappen
-    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight-200, 'teppan').setScale(0.3);
+    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight-200, 'teppan').setScale(0.2);
     this.player.setCollideWorldBounds(true);
 
     // create low_point_food
     this.time.addEvent({
-      delay: 600,
+      delay: 1500,
       loop: true,
       callback: () => {
         var vegepack = this.veges.get(
             Phaser.Math.Between(120, this.gameWidth-120), 
             Phaser.Math.Between(-64, 0),
             'vegepack',Phaser.Math.Between(0, 3)
-        );
+        ).setScale(0.9);
       }
 
     });
     // create high_point_food
     this.time.addEvent({
-      delay: 1000,
+      delay: 3000,
       loop: true,
       callback: () => {
         var meatpack = this.meats.get(
@@ -116,7 +116,7 @@ export default class Game extends Phaser.Scene {
 
     // bomb creation
     this.time.addEvent({
-        delay: 1200,
+        delay: 2000,
         loop: true,
         callback: () => {
             var x = Phaser.Math.Between(120, this.gameWidth);
@@ -129,7 +129,6 @@ export default class Game extends Phaser.Scene {
     });
 
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.pointer = this.input.activePointer;
 
     //player collide with bombs and foods
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
@@ -160,13 +159,15 @@ export default class Game extends Phaser.Scene {
     else {
       this.player.setVelocityX(0);
     }
-
+    
+    this.pointer = this.input.activePointer;
     if (this.pointer.isDown) {
 
 
       // console.log('DOWN');
-      // console.log(this.pointer.x);
-      // console.log(this.player.x);
+      console.log("touch location :"+this.pointer.x);
+      console.log("tappen location :"+this.player.x);
+
       var touchPoint = this.pointer.x;
       var tappen_location = this.player.x;
 
@@ -176,8 +177,8 @@ export default class Game extends Phaser.Scene {
       else if (touchPoint>tappen_location){
         this.player.setVelocityX(this.gameWidth/4*3);
       }
-      else{
-        // this.player.setVelocityX(0);
+      else if(touchPoint == tappen_location){
+        this.player.setVelocityX(0);
 
       }
 
