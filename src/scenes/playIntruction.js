@@ -20,7 +20,7 @@ export default class PlayInstruction extends Phaser.Scene {
   }
 
   update() {
-    if(this.sys.input.activePointer.isDown){
+    if(this.sys.input.activePointer.justUp){
       this.scene.start("Game");
     }
   }

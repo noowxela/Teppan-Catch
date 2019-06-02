@@ -20,7 +20,7 @@ export default class Welcome extends Phaser.Scene {
     let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
     let welcomeTitle = this.add.image(this.width/2, 700, 'welcomeTitle').setScale(1.3);
     let playButton = this.add.sprite(this.width/2, 1000, 'playButton').setScale(1.3).setInteractive();
-    playButton.on("pointerdown", () => {
+    playButton.on("pointerup", () => {
       this.scene.start("PlayInstruction");
     });
 

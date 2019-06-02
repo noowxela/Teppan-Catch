@@ -48,6 +48,9 @@ export default class Game extends Phaser.Scene {
          { frameWidth: 237, frameHeight: 203 }    );
     this.load.spritesheet('meatpack', 'assets/meatpack.png',
          { frameWidth: 240, frameHeight: 249 }    );
+
+    this.load.audio('collectSuccess', ['assets/audios/bubble.wav']);
+    this.load.audio('collectFailed', ['assets/audios/knockpot.wav']);
   }
 
   create() {
@@ -159,12 +162,14 @@ export default class Game extends Phaser.Scene {
 
     veges.disableBody(false, true);
     this.score += 10;
+    this.sound.play("collectSuccess");
 
   }
   collectMeats(player, meats) {
 
     meats.disableBody(false, true);
     this.score += 30;
+    this.sound.play("collectSuccess");
 
   }
 
@@ -173,6 +178,7 @@ export default class Game extends Phaser.Scene {
     // console.log('hitBomb');
     bomb.disableBody(true, true);
     this.score -= 10;
+    this.sound.play("collectFailed");
 
   }
 }
