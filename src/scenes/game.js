@@ -50,8 +50,8 @@ export default class Game extends Phaser.Scene {
     this.load.spritesheet('meatpack', 'assets/meatpack.png',
          { frameWidth: 240, frameHeight: 249 }    );
 
-    this.load.audio('collectSuccess', ['assets/audios/bubble.wav']);
-    this.load.audio('collectFailed', ['assets/audios/knockpot.wav']);
+    this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
+    this.load.audio('collectFailed', ['assets/audios/knockpot.wav','assets/audios/knockpot.ogg']);
   }
 
   create() {
@@ -129,7 +129,6 @@ export default class Game extends Phaser.Scene {
     });
 
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.pointer = this.input.activePointer;
 
     //player collide with bombs and foods
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
@@ -161,12 +160,9 @@ export default class Game extends Phaser.Scene {
       this.player.setVelocityX(0);
     }
 
+    this.pointer = this.input.activePointer;
     if (this.pointer.isDown) {
 
-
-      // console.log('DOWN');
-      // console.log(this.pointer.x);
-      // console.log(this.player.x);
       var touchPoint = this.pointer.x;
       var tappen_location = this.player.x;
 
