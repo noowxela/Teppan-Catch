@@ -2,6 +2,7 @@ export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' })
     this.cursors = null;
+    this.pointer = null;
     this.veges = null;
     this.meats = null;
     this.bombs = null;
@@ -66,7 +67,8 @@ export default class Game extends Phaser.Scene {
       this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
       this.hpBar = this.add.image(250, 100, '100bar').setScale(0.3);
 
-    this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
+    // foods produce logic
+    // this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
 
     this.bombs = this.physics.add.group({
       // defaultKey: 'foodpack',
@@ -98,6 +100,7 @@ export default class Game extends Phaser.Scene {
       }
 
     });
+    // create high_point_food
     this.time.addEvent({
       delay: 1000,
       loop: true,
@@ -126,6 +129,7 @@ export default class Game extends Phaser.Scene {
     });
 
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.pointer = this.input.activePointer;
 
     //player collide with bombs and foods
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
@@ -135,16 +139,16 @@ export default class Game extends Phaser.Scene {
 
   update() {
 
-    this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
-      this.veges.getLength(),
-      this.veges.maxSize,
-      this.veges.countActive(true),
-      this.veges.countActive(false),
-      this.veges.getTotalUsed(),
-      this.veges.getTotalFree(),
-      this.veges.isFull(),
-      this.score
-    ]));
+    // this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
+    //   this.veges.getLength(),
+    //   this.veges.maxSize,
+    //   this.veges.countActive(true),
+    //   this.veges.countActive(false),
+    //   this.veges.getTotalUsed(),
+    //   this.veges.getTotalFree(),
+    //   this.veges.isFull(),
+    //   this.score
+    // ]));
 
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-this.gameWidth/4*3);
@@ -156,6 +160,29 @@ export default class Game extends Phaser.Scene {
     else {
       this.player.setVelocityX(0);
     }
+
+    if (this.pointer.isDown) {
+
+
+      // console.log('DOWN');
+      // console.log(this.pointer.x);
+      // console.log(this.player.x);
+      var touchPoint = this.pointer.x;
+      var tappen_location = this.player.x;
+
+      if (touchPoint<tappen_location){
+        this.player.setVelocityX(-this.gameWidth/4*3);
+      }
+      else if (touchPoint>tappen_location){
+        this.player.setVelocityX(this.gameWidth/4*3);
+      }
+      else{
+        // this.player.setVelocityX(0);
+
+      }
+
+
+    };
   }
 
   collectVeges(player, veges) {
