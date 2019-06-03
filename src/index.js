@@ -3,6 +3,7 @@ import Game from "./scenes/game.js"
 import Welcome from "./scenes/welcome.js"
 import Register from "./scenes/register.js"
 import PlayInstruction from "./scenes/playIntruction.js"
+import ScoreBoard from "./scenes/scoreBoard.js"
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -17,7 +18,7 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  scene: [Welcome, Register, PlayInstruction, Game],
+  scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard],
 })
 
 // set maximum number of pointers allowed to be active at any one time

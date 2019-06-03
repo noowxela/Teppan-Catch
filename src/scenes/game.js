@@ -68,7 +68,7 @@ export default class Game extends Phaser.Scene {
       // this.hpBar = this.add.image(250, 100, '100bar').setScale(0.3);
 
     // foods produce logic
-    // this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
+    this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
 
     this.bombs = this.physics.add.group({
       // defaultKey: 'foodpack',
@@ -138,16 +138,16 @@ export default class Game extends Phaser.Scene {
 
   update() {
 
-    // this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
-    //   this.veges.getLength(),
-    //   this.veges.maxSize,
-    //   this.veges.countActive(true),
-    //   this.veges.countActive(false),
-    //   this.veges.getTotalUsed(),
-    //   this.veges.getTotalFree(),
-    //   this.veges.isFull(),
-    //   this.score
-    // ]));
+    this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
+      this.veges.getLength(),
+      this.veges.maxSize,
+      this.veges.countActive(true),
+      this.veges.countActive(false),
+      this.veges.getTotalUsed(),
+      this.veges.getTotalFree(),
+      this.veges.isFull(),
+      this.score
+    ]));
 
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-this.gameWidth/10*9*2);
@@ -178,6 +178,9 @@ export default class Game extends Phaser.Scene {
 
 
     };
+    if(this.score >= 100){
+      this.scene.start("ScoreBoard");
+    }
   }
 
   collectVeges(player, veges) {
