@@ -16,6 +16,7 @@ export default class Game extends Phaser.Scene {
     this.captionStyle = {
       fill: '#000000',
       fontFamily: 'monospace',
+      fontsize: 60 ,
       lineSpacing: 4
     };
 
@@ -181,6 +182,7 @@ export default class Game extends Phaser.Scene {
     if(this.score >= 100){
       this.scene.start("ScoreBoard");
     }
+    console.log(this.score);
   }
 
   collectVeges(player, veges) {

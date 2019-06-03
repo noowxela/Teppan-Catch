@@ -22,9 +22,9 @@ export default class PlayInstruction extends Phaser.Scene {
 
   update() {
 
-    // if(this.sys.input.activePointer.justUp){
-    //   this.scene.start("Game");
-    // }
+    if(this.sys.input.activePointer.justUp){
+      this.scene.start("Game");
+    }
   }
 
 }
