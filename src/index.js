@@ -19,7 +19,7 @@ const game = new Phaser.Game({
     }
   },
   // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard],
-  scene: [ScoreBoard],
+  scene: [Game, ScoreBoard],
 
 })
 

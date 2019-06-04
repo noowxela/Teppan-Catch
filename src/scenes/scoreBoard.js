@@ -18,7 +18,7 @@ export default class ScoreBoard extends Phaser.Scene {
         fill: '#000000',
         fontFamily: 'heavitas',
         fontSize: 80 ,
-        lineSpacing: 6
+        lineSpacrring: 6
     };
 
     this.leaderBoard = (
@@ -32,7 +32,7 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 // 
   create() {
-    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.25);
+    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
     // let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(1.3);
@@ -64,5 +64,8 @@ export default class ScoreBoard extends Phaser.Scene {
     //   this.scene.start("Prize");
     // }
   }
+
+  // Phaser current version test environment
+// Simple countdown timer
 
 }
