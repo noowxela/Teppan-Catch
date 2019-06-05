@@ -1,6 +1,6 @@
-export default class Prize extends Phaser.Scene {
+export default class Test extends Phaser.Scene {
   constructor() {
-    super({ key: 'Prize' })
+    super({ key: 'Test' })
 
     this.captionStyle = {
         fill: '#000002',
@@ -30,21 +30,51 @@ export default class Prize extends Phaser.Scene {
     this.load.image('reward_2', 'assets/reward/series1-reward-2.png');
     this.load.image('reward_3', 'assets/reward/series1-reward-3.png');
     // this.load.image('product', 'assets/product.png');
+    
+    this.load.image('playButton', 'assets/play-button.png');
+    // this.load.spritesheet('playButton', 'assets/play-button.png',{frameWidth: 438,frameHeight: 76 } );
+
   }
 
   create() {
+
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(1.3);
     
-    let scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
+    let scoreLV = this.add.text(this.width/2, 420, 'expert levvel', this.captionStyle).setOrigin(0.5,0);
     let score = this.add.text(this.width/2, 500, '200 PTS', this.scoreStlye).setOrigin(0.5,0);
 
+    let sprite = this.add.sprite(this.width/2, this.height/2, 'playButton').setInteractive();
 
-    let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
-    // let product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
+    sprite.on('pointerdown', function (pointer) {
+    console.log("pointerdown");
+        // this.scene.resume();
+        this.setTint(0xff0000);
+
+    });
+    sprite.on('pointerout', function (pointer) {
+    console.log("pointerout");
+
+        this.clearTint();
+
+    });
+    sprite.on('pointerOver', function (pointer) {
+    console.log("pointerOver");
+
+        this.clearTint();
+
+    });
+
+    sprite.on('pointerup', function (pointer) {
+    console.log("pointerup");
+
+        this.clearTint();
+
+    });
+    
     // let product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
 
-}
+    }   
 
 }

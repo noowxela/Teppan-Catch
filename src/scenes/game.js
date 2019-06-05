@@ -5,14 +5,20 @@ export default class Game extends Phaser.Scene {
     this.gameHeight= null;
     this.cursors = null;
     this.pointer = null;
+
     this.veges = null;
     this.meats = null;
     this.bombs = null;
-    this.hpBar = null;
-    this.hpBG = null;
+
+    this.timeBar = null;
+    this.timeBase = null;
+    this.heart = null;
+
     this.caption = null;
+
     this.score = 0;
-    this.scoretext = null;
+    this.stateText = null;
+    this.scoreText = null;
 
 
     this.playButton = null;
@@ -26,10 +32,16 @@ export default class Game extends Phaser.Scene {
       fontsize: 80 ,
       lineSpacing: 6
     };
-    this.sadlife = {
+    this.stateStyle = {
       fill: '#000000',
       fontFamily: 'heavitas',
       fontSize: 80 ,
+      lineSpacrring: 6
+  };
+    this.scoreStyle = {
+      fill: '#000000',
+      fontFamily: 'heavitas',
+      fontSize: 60 ,
       lineSpacrring: 6
   };
 
@@ -43,22 +55,25 @@ export default class Game extends Phaser.Scene {
       'Full:     %7\n' +
       'Score:    %8\n'
     );
-    this.scoreBoard = (
+    this.stateBoard = (
       'Score:    %1\n' +
       'Time:     %2\n' 
+      );
+    this.scoreBoard = (
+      '%1\n' 
       );
   }
 
   preload() {
-
+    // console.log(this.scene);
     this.load.image('background', 'assets/background.png');
-    this.load.image('space', 'assets/space.jpg');
     
-    this.load.image('buttonBG', 'assets/button-bg.png');
-    this.load.image('buttonText', 'assets/button-text.png');
-
-    this.load.image('heatlhbar', 'assets/heatlhbar.png');
-    this.load.image('100bar', 'assets/100bar.png');
+    this.load.image('heart', 'assets/heart.png');
+    this.load.image('timeBase', 'assets/timeBase.png');
+    this.load.image('timeBar', 'assets/100bar.png');
+    this.load.image('smallbar', 'assets/smallbar.png');
+    this.load.image('smallpot', 'assets/smallpot.png');
+    this.load.image('gift', 'assets/gift.png');
     
     this.load.image('teppan', 'assets/teppan.png');
     this.load.image('crumpled_paper', 'assets/crumpled_papera.png');
@@ -69,6 +84,8 @@ export default class Game extends Phaser.Scene {
          { frameWidth: 240, frameHeight: 249 }    );
 
     this.load.image('playButton', 'assets/play-button.png');
+    
+    this.load.image('blackBar', 'assets/blackBar.png');
 
 
     this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
@@ -86,93 +103,162 @@ export default class Game extends Phaser.Scene {
       this.gameWidth/2,
       this.gameHeight/2, 'background').setScale(1.5);
       
-    //scoretext
-    this.scoretext = this.add.text(this.gameWidth/2, this.gameHeight/2, 'sdfghgfdfghgfdsd', this.sadlife).setOrigin(0.5,0);
-    // foods produce logic
+ // foods produce logic
     this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
 
-    this.hpBG = this.add.image(250, 100, 'heatlhbar').setScale(0.3);
-    this.hpBar = this.add.image(50, 65, '100bar').setScale(0.3).setOrigin(0,0);
-
-    // this.playButton = this.add.image(this.gameWidth/2, this.gameHeight/2, 'playButton').setScale(1.3).setInteractive();
+    this.heart = this.add.image(30, 50, 'heart').setScale(1.3).setOrigin(0,0).setDepth(101);
+    this.timeBase = this.add.image(300, 100, 'timeBase').setScale(0.3).setDepth(100);
+    this.timeBar = this.add.image(100, 65, 'timeBar').setScale(0.3).setOrigin(0,0).setDepth(100);
+    
+    this.smallbar = this.add.image(this.gameWidth-15, 100, 'smallbar').setScale(1.6).setOrigin(1,0.5).setDepth(100);
+    this.smallpot = this.add.image(this.gameWidth-280, 100, 'smallpot').setScale(1.3).setDepth(100);
+     
+    //scoretext
+    this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
+    this.scoreText = this.add.text(this.gameWidth-205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
-    {
-      //Game Run Time
-      this.timerEvents.push(
-        this.time.addEvent({
-          // delay: 30000,
-          delay: 5000,
-          callback: () => {
-            this.scene.pause();
-            // this.scene.events.on('transitioninit', function(fromScene, duration){});
-            // this.scene.transition({
-            //   duration: 1000, 
-            //   target:"ScoreBoard",
-            //   allowInput: true, 
-            //   // moveBelow: false,
-            //   // sleep: false, 
-            // });
+    
+    //Game Run Time
+    this.timerEvents.push(
+      this.time.addEvent({
+        delay: 30000,
+        // delay: 5000,
+        callback: () => {
+          this.scene.pause();
+          // this.scene.events.on('transitioninit', function(fromScene, duration){});
+          // this.scene.transition({
+          //   duration: 1000, 
+          //   target:"ScoreBoard",
+          //   // moveBelow: false,
+          //   // sleep: false, 
+          // });
+          this.scene.start("ScoreBoard");
 
-          },
-          callbackScope: this,
-        })  
-      )
-      // Hpbar minus
-      this.timerEvents.push(
-        this.time.addEvent({
-          delay: 3000,
-          repeat: 9,
-          callback: () => {
-            var scale = this.timerEvents[1].getRepeatCount();
-            console.log(this.timerEvents[1].getRepeatCount());
-            this.hpBar.scaleX *= (scale/10);
-          },
-          callbackScope: this,
-        })  
-      )
-      // // create low_point_food
-      this.timerEvents.push(
-        this.time.addEvent({
-          delay: 1500,
+        },
+        callbackScope: this,
+      })  
+    )
+    // timeBar rescale
+    this.timeBarOriginal = this.timeBar.displayWidth ;
+    console.log(this.timeBar.displayWidth);
+    console.log(this.timeBarOriginal);
+    
+    this.timerEvents.push(
+      this.time.addEvent({
+        delay: 1000,
+        repeat: 30,
+        callback: () => {
+          var scale = this.timerEvents[1].getRepeatCount();
+          console.log(this.timerEvents[1].getRepeatCount());
+          // this.timeBar.scaleX *= (scale/10);
+          // this.timeBar.displayWidth = this.timeBar.displayWidth-3.33;
+          this.timeBar.displayWidth = this.timeBar.displayWidth-(this.timeBarOriginal*1/30);
+          // console.log(this.timeBar.displayWidth-(this.timeBarOriginal*1/30));
+          // console.log(this.timeBar.displayWidth);
+          // console.log(Math.round(this.timeBarOriginal*(scale*10)/100));
+        },
+        callbackScope: this,
+      })  
+    )
+    // // create low_point_food
+    this.timerEvents.push(
+      this.time.addEvent({
+        delay: 800,
+        // delay: 200,
+        loop: true,
+        callback: () => {
+          var vegepack = this.veges.get(
+              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(-64, 0),
+              'vegepack',Phaser.Math.Between(0, 3)
+          ).setScale(0.9);
+        }
+      })
+    )
+    // create high_point_food
+    this.timerEvents.push(
+      this.time.addEvent({
+        delay: 1800,
+        // delay: 500,
+        loop: true,
+        callback: () => {
+          var meatpack = this.meats.get(
+              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(-64, 0),
+              'meatpack',Phaser.Math.Between(0, 1)
+          );
+        }
+      })
+    )
+    // bomb creation
+    this.timerEvents.push(
+      this.time.addEvent({
+          delay: 1300,
+          // delay: 200,
           loop: true,
           callback: () => {
-            var vegepack = this.veges.get(
-                Phaser.Math.Between(120, this.gameWidth-120), 
-                Phaser.Math.Between(-64, 0),
-                'vegepack',Phaser.Math.Between(0, 3)
-            ).setScale(0.9);
+            var x = Phaser.Math.Between(120, this.gameWidth);
+            var y = Phaser.Math.Between(-64, 0);
+            
+            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
           }
-        })
-      )
-      // create high_point_food
-      this.timerEvents.push(
-        this.time.addEvent({
-          delay: 3000,
-          loop: true,
-          callback: () => {
-            var meatpack = this.meats.get(
-                Phaser.Math.Between(120, this.gameWidth-120), 
-                Phaser.Math.Between(-64, 0),
-                'meatpack',Phaser.Math.Between(0, 1)
-            );
-          }
-        })
-      )
-      // bomb creation
-      this.timerEvents.push(
-        this.time.addEvent({
-            delay: 2000,
-            loop: true,
-            callback: () => {
-              var x = Phaser.Math.Between(120, this.gameWidth);
-              var y = Phaser.Math.Between(-64, 0);
-              
-              var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
-            }
-        })
-      )
-    }
+      })
+    )
+  
+    this.timerEvents[0].paused = true;
+    this.timerEvents[1].paused = true;
+    this.timerEvents[2].paused = true;
+    this.timerEvents[3].paused = true;
+    this.timerEvents[4].paused = true;
+    
+    
+    // this.blackBar = this.add.sprite(this.gameWidth/2, this.gameHeight/2-200, 'blackBar').setInteractive();
+    this.scene.pause();
+    this.playButton = this.add.sprite(this.gameWidth/2, this.gameHeight/2-100, 'playButton').setInteractive();
+    this.playButton.setTint(0xff0000);
+
+    this.scene.resume();
+    this.playButton.on('pointerdown', function (pointer) {
+      // console.log("11");
+
+      if( this.scene.gamerun == 0 ){
+        console.log("start");
+
+        this.clearTint();
+        this.setTint(0x00ff00);
+
+        this.scene.gamerun = 1;
+        this.scene.timerEvents[0].paused = false;
+        this.scene.timerEvents[1].paused = false;
+        this.scene.timerEvents[2].paused = false;
+        this.scene.timerEvents[3].paused = false;
+        this.scene.timerEvents[4].paused = false;
+      }
+      else if( this.scene.gamerun == 1 ){
+        console.log("pause");
+
+        this.clearTint();
+        this.setTint(0xff0000);
+
+        this.scene.gamerun = 0;
+        this.scene.timerEvents[0].paused = true;
+        this.scene.timerEvents[1].paused = true;
+        this.scene.timerEvents[2].paused = true;
+        this.scene.timerEvents[3].paused = true;
+        this.scene.timerEvents[4].paused = true;
+        // this.scene.scene.pause();
+
+      }
+
+    });
+    this.playButton.on('pointerup', function (pointer) {
+    
+      // console.log("pointerup");
+      // this.clearTint();
+
+
+    });
 
  
     this.bombs = this.physics.add.group({
@@ -209,9 +295,12 @@ export default class Game extends Phaser.Scene {
     var timeEllapsed = Math.round(this.timerEvents[0].getElapsedSeconds());
     // console.log(timeEllapsed);
 
-    this.scoretext.setText(Phaser.Utils.String.Format(this.scoreBoard, [
+    this.stateText.setText(Phaser.Utils.String.Format(this.stateBoard, [
       this.score +'  PTS',
       30-timeEllapsed+'  s',
+  ]));
+    this.scoreText.setText(Phaser.Utils.String.Format(this.scoreBoard, [
+      this.score ,
   ]));
 
     this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
@@ -239,7 +328,6 @@ export default class Game extends Phaser.Scene {
     this.pointer = this.input.activePointer;
 
     if (this.pointer.isDown) {
-
       var touchPoint = this.pointer.x;
       var tappen_location = this.player.x;
 
@@ -252,39 +340,24 @@ export default class Game extends Phaser.Scene {
       else{
         this.player.setVelocityX(0);
       }
-
-    this.input.on('pointerup', function (pointer, gameobject) {
-        if (gameobject === this.playButton && gamerun==1 )
-        {
-          console.log(gamerun);
-          this.scene.pause()  
-            // text.setText('Pause All');
-        }
-        else if (gameobject === this.playButton && gamerun==0)
-        {
-          console.log(gamerun);
-          this.scene.resume()  
-            // text.setText('Resume All');
-        }
-    });
-
-
     };
 
   }
-
+  render(){
+    
+  } 
 
   collectVeges(player, veges) {
 
     veges.disableBody(false, true);
-    this.score += 1;
+    this.score += 5;
     this.sound.play("collectSuccess");
 
   }
   collectMeats(player, meats) {
 
     meats.disableBody(false, true);
-    this.score += 3;
+    this.score += 10;
     this.sound.play("collectSuccess");
 
   }
@@ -292,7 +365,7 @@ export default class Game extends Phaser.Scene {
   hitBomb(player, bomb) {
     // console.log('hitBomb');
     bomb.disableBody(true, true);
-    this.score -= 1;
+    this.score -= 30;
     this.sound.play("collectFailed");
 
   }

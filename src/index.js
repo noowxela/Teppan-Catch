@@ -4,6 +4,8 @@ import Welcome from "./scenes/welcome.js"
 import Register from "./scenes/register.js"
 import PlayInstruction from "./scenes/playIntruction.js"
 import ScoreBoard from "./scenes/scoreBoard.js"
+import Prize from "./scenes/prize.js"
+import Test from "./scenes/test.js"
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -14,12 +16,14 @@ const game = new Phaser.Game({
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 300 }, 
       debug: false
     }
   },
-  // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard],
-  scene: [Game, ScoreBoard],
+  scene: [Welcome, PlayInstruction, Game, ScoreBoard, Prize],
+  // scene: [ Game, ScoreBoard, Prize],
+  // scene: [ ScoreBoard, Prize],
+  // scene: [ Test],
 
 })
 
