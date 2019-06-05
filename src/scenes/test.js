@@ -1,7 +1,9 @@
 export default class Test extends Phaser.Scene {
   constructor() {
-    super({ key: 'Test' })
 
+    super({ key: 'Test' })
+      
+    this.doubleClick = 2;
     this.captionStyle = {
         fill: '#000002',
         fontFamily: 'heavitas',
@@ -36,7 +38,7 @@ export default class Test extends Phaser.Scene {
 
   }
 
-  create() {
+    create() {
 
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
@@ -47,34 +49,65 @@ export default class Test extends Phaser.Scene {
 
     let sprite = this.add.sprite(this.width/2, this.height/2, 'playButton').setInteractive();
 
-    sprite.on('pointerdown', function (pointer) {
-    console.log("pointerdown");
-        // this.scene.resume();
-        this.setTint(0xff0000);
+        sprite.on('pointerdown', function (pointer) {
+        console.log("pointerdown");
+            // this.scene.resume();
+            this.setTint(0xff0000);
 
+        });
+        sprite.on('pointerout', function (pointer) {
+        console.log("pointerout");
+
+            this.clearTint();
+
+        });
+        sprite.on('pointerOver', function (pointer) {
+        console.log("pointerOver");
+
+            this.clearTint();
+
+        });
+
+        sprite.on('pointerup', function (pointer) {
+        console.log("pointerup");
+
+            this.clearTint();
+
+
+        });
+    var pointer = this.input.activePointer;
+
+    // if (pointer.isDown) {
+    //     var touchX = pointer.x;
+    //     var touchY = pointer.y;
+    //     console.log("x : "+touchX);
+    //     console.log("Y : "+touchY);
+    //     // ...
+    // }
+    var doubleClick = this.doubleClick;
+    console.log(doubleClick);
+
+    this.input.on('pointerdown',function(pointer,doubleClick){
+        
+        console.log("this scene :"+this.scene.doubleClick);
+        console.log(doubleClick);
+
+        if( this.scene.doubleClick == 0){
+            console.log("d");
+            background.alpha = (background.alpha === 0.5) ? 1 : 0.5;
+            this.scene.doubleClick = 2;
+        }else{
+            console.log("a");
+
+            this.scene.doubleClick -= 1;
+        }
+        
     });
-    sprite.on('pointerout', function (pointer) {
-    console.log("pointerout");
+// this.input.
+        // var myFancySprite = this.add.sprite(500, 1000, 'playButton');
+        // myFancySprite.inputEnabled = true;
+        // myFancySprite.events.onInputDown.add(tapHandler, this);
 
-        this.clearTint();
-
-    });
-    sprite.on('pointerOver', function (pointer) {
-    console.log("pointerOver");
-
-        this.clearTint();
-
-    });
-
-    sprite.on('pointerup', function (pointer) {
-    console.log("pointerup");
-
-        this.clearTint();
-
-    });
-    
-    // let product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
-
-    }   
-
+    }    
+  
 }
