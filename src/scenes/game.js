@@ -295,8 +295,16 @@ export default class Game extends Phaser.Scene {
     var timeEllapsed = Math.round(this.timerEvents[0].getElapsedSeconds());
     // console.log(timeEllapsed);
 
+    if (this.score <= 0){
+      this.score = 0;
+
+    }else if(this.score > 0){
+      this.score = this.score;
+
+    }
+
     this.stateText.setText(Phaser.Utils.String.Format(this.stateBoard, [
-      this.score +'  PTS',
+      this.score+'  PTS',
       30-timeEllapsed+'  s',
   ]));
     this.scoreText.setText(Phaser.Utils.String.Format(this.scoreBoard, [

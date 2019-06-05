@@ -20,10 +20,10 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  scene: [Welcome, PlayInstruction, Game, ScoreBoard, Prize],
+  // scene: [Welcome, PlayInstruction, Game, ScoreBoard, Prize],
   // scene: [ Game, ScoreBoard, Prize],
   // scene: [ ScoreBoard, Prize],
-  // scene: [ Test],
+  scene: [ Test],
 
 })
 
