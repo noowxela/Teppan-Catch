@@ -39,6 +39,9 @@ export default class Welcome extends Phaser.Scene {
 
 
     let product = this.add.image(this.width/2, 1400, 'product');
+
+
+    
   }
 
 }

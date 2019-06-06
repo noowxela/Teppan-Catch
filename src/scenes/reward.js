@@ -2,6 +2,8 @@ export default class Prize extends Phaser.Scene {
   constructor() {
     super({ key: 'Prize' })
 
+    this.doubleClick = 2;
+
     this.captionStyle = {
         fill: '#000002',
         fontFamily: 'heavitas',
@@ -44,7 +46,21 @@ export default class Prize extends Phaser.Scene {
     let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
     // let product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
     // let product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
+    
+    var pointer = this.input.activePointer;
+    this.input.on('pointerdown',function(pointer){
+        
+        this.scene.doubleClick -= 1;
 
+        if( this.scene.doubleClick == 0){
+            console.log("taptap");
+            this.scene.doubleClick = 2;
+            this.scene.scene.start("Welcome");
+
+        }else{
+        }
+    
+    });
 }
 
 }
