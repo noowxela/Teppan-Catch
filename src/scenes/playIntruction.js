@@ -1,6 +1,9 @@
 export default class PlayInstruction extends Phaser.Scene {
   constructor() {
     super({ key: 'PlayInstruction' })
+
+    this.doubleClick = 2;
+
   }
 
   preload() {
@@ -18,13 +21,32 @@ export default class PlayInstruction extends Phaser.Scene {
     let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
     let playIntruction = this.add.image(this.width/2, 1100, 'playIntruction').setScale(1.3);
 
+    // console.log(this.doubleClick);
+
+    var pointer = this.input.activePointer;
+    this.input.on('pointerdown',function(pointer){
+        
+        this.scene.doubleClick -= 1;
+
+        if( this.scene.doubleClick == 0){
+            console.log("taptap");
+            this.scene.doubleClick = 2;
+            // console.log(this.doubleClick);
+            // console.log(this.scene.doubleClick);
+            this.scene.scene.start("Game");
+
+        }else{
+        }
+    
+    });
+
   }
 
   update() {
 
-    if(this.sys.input.activePointer.justUp){
-      this.scene.start("Game");
-    }
+    // if(this.sys.input.activePointer.justUp){
+    //   this.scene.start("Game");
+    // }
   }
 
 }

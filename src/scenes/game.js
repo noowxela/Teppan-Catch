@@ -39,7 +39,7 @@ export default class Game extends Phaser.Scene {
       lineSpacrring: 6
   };
     this.scoreStyle = {
-      fill: '#000000',
+      fill: '#ffffff',
       fontFamily: 'heavitas',
       fontSize: 60 ,
       lineSpacrring: 6
@@ -141,8 +141,8 @@ export default class Game extends Phaser.Scene {
     )
     // timeBar rescale
     this.timeBarOriginal = this.timeBar.displayWidth ;
-    console.log(this.timeBar.displayWidth);
-    console.log(this.timeBarOriginal);
+    // console.log(this.timeBar.displayWidth);
+    // console.log(this.timeBarOriginal);
     
     this.timerEvents.push(
       this.time.addEvent({

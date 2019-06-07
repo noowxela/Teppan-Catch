@@ -4,7 +4,7 @@ import Welcome from "./scenes/welcome.js"
 import Register from "./scenes/register.js"
 import PlayInstruction from "./scenes/playIntruction.js"
 import ScoreBoard from "./scenes/scoreBoard.js"
-import Prize from "./scenes/prize.js"
+import Reward from "./scenes/reward.js"
 import Test from "./scenes/test.js"
 
 const game = new Phaser.Game({
@@ -20,10 +20,10 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  // scene: [Welcome, PlayInstruction, Game, ScoreBoard, Prize],
-  // scene: [ Game, ScoreBoard, Prize],
-  // scene: [ ScoreBoard, Prize],
-  scene: [ Test],
+  scene: [Welcome, PlayInstruction, Game, ScoreBoard, Reward],
+  // scene: [ Game, ScoreBoard, Reward],
+  // scene: [ ScoreBoard, Reward],
+  // scene: [ Test],
 
 })
 
