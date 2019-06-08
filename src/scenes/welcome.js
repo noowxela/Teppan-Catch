@@ -35,6 +35,7 @@ export default class Welcome extends Phaser.Scene {
 
     playButton.on("pointerup", () => {
       this.scene.start("PlayInstruction");
+      // this.scene.start("Register");
     });
 
 

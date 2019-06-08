@@ -103,8 +103,8 @@ export default class Game extends Phaser.Scene {
       this.gameWidth/2,
       this.gameHeight/2, 'background').setScale(1.5);
       
- // foods produce logic
-    this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
+  // foods produce logic
+    // this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
 
     this.heart = this.add.image(30, 50, 'heart').setScale(1.3).setOrigin(0,0).setDepth(101);
     this.timeBase = this.add.image(300, 100, 'timeBase').setScale(0.3).setDepth(100);
@@ -114,7 +114,7 @@ export default class Game extends Phaser.Scene {
     this.smallpot = this.add.image(this.gameWidth-280, 100, 'smallpot').setScale(1.3).setDepth(100);
      
     //scoretext
-    this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
+    // this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
     this.scoreText = this.add.text(this.gameWidth-205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
@@ -206,59 +206,56 @@ export default class Game extends Phaser.Scene {
       })
     )
   
-    this.timerEvents[0].paused = true;
-    this.timerEvents[1].paused = true;
-    this.timerEvents[2].paused = true;
-    this.timerEvents[3].paused = true;
-    this.timerEvents[4].paused = true;
+    // pause all timer event
+    {
+    // this.timerEvents[0].paused = true;
+    // this.timerEvents[1].paused = true;
+    // this.timerEvents[2].paused = true;
+    // this.timerEvents[3].paused = true;
+    // this.timerEvents[4].paused = true;
+    }
     
-    
-    // this.blackBar = this.add.sprite(this.gameWidth/2, this.gameHeight/2-200, 'blackBar').setInteractive();
-    this.scene.pause();
-    this.playButton = this.add.sprite(this.gameWidth/2, this.gameHeight/2-100, 'playButton').setInteractive();
-    this.playButton.setTint(0xff0000);
+    // add play button
+    // this.playButton = this.add.sprite(this.gameWidth/2, this.gameHeight/2-100, 'playButton').setInteractive();
+    // this.playButton.setTint(0xff0000);
 
-    this.scene.resume();
-    this.playButton.on('pointerdown', function (pointer) {
-      // console.log("11");
+    //[play button functouin]
+    {
+      // this.playButton.on('pointerdown', function (pointer) {
+      //   if( this.scene.gamerun == 0 ){
+      //     console.log("start");
 
-      if( this.scene.gamerun == 0 ){
-        console.log("start");
+      //     this.clearTint();
+      //     this.setTint(0x00ff00);
 
-        this.clearTint();
-        this.setTint(0x00ff00);
+      //     this.scene.gamerun = 1;
+      //     this.scene.timerEvents[0].paused = false;
+      //     this.scene.timerEvents[1].paused = false;
+      //     this.scene.timerEvents[2].paused = false;
+      //     this.scene.timerEvents[3].paused = false;
+      //     this.scene.timerEvents[4].paused = false;
+      //   }
+      //   else if( this.scene.gamerun == 1 ){
+      //     console.log("pause");
 
-        this.scene.gamerun = 1;
-        this.scene.timerEvents[0].paused = false;
-        this.scene.timerEvents[1].paused = false;
-        this.scene.timerEvents[2].paused = false;
-        this.scene.timerEvents[3].paused = false;
-        this.scene.timerEvents[4].paused = false;
-      }
-      else if( this.scene.gamerun == 1 ){
-        console.log("pause");
+      //     this.clearTint();
+      //     this.setTint(0xff0000);
 
-        this.clearTint();
-        this.setTint(0xff0000);
+      //     this.scene.gamerun = 0;
+      //     this.scene.timerEvents[0].paused = true;
+      //     this.scene.timerEvents[1].paused = true;
+      //     this.scene.timerEvents[2].paused = true;
+      //     this.scene.timerEvents[3].paused = true;
+      //     this.scene.timerEvents[4].paused = true;
+      //     // this.scene.scene.pause();
 
-        this.scene.gamerun = 0;
-        this.scene.timerEvents[0].paused = true;
-        this.scene.timerEvents[1].paused = true;
-        this.scene.timerEvents[2].paused = true;
-        this.scene.timerEvents[3].paused = true;
-        this.scene.timerEvents[4].paused = true;
-        // this.scene.scene.pause();
+      //   }
 
-      }
+      // });
+    }
+    // this.playButton.on('pointerup', function (pointer) {
 
-    });
-    this.playButton.on('pointerup', function (pointer) {
-    
-      // console.log("pointerup");
-      // this.clearTint();
-
-
-    });
+    // });
 
  
     this.bombs = this.physics.add.group({
@@ -288,12 +285,7 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
-    // console.log(this.timerEvents[0].getElapsedSeconds());
-    // console.log(this.timerEvents[0].getElapsedSeconds().toString().substr(0, 1));
-    // console.log(this.timerEvents[0].getElapsedSeconds());
-    // this.text.setText('Event.progress: ' + this.timerEvents.getProgress().toString().substr(0, 4));
     var timeEllapsed = Math.round(this.timerEvents[0].getElapsedSeconds());
-    // console.log(timeEllapsed);
 
     if (this.score <= 0){
       this.score = 0;
@@ -303,24 +295,26 @@ export default class Game extends Phaser.Scene {
 
     }
 
-    this.stateText.setText(Phaser.Utils.String.Format(this.stateBoard, [
-      this.score+'  PTS',
-      30-timeEllapsed+'  s',
-  ]));
+// middle debug
+  //   this.stateText.setText(Phaser.Utils.String.Format(this.stateBoard, [
+  //     this.score+'  PTS',
+  //     30-timeEllapsed+'  s',
+  // ]));
     this.scoreText.setText(Phaser.Utils.String.Format(this.scoreBoard, [
       this.score ,
   ]));
 
-    this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
-      this.veges.getLength(),
-      this.veges.maxSize,
-      this.veges.countActive(true),
-      this.veges.countActive(false),
-      this.veges.getTotalUsed(),
-      this.veges.getTotalFree(),
-      this.veges.isFull(),
-      this.score
-    ]));
+// game physic debug
+    // this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
+    //   this.veges.getLength(),
+    //   this.veges.maxSize,
+    //   this.veges.countActive(true),
+    //   this.veges.countActive(false),
+    //   this.veges.getTotalUsed(),
+    //   this.veges.getTotalFree(),
+    //   this.veges.isFull(),
+    //   this.score
+    // ]));
 
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-this.gameWidth/10*9*2);
@@ -351,6 +345,7 @@ export default class Game extends Phaser.Scene {
     };
 
   }
+
   render(){
     
   } 

@@ -27,9 +27,9 @@ export default class Register extends Phaser.Scene {
     });
     text.setOrigin(0.5,0.5)
 
-    // var element = this.add.dom(400, 600).createFromCache('nameform');
+    var element = this.add.dom(400, 600).createFromCache('nameform');
 
-    //   element.setPerspective(800);
+    // element.setPerspective(800);
 
     // element.addListener('click');
 

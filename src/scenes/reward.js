@@ -1,6 +1,6 @@
 export default class Prize extends Phaser.Scene {
   constructor() {
-    super({ key: 'Prize' })
+    super({ key: 'Reward' })
 
     this.doubleClick = 2;
 
@@ -29,6 +29,7 @@ export default class Prize extends Phaser.Scene {
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
     this.load.image('reward_1', 'assets/reward/series1-reward-1.png');
+    // this.load.image('reward_1', 'assets/Set-1-(rookie).gif');
     this.load.image('reward_2', 'assets/reward/series1-reward-2.png');
     this.load.image('reward_3', 'assets/reward/series1-reward-3.png');
     // this.load.image('product', 'assets/product.png');
@@ -43,10 +44,12 @@ export default class Prize extends Phaser.Scene {
     let score = this.add.text(this.width/2, 500, '200 PTS', this.scoreStlye).setOrigin(0.5,0);
 
 
-    let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
+    // let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(0.5).setOrigin(0.5,1);
+    this.product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
     // let product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
     // let product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
-    
+
+
     var pointer = this.input.activePointer;
     this.input.on('pointerdown',function(pointer){
         
@@ -63,4 +66,17 @@ export default class Prize extends Phaser.Scene {
     });
 }
 
+  update(){
+    var d = new Date;
+    // var t = d.getTime();
+    var s = d.getSeconds();
+    console.log(s);
+    // console.log(Math.sin(t));
+    // console.log(Math.sin(s));
+
+    // this.product.scaleX *= (1);
+    // this.product.scaleY *= (1);
+    // image.scaleY *= ;
+    // image.rotation += 0.04
+  }
 }

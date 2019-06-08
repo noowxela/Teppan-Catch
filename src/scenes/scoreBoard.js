@@ -72,7 +72,7 @@ export default class ScoreBoard extends Phaser.Scene {
     ]));
 
     if(this.sys.input.activePointer.justUp){
-        this.scene.start("Prize");
+        this.scene.start("Reward");
       }
 
   }
