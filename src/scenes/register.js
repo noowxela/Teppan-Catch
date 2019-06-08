@@ -37,6 +37,7 @@ export default class Register extends Phaser.Scene {
     playButton.on("pointerup", () => {
       this.saveIntoDB();
       // Save into db
+      console.log("saving");
       // this.scene.start("PlayInstruction");
     });
 
@@ -86,16 +87,32 @@ export default class Register extends Phaser.Scene {
     console.log(this.contact)
     console.log(this.email)
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML = this.responseText;
-      }
-    };
-    xhttp.open("POST", "http://localhost/teppan/player.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhttp.setRequestHeader("Access-Control-Request-Method", "POST");
-    xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
+    // var xhttp = new XMLHttpRequest();
+    // xhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     document.getElementById("demo").innerHTML = this.responseText;
+    //   }
+    // };
+    // xhttp.open("POST", "http://localhost/teppan/player.php", true);
+    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // // xhttp.setRequestHeader("Access-Control-Request-Method", "POST");
+    // xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    // xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
+
+    var http_request;
+    http_request = new XMLHttpRequest();
+    http_request.onload = function () { console.log(this.responseText); };
+    http_request.open("POST", "http://localhost/teppan/player.php");
+    http_request.withCredentials = false;
+    http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 10);
+
+    var http_request_2;
+    http_request_2 = new XMLHttpRequest();
+    http_request_2.onload = function () { console.log(this.responseText);console.log(JSON.parse(this.responseText))};
+    http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
+    http_request_2.withCredentials = false;
+    http_request_2.send();
+    
   }
 }
