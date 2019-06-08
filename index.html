@@ -15,9 +15,28 @@
       canvas{
       	margin: 0;
       }
+      textarea {
+        border: none;
+        overflow: auto;
+        outline: none;
+
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+
+        resize: none; /*remove the resize handle on the bottom right*/
+        border-radius: 20px;
+        text-align: center;
+        font-size: 40px;
+      }
 	</style>
   </head>
   <body>
   	<div style="font-family:heavitas; position:absolute; left:-1000px; visibility:hidden;">.</div>
+    <div id="phaser-game">
+    </div>
+    <textarea id="name">Name</textarea>
+    <textarea id="contact">Contact</textarea>
+    <textarea id="email">Email</textarea>
   </body>
 </html>

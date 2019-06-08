@@ -8,6 +8,7 @@ import Reward from "./scenes/reward.js"
 import Test from "./scenes/test.js"
 
 const game = new Phaser.Game({
+  parent: "phaser-game",
   type: Phaser.AUTO,
   width: '100%',
   height: '100%',
@@ -20,10 +21,10 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  scene: [Welcome, PlayInstruction, Game, ScoreBoard, Reward],
+  // scene: [Welcome, PlayInstruction, Game, ScoreBoard, Reward],
   // scene: [ Game, ScoreBoard, Reward],
   // scene: [ ScoreBoard, Reward],
-  // scene: [ Test],
+  scene: [ Register ],
 
 })
 
