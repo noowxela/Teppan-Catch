@@ -45,9 +45,22 @@ export default class Prize extends Phaser.Scene {
 
 
     // let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(0.5).setOrigin(0.5,1);
-    this.product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
-    // let product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
-    // let product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
+    console.log(this.sys.game.playerScore);
+
+    if (this.sys.game.playerScore <=100){
+      console.log("reward one");
+      this.product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
+      
+    }else if(this.sys.game.playerScore <=150){
+      console.log("reward 2");
+      this.product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
+      
+    }else{
+      console.log("reward 3");
+      this.product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
+
+    }
+
 
 
     var pointer = this.input.activePointer;

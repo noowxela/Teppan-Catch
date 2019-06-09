@@ -180,7 +180,7 @@ export default class Register extends Phaser.Scene {
     // console.log(this.sys.game.playerName )
 
 
-		let vm = this
+		let vm = this;
 		var http_request;
 		http_request = new XMLHttpRequest();
 		http_request.onload = function () { vm.removeForm();console.log(this.responseText); };

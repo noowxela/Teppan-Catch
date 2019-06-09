@@ -8,8 +8,41 @@ export default class ScoreBoard extends Phaser.Scene {
         fontSize: 80 ,
         lineSpacrring: 6
     };
-
-    this.rank = null ;
+    this.caption = null;
+    this.rank ={
+      "scoreBoard": [
+        {
+          "rank": null,
+          "name": null,
+          "point": null,
+          "player_id": null
+        },
+        {
+          "rank": null,
+          "name": null,
+          "point": null,
+          "player_id": null
+        },
+        {
+          "rank": null,
+          "name": null,
+          "point": null,
+          "player_id": null
+        },
+        {
+          "rank": null,
+          "name": null,
+          "point": null,
+          "player_id": null
+        },
+        {
+          "rank": null,
+          "name": null,
+          "point": null,
+          "player_id": null
+        }
+      ]
+  };
 
     this.leaderBoard = (
         '%1\n' +
@@ -56,17 +89,22 @@ export default class ScoreBoard extends Phaser.Scene {
 
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
     this.getfromDB();
+    // console.log(this.rank);
+
   }
 
   update() {
-    this.caption.setText(Phaser.Utils.String.Format(this.leaderBoard, [
-        '1. DARhhh   100 PTS',
-        '2. POL       90 PTS',
-        '3. MET       89 PTS',
-        '4. DEE       72 PTS'
 
-    ]));
-
+    // this.caption.setText(Phaser.Utils.String.Format(this.leaderBoard, [
+    //   this.rank.scoreBoard[0].rank+'. '+ this.rank.scoreBoard[0].name+' '+this.rank.scoreBoard[0].point+'  PTS',
+    //   this.rank.scoreBoard[1].rank+'. '+ this.rank.scoreBoard[1].name+' '+this.rank.scoreBoard[1].point+'  PTS',
+    //   this.rank.scoreBoard[2].rank+'. '+ this.rank.scoreBoard[2].name+' '+this.rank.scoreBoard[2].point+'  PTS',
+    //   this.rank.scoreBoard[3].rank+'. '+ this.rank.scoreBoard[3].name+' '+this.rank.scoreBoard[3].point+'  PTS'
+    //   // '2. POL       90 PTS',
+    //   // '3. MET       89 PTS',
+    //   // '4. DEE       72 PTS'
+    // ]));
+  
     if(this.sys.input.activePointer.justUp){
         this.scene.start("Reward");
       }
@@ -81,14 +119,21 @@ export default class ScoreBoard extends Phaser.Scene {
     // var topName;
     // var topScore;
 
-    this.sys.game.playerName = "cat";
+    this.sys.game.playerName = "tiger";
+    this.sys.game.playerScore = 555;
+    // console.log(this.sys.game.playerName);
 
-    console.log(this.sys.game.playerName);
+		let vm = this;
     var http_request_2;
     http_request_2 = new XMLHttpRequest();
     http_request_2.onload = function () { 
-      console.log(this.responseText);
-      console.log(JSON.parse(this.responseText))
+      // console.log(this.responseText);
+      // console.log(JSON.parse(this.responseText));
+      console.log(vm.sys.game.playerName);
+      vm.rank = JSON.parse(this.responseText) ;
+      console.log(vm.rank);
+      console.log(vm.rank.scoreBoard[0]);
+      vm.updateText();
     };
     // http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
     http_request_2.open("POST", "http://localhost/teppan/scoreboard.php");
@@ -96,8 +141,19 @@ export default class ScoreBoard extends Phaser.Scene {
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request_2.send("name=" + this.sys.game.playerName );
 
-    this.rank = JSON.parse(this.responseText) ;
     console.log("score Board data");
+    // console.log(this.rank);
   }
 
+  updateText(){
+    this.caption.setText(Phaser.Utils.String.Format(this.leaderBoard, [
+      this.rank.scoreBoard[0].rank+'. '+ this.rank.scoreBoard[0].name+' \t'+this.rank.scoreBoard[0].point+'  PTS',
+      this.rank.scoreBoard[1].rank+'. '+ this.rank.scoreBoard[1].name+' \t'+this.rank.scoreBoard[1].point+'  PTS',
+      this.rank.scoreBoard[2].rank+'. '+ this.rank.scoreBoard[2].name+' \t'+this.rank.scoreBoard[2].point+'  PTS',
+      this.rank.scoreBoard[3].rank+'. '+ this.rank.scoreBoard[3].name+' \t'+this.rank.scoreBoard[3].point+'  PTS'
+      // '2. POL       90 PTS',
+      // '3. MET       89 PTS',
+      // '4. DEE       72 PTS'
+    ]));
+  }
 }

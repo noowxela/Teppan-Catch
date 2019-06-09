@@ -380,6 +380,7 @@ export default class Game extends Phaser.Scene {
     this.sys.game.playerName = "cat";
     this.sys.game.playerContact = "Contliao act";
     this.sys.game.playerEmail = "Emailya";
+    this.sys.game.playerScore = this.score;
 
     var http_request;
     http_request = new XMLHttpRequest();
