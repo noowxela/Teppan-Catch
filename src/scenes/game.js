@@ -93,6 +93,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    console.log(this.sys.game)
     //get canvas size
     this.gameWidth = this.sys.game.canvas.getAttribute("width");
     this.gameHeight = this.sys.game.canvas.getAttribute("height");
@@ -151,7 +152,7 @@ export default class Game extends Phaser.Scene {
         repeat: 30,
         callback: () => {
           var scale = this.timerEvents[1].getRepeatCount();
-          console.log(this.timerEvents[1].getRepeatCount());
+          // console.log(this.timerEvents[1].getRepeatCount());
           // this.timeBar.scaleX *= (scale/10);
           // this.timeBar.displayWidth = this.timeBar.displayWidth-3.33;
           this.timeBar.displayWidth = this.timeBar.displayWidth-(this.timeBarOriginal*1/30);

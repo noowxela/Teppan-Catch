@@ -132,6 +132,9 @@ export default class Register extends Phaser.Scene {
     console.log(this.email)
     console.log(this.formUtil.scene.notice)
 
+    this.sys.game.wtf = "12123"
+    console.log(this.sys.game)
+
 
     // var xhttp = new XMLHttpRequest();
     // xhttp.onreadystatechange = function() {
