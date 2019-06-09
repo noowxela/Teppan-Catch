@@ -123,7 +123,7 @@ export default class Game extends Phaser.Scene {
     this.timerEvents.push(
       this.time.addEvent({
         delay: 30000,
-        // delay: 5000,
+        // delay: 3000,
         callback: () => {
           this.scene.pause();
           // this.scene.events.on('transitioninit', function(fromScene, duration){});
@@ -133,7 +133,8 @@ export default class Game extends Phaser.Scene {
           //   // moveBelow: false,
           //   // sleep: false, 
           // });
-          this.scene.start("ScoreBoard");
+          this.saveIntoDB();
+          // this.scene.start("ScoreBoard");
 
         },
         callbackScope: this,
@@ -373,6 +374,22 @@ export default class Game extends Phaser.Scene {
 
   }
 
+  saveIntoDB() {
+   
+    console.log("saving score");
+    
+    var http_request;
+    http_request = new XMLHttpRequest();
+    // http_request.onload = function () { console.log(this.responseText); };
+    http_request.open("POST", "http://localhost/teppan/game.php");
+    // http_request.open("POST", "X");
+    http_request.withCredentials = false;
+    http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request.send("&score=" + this.score);
+    // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0);
 
+    console.log("sucessful");
+
+  }
 
 }

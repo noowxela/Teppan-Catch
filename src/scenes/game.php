@@ -8,10 +8,9 @@ $host = "127.0.0.1";
 $user = "root";
 $password = "";
 
-$name = $_POST['name'];
-$contact = $_POST['contact'];
-$email = $_POST['email'];
+$user_id = "";
 $score = $_POST['score'];
+
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
@@ -19,8 +18,22 @@ if (!$con)
 	
 mysqli_select_db($con,$database) or die ("Error could not load database" . mysqli_error($con));
 
-// run query
-$sql = "INSERT INTO `user`(`user_name`, `user_contact`, `user_email`, `score`) VALUES ('".$name."','".$contact."','".$email."','".$score."')";
+// $sql_top4 = "SELECT * FROM user";
+// $result = $con->query($sql_top4);
+
+$sql_currentPlayer = "SELECT * FROM user ORDER BY user_id desc LIMIT 1";
+$result = $con->query($sql_currentPlayer);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $user_id = $row['user_id'];
+    }
+} else {
+    echo("0 results");
+}
+
+// // run query
+$sql = "UPDATE `user` SET `score` = '".$score."' WHERE user_id = '".$user_id."' ";
 $ins = $con->query($sql);
 if (!$ins)
 	die('Error entry already exists ' . mysqli_error($con));

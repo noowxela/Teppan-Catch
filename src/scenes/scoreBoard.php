@@ -1,5 +1,9 @@
 <?PHP
-$database = "teppan";
+header('Access-Control-Allow-Origin:*');  
+header('Access-Control-Allow-Methods:POST, GET');  
+header('Access-Control-Allow-Headers:x-requested-with,content-type');
+
+$database = "teppan_catch";
 $host = "127.0.0.1";
 $user = "root";
 $password = "";
@@ -10,21 +14,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql_current_playerScore = "SSELECT * FROM user ORDER BY user_id desc LIMIT 1";
+// $sql_current_playerScore = "SSELECT * FROM user ORDER BY user_id desc LIMIT 1";
 $sql_top4 = "SELECT * FROM user ORDER BY score desc LIMIT 4";
 $result = $conn->query($sql_top4);
 
+
 if ($result->num_rows > 0) {
-    // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "user_id: " . $row["user_id"]. " - user_name: " . $row["user_name"]. " - score: " . $row["score"]. "<br>";
+        die('{"user_id": "' . $row['user_id']. '","user_name": "' . $row['user_name']. '","score": "' . $row['score'] . '"}');
     }
 } else {
-    echo "0 results";
+    die("0 results");
 }
 
-// Everything good
-die('success');
 mysqli_close($con);
 
 ?>
