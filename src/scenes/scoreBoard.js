@@ -85,8 +85,8 @@ export default class ScoreBoard extends Phaser.Scene {
       console.log(JSON.parse(this.responseText))
     };
     http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
-    http_request_2.withCredentials = false;
-    http_request_2.send();
+    // http_request_2.withCredentials = false;
+    // http_request_2.send();
 
 
     console.log("score Board data");

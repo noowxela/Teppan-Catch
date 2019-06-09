@@ -21,7 +21,7 @@ $result = $conn->query($sql_top4);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        die('{"user_id": "' . $row['user_id']. '","user_name": "' . $row['user_name']. '","score": "' . $row['score'] . '","subscribe": "' . $row['subscribe'] . '"}');
+        echo('user_id : ' . $row['user_id']. ' , user_name: ' . $row['user_name']. ' , score : ' . $row['score'] . ' , subscribe": ' . $row['subscribe'] . '<br>');
     }
 } else {
     die("0 results");

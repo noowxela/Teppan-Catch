@@ -12,7 +12,7 @@ $name = $_POST['name'];
 $contact = $_POST['contact'];
 $email = $_POST['email'];
 $score = $_POST['score'];
-
+$user_id = "";
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
@@ -20,11 +20,8 @@ if (!$con)
 	
 mysqli_select_db($con,$database) or die ("Error could not load database" . mysqli_error($con));
 
-// $sql_top4 = "SELECT * FROM user";
-// $result = $con->query($sql_top4);
 
-// SELECT * FROM user WHERE user_name = "Name" ORDER BY user_id desc LIMIT 1
-$sql_currentPlayer = "SELECT * FROM user WHERE user_name = '". $name . "' user_contact = '" . $contact . "' user_email = '" . $email . "' " . "'ORDER BY user_id desc LIMIT 1";
+$sql_currentPlayer = "SELECT * FROM user WHERE user_name = '". $name . "'And user_contact = '" . $contact . "'And user_email = '" . $email . "' " ;
 $result = $con->query($sql_currentPlayer);
 
 if ($result->num_rows > 0) {
