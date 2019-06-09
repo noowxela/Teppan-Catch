@@ -101,7 +101,6 @@ export default class Register extends Phaser.Scene {
   }
   nameInputChanged() {
     this.name=this.formUtil.getTextAreaValue("name");
-    // return null;
   }
   contactInputChanged() {
     this.contact=this.formUtil.getTextAreaValue("contact");
@@ -131,7 +130,7 @@ export default class Register extends Phaser.Scene {
     console.log(this.name)
     console.log(this.contact)
     console.log(this.email)
-    console.log("saving");
+    console.log(this.formUtil.scene.notice)
 
 
     // var xhttp = new XMLHttpRequest();
@@ -154,7 +153,7 @@ export default class Register extends Phaser.Scene {
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0);
+    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + this.formUtil.scene.notice);
     // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
 
     // var http_request_2;

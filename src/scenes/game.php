@@ -8,7 +8,9 @@ $host = "127.0.0.1";
 $user = "root";
 $password = "";
 
-$user_id = "";
+$name = $_POST['name'];
+$contact = $_POST['contact'];
+$email = $_POST['email'];
 $score = $_POST['score'];
 
 
@@ -21,7 +23,8 @@ mysqli_select_db($con,$database) or die ("Error could not load database" . mysql
 // $sql_top4 = "SELECT * FROM user";
 // $result = $con->query($sql_top4);
 
-$sql_currentPlayer = "SELECT * FROM user ORDER BY user_id desc LIMIT 1";
+// SELECT * FROM user WHERE user_name = "Name" ORDER BY user_id desc LIMIT 1
+$sql_currentPlayer = "SELECT * FROM user WHERE user_name = '". $name . "' user_contact = '" . $contact . "' user_email = '" . $email . "' " . "'ORDER BY user_id desc LIMIT 1";
 $result = $con->query($sql_currentPlayer);
 
 if ($result->num_rows > 0) {
