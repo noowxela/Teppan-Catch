@@ -40,23 +40,27 @@ export default class Prize extends Phaser.Scene {
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(1.3);
     
-    let scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
-    let score = this.add.text(this.width/2, 500, '200 PTS', this.scoreStlye).setOrigin(0.5,0);
 
 
     // let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(0.5).setOrigin(0.5,1);
     console.log(this.sys.game.playerScore);
 
-    if (this.sys.game.playerScore <=100){
+    if (this.sys.game.playerScore <150){
       console.log("reward one");
+      this.scoreLV = this.add.text(this.width/2, 420, 'rookie level', this.captionStyle).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       this.product = this.add.image(this.width/2, this.height, 'reward_1').setScale(1.3).setOrigin(0.5,1);
       
-    }else if(this.sys.game.playerScore <=150){
+    }else if(this.sys.game.playerScore <200){
       console.log("reward 2");
+      this.scoreLV = this.add.text(this.width/2, 420, 'inermediate level', this.captionStyle).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       this.product = this.add.image(this.width/2, this.height, 'reward_2').setScale(1.3).setOrigin(0.5,1);
       
     }else{
       console.log("reward 3");
+      this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       this.product = this.add.image(this.width/2, this.height, 'reward_3').setScale(1.3).setOrigin(0.5,1);
 
     }

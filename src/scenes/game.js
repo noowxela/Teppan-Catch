@@ -375,11 +375,7 @@ export default class Game extends Phaser.Scene {
   }
 
   saveIntoDB() {
-    // this.
     console.log("saving score");
-    this.sys.game.playerName = "cat";
-    this.sys.game.playerContact = "Contliao act";
-    this.sys.game.playerEmail = "Emailya";
     this.sys.game.playerScore = this.score;
 
     var http_request;
@@ -392,7 +388,7 @@ export default class Game extends Phaser.Scene {
     http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
     console.log("saving done");
-    // this.scene.start("ScoreBoard");
+    this.scene.start("ScoreBoard");
 
   }
 
