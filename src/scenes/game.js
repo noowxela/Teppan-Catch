@@ -134,7 +134,6 @@ export default class Game extends Phaser.Scene {
           //   // sleep: false, 
           // });
           this.saveIntoDB();
-          // this.scene.start("ScoreBoard");
 
         },
         callbackScope: this,
@@ -375,7 +374,7 @@ export default class Game extends Phaser.Scene {
   }
 
   saveIntoDB() {
-   
+    // this.
     console.log("saving score");
     
     var http_request;
@@ -389,6 +388,7 @@ export default class Game extends Phaser.Scene {
     // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0);
 
     console.log("sucessful");
+    this.scene.start("ScoreBoard");
 
   }
 

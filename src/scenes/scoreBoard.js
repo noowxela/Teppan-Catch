@@ -32,7 +32,8 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 // 
   create() {
-    
+    console.log(this.sys.game.name);
+
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
     // let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
@@ -58,7 +59,7 @@ export default class ScoreBoard extends Phaser.Scene {
     // });
 
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
-    console.log(this.height);
+    // console.log(this.height);
     // console.log(this.scene.Game.score);
   }
 
@@ -76,6 +77,58 @@ export default class ScoreBoard extends Phaser.Scene {
       }
 
   }
+  getfromDB() {
 
+
+    this.contact=this.formUtil.getTextAreaValue("contact");
+    this.name=this.formUtil.getTextAreaValue("name");
+    this.email=this.formUtil.getTextAreaValue("email");
+    
+    if(this.contact=="" || this.name == ""|| this.email == "" ){
+      alert('Please complete the user detail')
+      return;
+    }
+    if(this.agree == 0 ){
+      alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy')
+      return;
+    }
+    console.log(this.name)
+    console.log(this.contact)
+    console.log(this.email)
+    console.log("saving");
+
+
+    // var xhttp = new XMLHttpRequest();
+    // xhttp.onreadystatechange = function() {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     document.getElementById("demo").innerHTML = this.responseText;
+    //   }
+    // };
+    // xhttp.open("POST", "http://localhost/teppan/player.php", true);
+    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // // xhttp.setRequestHeader("Access-Control-Request-Method", "POST");
+    // xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    // xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
+
+    var http_request;
+    http_request = new XMLHttpRequest();
+    // http_request.onload = function () { console.log(this.responseText); };
+    http_request.open("POST", "http://localhost/teppan/player.php");
+    // http_request.open("POST", "X");
+    http_request.withCredentials = false;
+    http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0);
+    // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
+
+    // var http_request_2;
+    // http_request_2 = new XMLHttpRequest();
+    // // http_request_2.onload = function () { console.log(this.responseText);console.log(JSON.parse(this.responseText))};
+    // http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
+    // // http_request_2.open("GET", "http://localhost/Teppan-Catch/src/scenes/scoreboard.php");
+    // http_request_2.withCredentials = false;
+    // http_request_2.send();
+
+    console.log("sucessful");
+  }
 
 }
