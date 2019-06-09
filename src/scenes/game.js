@@ -377,20 +377,23 @@ export default class Game extends Phaser.Scene {
   saveIntoDB() {
     // this.
     console.log("saving score");
-    
+    this.sys.game.playerName = "cat";
+    this.sys.game.playerContact = "Contliao act";
+    this.sys.game.playerEmail = "Emailya";
+
     var http_request;
     http_request = new XMLHttpRequest();
-    // http_request.onload = function () { console.log(this.responseText); };
+    http_request.onload = function () { console.log(this.responseText); };
     http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // http_request.send("name=" + this.sys.game.playerName + "&score=" + this.score);
     http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
     console.log("saving done");
     // this.scene.start("ScoreBoard");
 
   }
+
 
 }

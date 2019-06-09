@@ -9,6 +9,8 @@ export default class ScoreBoard extends Phaser.Scene {
         lineSpacrring: 6
     };
 
+    this.rank = null ;
+
     this.leaderBoard = (
         '%1\n' +
         '%2\n' +
@@ -32,7 +34,6 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 // 
   create() {
-    console.log(this.sys.game.playerName )
 
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
     // let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.3);
@@ -73,22 +74,29 @@ export default class ScoreBoard extends Phaser.Scene {
   }
   getfromDB() {
 
-    console.log(this.sys.game.playerName)
-    console.log(this.sys.game.playerContact)
-    console.log(this.sys.game.playerEmail)
+    // console.log(this.sys.game.playerName)
+    // console.log(this.sys.game.playerContact)
+    // console.log(this.sys.game.playerEmail)
     console.log("score Board start calulate")
+    // var topName;
+    // var topScore;
 
+    this.sys.game.playerName = "cat";
+
+    console.log(this.sys.game.playerName);
     var http_request_2;
     http_request_2 = new XMLHttpRequest();
     http_request_2.onload = function () { 
       console.log(this.responseText);
       console.log(JSON.parse(this.responseText))
     };
-    http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
-    // http_request_2.withCredentials = false;
-    // http_request_2.send();
+    // http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
+    http_request_2.open("POST", "http://localhost/teppan/scoreboard.php");
+    http_request_2.withCredentials = false;
+    http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request_2.send("name=" + this.sys.game.playerName );
 
-
+    this.rank = JSON.parse(this.responseText) ;
     console.log("score Board data");
   }
 
