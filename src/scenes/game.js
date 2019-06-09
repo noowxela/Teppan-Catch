@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    console.log(this.sys.game)
+    // console.log(this.sys.game)
     //get canvas size
     this.gameWidth = this.sys.game.canvas.getAttribute("width");
     this.gameHeight = this.sys.game.canvas.getAttribute("height");
@@ -385,11 +385,11 @@ export default class Game extends Phaser.Scene {
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request.send("&score=" + this.score);
-    // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0);
+    // http_request.send("name=" + this.sys.game.playerName + "&score=" + this.score);
+    http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
-    console.log("sucessful");
-    this.scene.start("ScoreBoard");
+    console.log("saving done");
+    // this.scene.start("ScoreBoard");
 
   }
 

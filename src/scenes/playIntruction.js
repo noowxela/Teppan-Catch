@@ -33,8 +33,8 @@ export default class PlayInstruction extends Phaser.Scene {
             this.scene.doubleClick = 2;
             // console.log(this.doubleClick);
             // console.log(this.scene.doubleClick);
-            this.scene.scene.start("ScoreBoard");
-            // this.scene.scene.start("Game");
+            // this.scene.scene.start("ScoreBoard");
+            this.scene.scene.start("Game");
 
         }else{
         }

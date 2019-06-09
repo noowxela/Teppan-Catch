@@ -115,8 +115,8 @@ export default class Register extends Phaser.Scene {
   }
 
   saveIntoDB() {
-    this.contact=this.formUtil.getTextAreaValue("contact");
     this.name=this.formUtil.getTextAreaValue("name");
+    this.contact=this.formUtil.getTextAreaValue("contact");
     this.email=this.formUtil.getTextAreaValue("email");
     
     if(this.contact=="" || this.name == ""|| this.email == "" ){
@@ -127,13 +127,15 @@ export default class Register extends Phaser.Scene {
       alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy')
       return;
     }
-    console.log(this.name)
-    console.log(this.contact)
-    console.log(this.email)
-    console.log(this.formUtil.scene.notice)
+    // console.log(this.name)
+    // console.log(this.contact)
+    // console.log(this.email)
+    // console.log(this.notice)
 
-    this.sys.game.wtf = "12123"
-    console.log(this.sys.game)
+    this.sys.game.playerName = this.name;
+    this.sys.game.playerContact = this.contact;
+    this.sys.game.playerEmail = this.email;
+    console.log(this.sys.game.playerName )
 
 
     // var xhttp = new XMLHttpRequest();
@@ -148,7 +150,7 @@ export default class Register extends Phaser.Scene {
     // xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     // xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
 
-    let vm = this
+    let vm = this;
     var http_request;
     http_request = new XMLHttpRequest();
     http_request.onload = function () { vm.removeForm();console.log(this.responseText); };
@@ -156,18 +158,17 @@ export default class Register extends Phaser.Scene {
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + this.formUtil.scene.notice);
-    // http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
+    http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + this.notice);
+
+    console.log("save detail done");
 
     // var http_request_2;
     // http_request_2 = new XMLHttpRequest();
-    // // http_request_2.onload = function () { console.log(this.responseText);console.log(JSON.parse(this.responseText))};
+    // http_request_2.onload = function () { console.log(this.responseText);console.log(JSON.parse(this.responseText))};
     // http_request_2.open("GET", "http://localhost/teppan/scoreboard.php");
-    // // http_request_2.open("GET", "http://localhost/Teppan-Catch/src/scenes/scoreboard.php");
     // http_request_2.withCredentials = false;
     // http_request_2.send();
 
-    // console.log("sucessful");
     this.scene.start("PlayInstruction");
 
   }
