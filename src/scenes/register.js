@@ -75,7 +75,6 @@ export default class Register extends Phaser.Scene {
         width: this.sys.game.canvas.getAttribute("width"),
         height: this.sys.game.canvas.getAttribute("height"),
     });
-    // this.formUtil.showNumbers();
 
     this.formUtil.scaleToGameW("name", .5);
     this.formUtil.scaleToGameH("name", .03);
@@ -110,6 +109,11 @@ export default class Register extends Phaser.Scene {
   emailInputChanged() {
     this.email=this.formUtil.getTextAreaValue("email");
   }
+  removeForm(){
+    this.formUtil.removeElement("name")
+    this.formUtil.removeElement("contact")
+    this.formUtil.removeElement("email")
+  }
 
   saveIntoDB() {
     this.contact=this.formUtil.getTextAreaValue("contact");
@@ -142,9 +146,10 @@ export default class Register extends Phaser.Scene {
     // xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     // xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
 
+    let vm = this
     var http_request;
     http_request = new XMLHttpRequest();
-    // http_request.onload = function () { console.log(this.responseText); };
+    http_request.onload = function () { vm.removeForm();console.log(this.responseText); };
     http_request.open("POST", "http://localhost/teppan/player.php");
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
@@ -160,7 +165,7 @@ export default class Register extends Phaser.Scene {
     // http_request_2.withCredentials = false;
     // http_request_2.send();
 
-    console.log("sucessful");
+    // console.log("sucessful");
     this.scene.start("PlayInstruction");
 
   }

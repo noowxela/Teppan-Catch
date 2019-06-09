@@ -66,6 +66,12 @@ export default class FormUtil {
         el.style.top = y + "px";
         el.style.left = x + "px";
     }
+    removeElement(elName){
+        //get the element
+        var el = document.getElementById(elName);
+        //set the display to none
+        el.style.display = "none";
+    }
     toNum(s) {
         s = s.replace("px", "");
         s = parseInt(s);
