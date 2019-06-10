@@ -152,12 +152,12 @@ export default class Register extends Phaser.Scene {
 	}
 
 	validatePhone(phone){
-		let re = /^\+65[6|8|9]\d{7}$/
+		let re = /^\d{7}$/
 		return re.test(String(phone).toLowerCase());
 	}
 
 	validateName(name){
-		let re = /^[a-zA-Z ]{3}$/
+		let re = /^[a-zA-Z ]{3,8}$/
 		return re.test(String(name).toLowerCase());
 
 	}
