@@ -126,7 +126,7 @@ export default class Register extends Phaser.Scene {
 	}
 
 	validateName(name){
-		let re = /^[a-zA-Z ]{3,}$/
+		let re = /^[a-zA-Z ]{3,5}$/
 		return re.test(String(name).toLowerCase());
 
 	}

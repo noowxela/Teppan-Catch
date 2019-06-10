@@ -22,9 +22,9 @@ const game = new Phaser.Game({
     }
   },
 
-  // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
+  scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
   // scene: [ScoreBoard, Reward],
-  scene: [Reward],
+  // scene: [Reward],
   // scene: [game],
 
 })

@@ -39,6 +39,7 @@ export default class FormUtil {
         //get the element
         var el = document.getElementById(elName);
         //set the position to absolute
+        el.style.display = "inherit";
         el.style.position = "absolute";
         //get the width of the element
         var w = el.style.width;
