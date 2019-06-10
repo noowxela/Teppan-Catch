@@ -72,6 +72,8 @@ export default class ScoreBoard extends Phaser.Scene {
     this.load.image('scoreboard', 'assets/scoreboard.png');
     this.load.image('redbar', 'assets/redbar.png');
     this.load.image('product', 'assets/product.png');
+    this.load.html('fbShare', 'src/scenes/fbShare.html');
+
   }
 // 
   create() {
@@ -94,12 +96,13 @@ export default class ScoreBoard extends Phaser.Scene {
     });
     // var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
 
+    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
+
     this.getfromDB();
   }
 
   update() {
-    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
 
   // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3&appId=2055826714667767&autoLogAppEvents=1"></script>
 
