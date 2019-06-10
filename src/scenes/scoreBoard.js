@@ -72,6 +72,8 @@ export default class ScoreBoard extends Phaser.Scene {
     this.load.image('scoreboard', 'assets/scoreboard.png');
     this.load.image('redbar', 'assets/redbar.png');
     this.load.image('product', 'assets/product.png');
+    this.load.html('fbShare', 'src/scenes/fbShare.html');
+
   }
 // 
   create() {
@@ -92,14 +94,15 @@ export default class ScoreBoard extends Phaser.Scene {
         ease: 'Power2',
         // repeat: -1,            // -1: infinity
     });
-    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
+    // var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
 
+    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
+
     this.getfromDB();
   }
 
   update() {
-
     if(this.sys.input.activePointer.justDown){
         this.pressed = true;
       }
