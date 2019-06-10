@@ -14,6 +14,9 @@ const game = new Phaser.Game({
   height: '100%',
   mode: Phaser.Scale.NONE,
   autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+  dom: {
+    createContainer: true
+  },
   physics: {
     default: 'arcade',
     arcade: {
@@ -22,5 +25,6 @@ const game = new Phaser.Game({
     }
   },
 
-  scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
+  // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
+  scene: [ScoreBoard],
 })
