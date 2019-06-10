@@ -74,7 +74,7 @@ export default class Game extends Phaser.Scene {
     this.load.image('gift', 'assets/gift.png');
     
     this.load.image('teppan', 'assets/teppan.png');
-    this.load.image('crumpled_paper', 'assets/rubbish.png');
+    this.load.image('crumpled_paper', 'assets/crumpled_paper.png');
 
     this.load.spritesheet('vegepack', 'assets/vegepack.png',
          { frameWidth: 237, frameHeight: 203 }    );

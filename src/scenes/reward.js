@@ -45,39 +45,6 @@ export default class Prize extends Phaser.Scene {
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.3);
-    this.shareButton = this.add.image(this.width/2, 1000, 'shareButton').setScale(1.3).setInteractive();
-
-    var maxscale = 1.39;
-    var minscale = 1.3;
-    var scale = 1.3;
-    var larOrSma = 0;
-    this.time.addEvent({
-      delay: 200,
-      // repeat: 30,
-      callback: () => {
-        if(larOrSma ==0 ){
-          this.shareButton.setScale(scale);
-          scale += 0.005;
-          if(scale >maxscale){
-            larOrSma =1 ;
-          }
-        }else if(larOrSma==1){
-          this.shareButton.setScale(scale);
-          scale -= 0.005;
-          if(scale <minscale){
-            larOrSma =0 ;
-          }
-
-        }
-      },
-      callbackScope: this,
-      loop: -1
-    }) 
-
-
-    this.shareButton.on("pointerup", () => {
-      window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
-    });
 
 
     if (this.sys.game.playerScore <=50){
@@ -146,6 +113,41 @@ export default class Prize extends Phaser.Scene {
         }else{
         }
     
+    });
+
+
+    this.shareButton = this.add.image(this.width/2, 1300, 'shareButton').setScale(1.3).setInteractive();
+
+    var maxscale = 1.39;
+    var minscale = 1.3;
+    var scale = 1.3;
+    var larOrSma = 0;
+    this.time.addEvent({
+      delay: 200,
+      // repeat: 30,
+      callback: () => {
+        if(larOrSma ==0 ){
+          this.shareButton.setScale(scale);
+          scale += 0.005;
+          if(scale >maxscale){
+            larOrSma =1 ;
+          }
+        }else if(larOrSma==1){
+          this.shareButton.setScale(scale);
+          scale -= 0.005;
+          if(scale <minscale){
+            larOrSma =0 ;
+          }
+
+        }
+      },
+      callbackScope: this,
+      loop: -1
+    }) 
+
+
+    this.shareButton.on("pointerup", () => {
+      window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
     });
   }
 
