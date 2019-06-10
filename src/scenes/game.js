@@ -16,7 +16,6 @@ export default class Game extends Phaser.Scene {
 
     this.caption = null;
 
-    this.score = 0;
     this.stateText = null;
     this.scoreText = null;
 
@@ -65,7 +64,6 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    // console.log(this.scene);
     this.load.image('background', 'assets/background.png');
     
     this.load.image('heart', 'assets/heart.png');
@@ -94,6 +92,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.score = 0;
     this.music = this.sound.add('background',{loop:true});
     this.music.play();
 

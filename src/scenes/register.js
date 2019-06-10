@@ -121,7 +121,7 @@ export default class Register extends Phaser.Scene {
 	}
 
 	validatePhone(phone){
-		let re = /^(\+?6?01)[0-46-9]-*[0-9]{7,8}$/
+		let re = /^\+65[6|8|9]\d{7}$/
 		return re.test(String(phone).toLowerCase());
 	}
 
@@ -174,10 +174,10 @@ export default class Register extends Phaser.Scene {
 		// xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
 		// xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
 
-    this.sys.game.playerName = this.name;
-    this.sys.game.playerContact = this.contact;
-    this.sys.game.playerEmail = this.email;
-    // console.log(this.sys.game.playerName )
+	    this.sys.game.playerName = this.name;
+	    this.sys.game.playerContact = this.contact;
+	    this.sys.game.playerEmail = this.email;
+	    // console.log(this.sys.game.playerName )
 
 
 		let vm = this;

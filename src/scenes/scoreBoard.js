@@ -9,7 +9,6 @@ export default class ScoreBoard extends Phaser.Scene {
         lineSpacing: 20
     };
     this.caption = null;
-    this.pressed = false;
 
     this.rank ={
       "scoreBoard": [
@@ -77,7 +76,7 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 // 
   create() {
-
+    this.pressed = false;
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(1.3);
