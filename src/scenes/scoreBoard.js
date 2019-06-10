@@ -94,13 +94,15 @@ export default class ScoreBoard extends Phaser.Scene {
         ease: 'Power2',
         // repeat: -1,            // -1: infinity
     });
-    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
+    // var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
 
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
     this.getfromDB();
   }
 
   update() {
+    var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
+
   // <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3&appId=2055826714667767&autoLogAppEvents=1"></script>
 
     if(this.sys.input.activePointer.justDown){
