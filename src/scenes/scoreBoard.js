@@ -170,6 +170,7 @@ export default class ScoreBoard extends Phaser.Scene {
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
         &&(this.rank.scoreBoard[i].contact == (this.sys.game.playerContact)))
       {
+        console.log("Too gotsay nice");
           this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
           pRank[i].setFill('#FFF200');
           pName[i].setFill('#FFF200');

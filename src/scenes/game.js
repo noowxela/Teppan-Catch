@@ -243,15 +243,15 @@ export default class Game extends Phaser.Scene {
 
  
     this.bombs = this.physics.add.group({
-      maxSize: 10000,
+      maxSize: 100,
     });
     this.veges = this.physics.add.group({
       defaultKey: 'vegepack',
-      maxSize: 10000,
+      maxSize: 100,
     });
     this.meats = this.physics.add.group({
       defaultKey: 'meatpack',
-      maxSize: 10000,
+      maxSize: 100,
     });
 
     // create player tappen
