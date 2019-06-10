@@ -54,6 +54,7 @@ export default class Register extends Phaser.Scene {
 		});
 		text.setOrigin(0.5,0.5)
 
+		this.showElement("form")
 		this.showElement("name")
 		this.showElement("contact")
 		this.showElement("email")
@@ -159,6 +160,7 @@ export default class Register extends Phaser.Scene {
 	// }
 
 	removeForm(){
+		this.hideElement("form")
 		this.hideElement("name")
 		this.hideElement("contact")
 		this.hideElement("email")
