@@ -28,16 +28,23 @@ export default class Register extends Phaser.Scene {
 
 	}
 
+	blurInput(){
+		document.getElementById('email').blur()
+		document.getElementById('contact').blur()
+		document.getElementById('name').blur()
+	}
+
 	create() {
 		let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
-		let balck_bg = this.add.image(this.width/2, this.height/2-110, 'balck_bg').setScale(0.21,0.12);
+		let balck_bg = this.add.image(this.width/2, 760, 'balck_bg').setScale(1.35,0.9);
+		// let balck_bg = this.add.image(this.width/2, this.height/2-90, 'balck_bg').setScale(1.3,0.9);
 		let logo = this.add.image(this.width/2, 230, 'logo').setScale(1.3);
 		let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
-		let checkBox1 = this.add.image(300, 990, 'checkBox').setScale(1).setOrigin(0,0).setInteractive();
-		let test1 = this.add.image(350, 990, 'test1').setScale(1).setOrigin(0,0);
-		let text2 = this.add.image(492, 1006, 'text2').setScale(1).setOrigin(0,0);
-		let text3 = this.add.image(350, 1050, 'text3').setScale(1).setOrigin(0,0);
-		let checkBox2 = this.add.image(300, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive();
+		let checkBox1 = this.add.image(300, 990, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
+		let test1 = this.add.image(352, 990, 'test1').setScale(1).setOrigin(0,0).setScale(1.3);
+		let text2 = this.add.image(534, 1011, 'text2').setScale(1).setOrigin(0,0).setScale(1.3);
+		let text3 = this.add.image(350, 1050, 'text3').setScale(1).setOrigin(0,0).setScale(1.3);
+		let checkBox2 = this.add.image(300, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
 		let product = this.add.image(this.width/2, 1400, 'product');
 
 		let text = this.add.text(this.width/2, 500, 'User Registeration', {
@@ -47,8 +54,13 @@ export default class Register extends Phaser.Scene {
 		});
 		text.setOrigin(0.5,0.5)
 
+		this.showElement("name")
+		this.showElement("contact")
+		this.showElement("email")
+
 
 		checkBox1.on('pointerdown', function (pointer) {
+			this.scene.blurInput()
 			if(this.scene.agree == 0){
 				this.setTint(0xff0000);
 				this.scene.agree = 1;
@@ -59,7 +71,7 @@ export default class Register extends Phaser.Scene {
 			}
 		});
 		checkBox2.on('pointerdown', function (pointer) {
-
+			this.scene.blurInput()
 			if(this.scene.notice == 0){
 				this.setTint(0xff0000);
 				this.scene.notice = 1;
@@ -70,28 +82,28 @@ export default class Register extends Phaser.Scene {
 			}
 		});
 
-		this.formUtil = new FormUtil({
-				scene: this,
-				rows: 15,
-				cols: 15,
-				width: this.sys.game.canvas.getAttribute("width"),
-				height: this.sys.game.canvas.getAttribute("height"),
-		});
+		// this.formUtil = new FormUtil({
+		// 		scene: this,
+		// 		rows: 15,
+		// 		cols: 15,
+		// 		width: this.sys.game.canvas.getAttribute("width"),
+		// 		height: this.sys.game.canvas.getAttribute("height"),
+		// });
 
-		this.formUtil.scaleToGameW("name", .5);
-		this.formUtil.scaleToGameH("name", .03);
-		this.formUtil.placeElementAt(82, "name", true, true);
-		this.formUtil.addChangeCallback("name", this.nameInputChanged, this);
+		// this.formUtil.scaleToGameW("name", .45);
+		// this.formUtil.scaleToGameH("name", .03);
+		// this.formUtil.placeElementAt(82, "name", true, true);
+		// this.formUtil.addChangeCallback("name", this.nameInputChanged, this);
 
-		this.formUtil.scaleToGameW("contact", .5);
-		this.formUtil.scaleToGameH("contact", .03);
-		this.formUtil.placeElementAt(97, "contact", true, true);
-		this.formUtil.addChangeCallback("contact", this.contactInputChanged, this);
+		// this.formUtil.scaleToGameW("contact", .45);
+		// this.formUtil.scaleToGameH("contact", .03);
+		// this.formUtil.placeElementAt(97, "contact", true, true);
+		// this.formUtil.addChangeCallback("contact", this.contactInputChanged, this);
 
-		this.formUtil.scaleToGameW("email", .5);
-		this.formUtil.scaleToGameH("email", .03);
-		this.formUtil.placeElementAt(112, "email", true, true);
-		this.formUtil.addChangeCallback("email", this.emailInputChanged, this);
+		// this.formUtil.scaleToGameW("email", .45);
+		// this.formUtil.scaleToGameH("email", .03);
+		// this.formUtil.placeElementAt(112, "email", true, true);
+		// this.formUtil.addChangeCallback("email", this.emailInputChanged, this);
 		
 		this.start_button = this.add.image(this.width/2, 1150, 'start_button').setInteractive();
 
@@ -131,19 +143,25 @@ export default class Register extends Phaser.Scene {
 		});
 		
 	}
-	nameInputChanged() {
-		this.name=this.formUtil.getTextAreaValue("name");
-	}
-	contactInputChanged() {
-		this.contact=this.formUtil.getTextAreaValue("contact");
-	}
-	emailInputChanged() {
-		this.email=this.formUtil.getTextAreaValue("email");
-	}
+	// nameInputChanged() {
+	// 	this.name=this.formUtil.getTextAreaValue("name");
+	// }
+	// contactInputChanged() {
+	// 	this.contact=this.formUtil.getTextAreaValue("contact");
+	// }
+	// emailInputChanged() {
+	// 	this.email=this.formUtil.getTextAreaValue("email");
+	// }
+	// removeForm(){
+	// 	this.formUtil.removeElement("name")
+	// 	this.formUtil.removeElement("contact")
+	// 	this.formUtil.removeElement("email")
+	// }
+
 	removeForm(){
-		this.formUtil.removeElement("name")
-		this.formUtil.removeElement("contact")
-		this.formUtil.removeElement("email")
+		this.hideElement("name")
+		this.hideElement("contact")
+		this.hideElement("email")
 	}
 
 	validateEmail(email) {
@@ -152,7 +170,7 @@ export default class Register extends Phaser.Scene {
 	}
 
 	validatePhone(phone){
-		let re = /^\d{7}$/
+		let re = /^\d{8}$/
 		return re.test(String(phone).toLowerCase());
 	}
 
@@ -161,10 +179,22 @@ export default class Register extends Phaser.Scene {
 		return re.test(String(name).toLowerCase());
 
 	}
+	showElement(id){
+		document.getElementById(id).style.opacity = "1";
+		document.getElementById(id).style.pointerEvents = "all";
+	}
+	hideElement(id){
+		document.getElementById(id).style.opacity = "0";
+		document.getElementById(id).style.pointerEvents = "none";
+	}
 	saveIntoDB() {
-		this.contact=this.formUtil.getTextAreaValue("contact");
-		this.name=this.formUtil.getTextAreaValue("name");
-		this.email=this.formUtil.getTextAreaValue("email");
+		// this.contact=this.formUtil.getTextAreaValue("contact");
+		// this.name=this.formUtil.getTextAreaValue("name");
+		// this.email=this.formUtil.getTextAreaValue("email");
+		this.name = document.getElementById("name").value;
+		this.contact = document.getElementById("contact").value;
+		this.email = document.getElementById("email").value;
+		
 		
 		if(this.contact=="" || this.name1 == ""|| this.email == "" ){
             alert('Please complete the user detail')
@@ -207,6 +237,7 @@ export default class Register extends Phaser.Scene {
 
 
 		let vm = this;
+		console.log(vm.notice)
 		var http_request;
 		http_request = new XMLHttpRequest();
 		http_request.onload = function () { vm.removeForm();console.log(this.responseText); };
@@ -215,7 +246,7 @@ export default class Register extends Phaser.Scene {
 		// http_request.open("POST", "X");
 		http_request.withCredentials = false;
 		http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + this.formUtil.scene.notice);
+		http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + vm.notice);
 		// http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
 
 		// var http_request_2;
