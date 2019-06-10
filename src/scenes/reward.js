@@ -48,7 +48,7 @@ export default class Prize extends Phaser.Scene {
 
 
     if (this.sys.game.playerScore <=50){
-      console.log("reward one");
+      // console.log("reward one");
       this.scoreLV = this.add.text(this.width/2, 420, 'rookie level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
@@ -57,7 +57,7 @@ export default class Prize extends Phaser.Scene {
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
-      console.log("reward 2");
+      // console.log("reward 2");
       this.scoreLV = this.add.text(this.width/2, 350, 'intermediate \n       level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
@@ -65,7 +65,7 @@ export default class Prize extends Phaser.Scene {
       this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1.3).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
-      console.log("reward 3");
+      // console.log("reward 3");
       this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
@@ -106,7 +106,7 @@ export default class Prize extends Phaser.Scene {
         this.scene.doubleClick -= 1;
 
         if( this.scene.doubleClick == 0){
-            console.log("taptap");
+            // console.log("taptap");
             this.scene.doubleClick = 2;
             window.location = window.location;
 

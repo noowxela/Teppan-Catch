@@ -183,7 +183,7 @@ export default class Game extends Phaser.Scene {
     // spoon creation
     this.timerEvents.push(
       this.time.addEvent({
-          delay: 1300,
+          delay: 2500,
           // delay: 200,
           loop: true,
           callback: () => {
@@ -204,7 +204,7 @@ export default class Game extends Phaser.Scene {
             var x = Phaser.Math.Between(120, this.gameWidth);
             var y = Phaser.Math.Between(-200, 0);
             
-            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(1);
+            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(1.3);
           }
       })
     )
@@ -385,12 +385,14 @@ export default class Game extends Phaser.Scene {
   }
 
   saveIntoDB() {
-    console.log("saving score");
+    // console.log("saving score");
     this.sys.game.playerScore = this.score;
 
     var http_request;
     http_request = new XMLHttpRequest();
-    http_request.onload = function () { console.log(this.responseText); };
+    http_request.onload = function () {
+      // console.log(this.responseText); 
+    };
     http_request.open("POST", "http://pepperlunchgame.com/game.php");
     // http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
@@ -398,7 +400,7 @@ export default class Game extends Phaser.Scene {
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
-    console.log("saving done");
+    // console.log("saving done");
     this.music.stop();
     this.scene.start("ScoreBoard");
   }

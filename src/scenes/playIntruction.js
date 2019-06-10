@@ -27,7 +27,7 @@ export default class PlayInstruction extends Phaser.Scene {
         this.scene.doubleClick -= 1;
 
         if( this.scene.doubleClick == 0){
-            console.log("taptap");
+            // console.log("taptap");
             this.scene.doubleClick = 1;
             this.scene.scene.start("Game");
 

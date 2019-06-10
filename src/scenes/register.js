@@ -239,10 +239,12 @@ export default class Register extends Phaser.Scene {
 
 
 		let vm = this;
-		console.log(vm.notice)
+		// console.log(vm.notice)
 		var http_request;
 		http_request = new XMLHttpRequest();
-		http_request.onload = function () { vm.removeForm();console.log(this.responseText); };
+		http_request.onload = function () { vm.removeForm()
+			// ;console.log(this.responseText); 
+		};
 		http_request.open("POST", "http://pepperlunchgame.com/player.php");
 		// http_request.open("POST", "http://localhost/teppan/player.php");
 		// http_request.open("POST", "X");
