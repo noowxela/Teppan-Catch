@@ -157,7 +157,7 @@ export default class Game extends Phaser.Scene {
         callback: () => {
           var vegepack = this.veges.get(
               Phaser.Math.Between(120, this.gameWidth-120), 
-              Phaser.Math.Between(-64, 0),
+              Phaser.Math.Between(-200, 0),
               'vegepack',Phaser.Math.Between(0, 3)
           ).setScale(0.9);
         }
@@ -172,7 +172,7 @@ export default class Game extends Phaser.Scene {
         callback: () => {
           var meatpack = this.meats.get(
               Phaser.Math.Between(120, this.gameWidth-120), 
-              Phaser.Math.Between(-64, 0),
+              Phaser.Math.Between(-200, 0),
               'meatpack',Phaser.Math.Between(0, 1)
           );
         }
@@ -186,7 +186,7 @@ export default class Game extends Phaser.Scene {
           loop: true,
           callback: () => {
             var x = Phaser.Math.Between(120, this.gameWidth);
-            var y = Phaser.Math.Between(-64, 0);
+            var y = Phaser.Math.Between(-200, 0);
             
             var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
           }

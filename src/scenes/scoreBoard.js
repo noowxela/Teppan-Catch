@@ -161,15 +161,19 @@ export default class ScoreBoard extends Phaser.Scene {
       pName[i] = this.add.text(this.width/4-20, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
       pPoints[i] = this.add.text(this.width-100, height, column_3[i], this.captionStyle).setOrigin(1,0).setDepth(99);
 
-      console.log("player"+i +" : "+this.rank.scoreBoard[i].name+", "+this.rank.scoreBoard[i].email+", "+(this.sys.game.playerContact));
+      // console.log("player"+i +" : "+this.rank.scoreBoard[i].name+", "+this.rank.scoreBoard[i].email+", "+(this.sys.game.playerContact));
       // console.log();
-      // console.log();
-      // console.log();
+      console.log("compareing");
+      console.log(this.rank.scoreBoard[i].name + ": " +this.sys.game.playerName);
+      console.log(this.rank.scoreBoard[i].email + ": " +this.sys.game.playerEmail);
+      console.log(this.rank.scoreBoard[i].contact + ": " +this.sys.game.playerContact);
+      console.log();
 
       if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
-        &&(this.rank.scoreBoard[i].contact == (this.sys.game.playerContact)))
+        &&(this.rank.scoreBoard[i].contact == this.sys.game.playerContact))
       {
+        console.log("Too gotsay nice");
           this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
           pRank[i].setFill('#FFF200');
           pName[i].setFill('#FFF200');
