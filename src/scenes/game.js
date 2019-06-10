@@ -9,6 +9,7 @@ export default class Game extends Phaser.Scene {
     this.veges = null;
     this.meats = null;
     this.bombs = null;
+    this.spoon = null;
 
     this.timeBar = null;
     this.timeBase = null;
@@ -75,15 +76,16 @@ export default class Game extends Phaser.Scene {
     
     this.load.image('teppan', 'assets/teppan.png');
     this.load.image('crumpled_paper', 'assets/crumpled_paper.png');
+    this.load.image('spoon', 'assets/spoon.png');
 
     this.load.spritesheet('vegepack', 'assets/vegepack.png',
          { frameWidth: 237, frameHeight: 203 }    );
-    this.load.spritesheet('meatpack', 'assets/meatpack.png',
-         { frameWidth: 240, frameHeight: 249 }    );
+    this.load.spritesheet('meatpack', 'assets/steakv2.png',
+         { frameWidth: 222, frameHeight: 127 }    );
 
     this.load.image('playButton', 'assets/play-button.png');
     
-    this.load.image('blackBar', 'assets/blackBar.png');
+    // this.load.image('blackBar', 'assets/blackBar.png');
 
 
     this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
@@ -178,6 +180,20 @@ export default class Game extends Phaser.Scene {
         }
       })
     )
+    // spoon creation
+    this.timerEvents.push(
+      this.time.addEvent({
+          delay: 1300,
+          // delay: 200,
+          loop: true,
+          callback: () => {
+            var x = Phaser.Math.Between(120, this.gameWidth);
+            var y = Phaser.Math.Between(-200, 0);
+            
+            var spoon = this.spoon.create(x,y,'spoon').setScale(1);
+          }
+      })
+    )
     // bomb creation
     this.timerEvents.push(
       this.time.addEvent({
@@ -188,7 +204,7 @@ export default class Game extends Phaser.Scene {
             var x = Phaser.Math.Between(120, this.gameWidth);
             var y = Phaser.Math.Between(-200, 0);
             
-            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(0.3);
+            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(1);
           }
       })
     )
@@ -245,6 +261,9 @@ export default class Game extends Phaser.Scene {
     this.bombs = this.physics.add.group({
       maxSize: 100,
     });
+    this.spoon = this.physics.add.group({
+      maxSize: 100,
+    });
     this.veges = this.physics.add.group({
       defaultKey: 'vegepack',
       maxSize: 100,
@@ -264,6 +283,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     this.physics.add.collider(this.player, this.veges, this.collectVeges, null, this);
     this.physics.add.collider(this.player, this.meats, this.collectMeats, null, this);
+    this.physics.add.collider(this.player, this.spoon, this.collectSpoon, null, this);
   
 
   }
@@ -345,6 +365,13 @@ export default class Game extends Phaser.Scene {
 
     meats.disableBody(false, true);
     this.score += 3;
+    this.sound.play("collectSuccess");
+
+  }
+  collectSpoon(player, spoon) {
+
+    spoon.disableBody(false, true);
+    this.score += 5;
     this.sound.play("collectSuccess");
 
   }
