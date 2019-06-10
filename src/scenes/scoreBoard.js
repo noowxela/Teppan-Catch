@@ -6,7 +6,7 @@ export default class ScoreBoard extends Phaser.Scene {
     this.captionStyle = {
         fill: '#000002',
         fontFamily: 'heavitas',
-        fontSize: 80 ,
+        fontSize: 60 ,
         lineSpacing: 20
     };
     this.caption = null;
@@ -134,7 +134,6 @@ export default class ScoreBoard extends Phaser.Scene {
 
   updateText(){
 
-    var top =Array(4);
     var column_1 =Array(4);
     var column_2 =Array(4);
     var column_3 =Array(4);
@@ -151,25 +150,24 @@ export default class ScoreBoard extends Phaser.Scene {
     console.log(this.sys.game.playerName);
     console.log(this.sys.game.playerEmail);
     console.log(this.sys.game.playerContact);
+
     for (var i = 0; i < 4; i++) {
       
-      top[i] = this.rank.scoreBoard[i].rank+'. '+ this.rank.scoreBoard[i].name+' \t'+this.rank.scoreBoard[i].point+'  PTS';
       column_1[i] = this.rank.scoreBoard[i].rank+'. ';
       column_2[i] = this.rank.scoreBoard[i].name;
-      column_3[i] = this.rank.scoreBoard[i].point+'\t PTS';
+      column_3[i] = this.rank.scoreBoard[i].point+' PTS';
 
-      pRank[i] = this.add.text(this.width/4+50, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
+      pRank[i] = this.add.text(this.width/5+20, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
       pName[i] = this.add.text(this.width/4-20, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
-      pPoints[i] = this.add.text(this.width/2, height, column_3[i], this.captionStyle).setOrigin(0,1).setDepth(99);
-      
+      pPoints[i] = this.add.text(this.width-100, height, column_3[i], this.captionStyle).setOrigin(1,0).setDepth(99);
+
       console.log("player"+i +" : "+this.rank.scoreBoard[i].name+", "+this.rank.scoreBoard[i].email+", "+(this.sys.game.playerContact));
-      console.log();
-      console.log();
-      console.log();
+      // console.log();
+      // console.log();
+      // console.log();
 
       if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
-        // &&(this.rank.scoreBoard[i].contact == ('+'+this.sys.game.playerContact)))
         &&(this.rank.scoreBoard[i].contact == (this.sys.game.playerContact)))
       {
           this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
@@ -178,6 +176,6 @@ export default class ScoreBoard extends Phaser.Scene {
           pPoints[i].setFill('#FFF200');
       }
       height +=100;
-    }    
+    }   
   }
 }
