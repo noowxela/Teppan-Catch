@@ -166,9 +166,6 @@ export default class Register extends Phaser.Scene {
 		this.contact=this.formUtil.getTextAreaValue("contact");
 		this.name=this.formUtil.getTextAreaValue("name");
 		this.email=this.formUtil.getTextAreaValue("email");
-
-		console.log(this.validateName(this.name))
-		console.log(this.validatePhone(this.contact))
 		
 		if(this.contact=="" || this.name1 == ""|| this.email == "" ){
             alert('Please complete the user detail')
@@ -215,7 +212,8 @@ export default class Register extends Phaser.Scene {
 		var http_request;
 		http_request = new XMLHttpRequest();
 		http_request.onload = function () { vm.removeForm();console.log(this.responseText); };
-		http_request.open("POST", "http://localhost/teppan/player.php");
+		http_request.open("POST", "http://pepperlunchgame.com/player.php");
+		// http_request.open("POST", "http://localhost/teppan/player.php");
 		// http_request.open("POST", "X");
 		http_request.withCredentials = false;
 		http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
