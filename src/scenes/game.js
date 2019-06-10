@@ -356,14 +356,14 @@ export default class Game extends Phaser.Scene {
   collectVeges(player, veges) {
 
     veges.disableBody(false, true);
-    this.score += 5;
+    this.score += 1;
     this.sound.play("collectSuccess");
 
   }
   collectMeats(player, meats) {
 
     meats.disableBody(false, true);
-    this.score += 10;
+    this.score += 3;
     this.sound.play("collectSuccess");
 
   }
@@ -371,7 +371,7 @@ export default class Game extends Phaser.Scene {
   hitBomb(player, bomb) {
     // console.log('hitBomb');
     bomb.disableBody(true, true);
-    this.score -= 30;
+    this.score -= 1;
     this.sound.play("collectFailed");
 
   }

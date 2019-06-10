@@ -96,6 +96,8 @@ export default class ScoreBoard extends Phaser.Scene {
 
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
     this.getfromDB();
+
+    document.getElementById("fbShareButton").display=inherit;
   }
 
   update() {

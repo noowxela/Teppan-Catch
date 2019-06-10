@@ -19,21 +19,51 @@ export default class Welcome extends Phaser.Scene {
     let logo = this.add.image(this.width/2, 230, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
     let welcomeTitle = this.add.image(this.width/2, 700, 'welcomeTitle').setScale(1.3);
-    let playButton = this.add.sprite(this.width/2, 1000, 'playButton').setScale(1.3).setInteractive();
+    this.playButton = this.add.image(this.width/2, 1000, 'playButton').setScale(1.3).setInteractive();
 
-    playButton.alpha = 0;
+    
+    // playButton.alpha = 0;
+  //   this.tweens.add({ 
+  //     targets: playButton,
+  //     x: this.width/2,
+  //     y: 620,
+  //     duration: 3000,
+  //     ease: 'Power2',
+  //     repeat: -1,     // -1: infinity
+  //     props:   { alpha: 1 }       
+  // });
 
-    this.tweens.add({ 
-      targets: playButton,
-      x: this.width/2,
-      y: 620,
-      duration: 3000,
-      ease: 'Power2',
-      repeat: -1,     // -1: infinity
-      props:   { alpha: 1 }       
-  });
+  var maxscale = 1.39;
+  var minscale = 1.3;
+  var scale = 1.3;
+  var larOrSma = 0;
+  // this.playButton.setScale(scale);
+  this.time.addEvent({
+    delay: 200,
+    // repeat: 30,
+    callback: () => {
+      if(larOrSma ==0 ){
+        this.playButton.setScale(scale);
+        scale += 0.005;
+        // console.log(scale);
+        if(scale >maxscale){
+          larOrSma =1 ;
+        }
+      }else if(larOrSma==1){
+        this.playButton.setScale(scale);
+        scale -= 0.005;
+        if(scale <minscale){
+          larOrSma =0 ;
+        }
 
-    playButton.on("pointerup", () => {
+      }
+    },
+    callbackScope: this,
+    loop: -1
+  }) 
+
+
+    this.playButton.on("pointerup", () => {
       // this.scene.start("PlayInstruction");
       this.scene.start("Register");
     });

@@ -24,6 +24,7 @@ export default class Register extends Phaser.Scene {
 		this.load.image('text3', 'assets/text3.png');
 		this.load.image('product', 'assets/product.png');
 		this.load.image('playButton', 'assets/play-button.png');
+		this.load.image('start_button', 'assets/start_button.png');
 
 	}
 
@@ -92,9 +93,39 @@ export default class Register extends Phaser.Scene {
 		this.formUtil.placeElementAt(112, "email", true, true);
 		this.formUtil.addChangeCallback("email", this.emailInputChanged, this);
 		
+		this.start_button = this.add.image(this.width/2, 1150, 'start_button').setInteractive();
 
-		let playButton = this.add.image(this.width/2, 1150, 'playButton').setInteractive();
-		playButton.on("pointerup", () => {
+
+		var maxscale = 1.19;
+		var minscale = 1;
+		var scale = minscale;
+		var larOrSma = 0;
+		// this.playButton.setScale(scale);
+		this.time.addEvent({
+		  delay: 200,
+		  // repeat: 30,
+		  callback: () => {
+			if(larOrSma ==0 ){
+			  this.start_button.setScale(scale);
+			  scale += 0.005;
+			  // console.log(scale);
+			  if(scale >maxscale){
+				larOrSma =1 ;
+			  }
+			}else if(larOrSma==1){
+			  this.start_button.setScale(scale);
+			  scale -= 0.005;
+			  if(scale <minscale){
+				larOrSma =0 ;
+			  }
+	  
+			}
+		  },
+		  callbackScope: this,
+		  loop: -1
+		}) 
+	  
+		this.start_button.on("pointerup", () => {
 			// Save into db
 			this.saveIntoDB();
 		});
