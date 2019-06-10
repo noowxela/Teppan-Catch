@@ -2,6 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
+     <meta property="og:url"           content="http://pepperlunchgame.com/" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Pepper Lunch Game" />
+      <meta property="og:description"   content="Collect as many as ingredients as possible within the time limit. Top 3 Players will stand to win $250 worth of pepper lunch vouchers" />
+      <meta property="og:image"         content="http://pepperlunchgame.com/banner.jpg" />
+
     <style media='screen' type='text/css'>
       @font-face {
         font-family: heavitas;
@@ -46,9 +52,9 @@
   	<div style="font-family:heavitas; position:absolute; left:-1000px; visibility:hidden;">.</div>
     <div id="phaser-game">
     </div>
-    <input type="text" id="name" row=1 placeholder="Name" style="position: fixed;left: 260px;top:620px"></input>
-    <input type="text"  id="contact" row=1 placeholder="XXXXXXXX" style="position: fixed;left: 260px;top:720px"></input>
-    <input type="text"  id="email" row=1 placeholder="Email" style="position: fixed;left: 260px;top:820px"></input>
+    <input type="text" autocomplete="off" id="name" placeholder="Name" style="position: fixed;left: 260px;top:620px"></input>
+    <input type="text" autocomplete="off" id="contact" placeholder="XXXXXXXX" style="position: fixed;left: 260px;top:720px"></input>
+    <input type="text" autocomplete="off" id="email" placeholder="Email" style="position: fixed;left: 260px;top:820px"></input>
 
     <!-- Load Facebook SDK for JavaScript -->
     <!-- <div id="fb-root"></div>

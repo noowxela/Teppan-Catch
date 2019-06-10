@@ -72,8 +72,6 @@ export default class ScoreBoard extends Phaser.Scene {
     this.load.image('scoreboard', 'assets/scoreboard.png');
     this.load.image('redbar', 'assets/redbar.png');
     this.load.image('product', 'assets/product.png');
-    this.load.html('fbShare', 'src/scenes/fbShare.html');
-
   }
 // 
   create() {
@@ -125,7 +123,6 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(JSON.parse(this.responseText));
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
-      console.log(vm.rank);
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
@@ -168,7 +165,6 @@ export default class ScoreBoard extends Phaser.Scene {
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
         &&(this.rank.scoreBoard[i].contact == this.sys.game.playerContact))
       {
-        console.log("Too gotsay nice");
           this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
           pRank[i].setFill('#FFF200');
           pName[i].setFill('#FFF200');
