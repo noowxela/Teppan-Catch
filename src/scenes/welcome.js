@@ -45,7 +45,6 @@ export default class Welcome extends Phaser.Scene {
       if(larOrSma ==0 ){
         this.playButton.setScale(scale);
         scale += 0.005;
-        // console.log(scale);
         if(scale >maxscale){
           larOrSma =1 ;
         }

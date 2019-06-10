@@ -161,14 +161,11 @@ export default class Register extends Phaser.Scene {
 		return re.test(String(name).toLowerCase());
 
 	}
-
 	saveIntoDB() {
 		this.contact=this.formUtil.getTextAreaValue("contact");
 		this.name=this.formUtil.getTextAreaValue("name");
 		this.email=this.formUtil.getTextAreaValue("email");
 
-		console.log(this.validateName(this.name))
-		console.log(this.validatePhone(this.contact))
 		
 		if(this.contact=="" || this.name1 == ""|| this.email == "" ){
             alert('Please complete the user detail')
@@ -208,7 +205,6 @@ export default class Register extends Phaser.Scene {
 	    this.sys.game.playerName = this.name;
 	    this.sys.game.playerContact = this.contact;
 	    this.sys.game.playerEmail = this.email;
-	    // console.log(this.sys.game.playerName )
 
 
 		let vm = this;
@@ -230,7 +226,6 @@ export default class Register extends Phaser.Scene {
 		// http_request_2.withCredentials = false;
 		// http_request_2.send();
 
-		// console.log("sucessful");
 		this.scene.start("PlayInstruction");
 
 	}

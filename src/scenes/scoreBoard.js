@@ -1,3 +1,4 @@
+
 export default class ScoreBoard extends Phaser.Scene {
   constructor() {
     super({ key: 'ScoreBoard' })
@@ -68,14 +69,13 @@ export default class ScoreBoard extends Phaser.Scene {
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
     this.load.image('welcomeTitle', 'assets/welcome-title.png');
-    // this.load.image('playButton', 'assets/play-button.png');
     this.load.image('scoreboard', 'assets/scoreboard.png');
     this.load.image('redbar', 'assets/redbar.png');
     this.load.image('product', 'assets/product.png');
-
   }
 // 
   create() {
+    
     this.pressed = false;
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
@@ -96,7 +96,6 @@ export default class ScoreBoard extends Phaser.Scene {
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
     this.getfromDB();
 
-    document.getElementById("fbShareButton").display=inherit;
   }
 
   update() {
@@ -110,9 +109,9 @@ export default class ScoreBoard extends Phaser.Scene {
       }
 
   }
+  
   getfromDB() {
 
-    // console.log("score Board start calulate")
 		let vm = this;
     var http_request_2;
     http_request_2 = new XMLHttpRequest();
@@ -121,7 +120,7 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(JSON.parse(this.responseText));
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
-      console.log(vm.rank);
+      // console.log(vm.rank);
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
@@ -130,32 +129,53 @@ export default class ScoreBoard extends Phaser.Scene {
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request_2.send("name=" + this.sys.game.playerName );
 
-    console.log("score Board data");
-    // console.log(this.rank);
+    // console.log("score Board data");
   }
 
   updateText(){
+
     var top =Array(4);
-    var playerRank = Array(4);
+    var column_1 =Array(4);
+    var column_2 =Array(4);
+    var column_3 =Array(4);
+
+    var pRank = Array(4);
+    var pName = Array(4);
+    var pPoints = Array(4);
+
+    // this.sys.game.playerName ="D99";
+    // this.sys.game.playerEmail ="noowxela@yahoo.com";
+    // this.sys.game.playerContact ="6585256895";
+
     var height = 720;
     console.log(this.sys.game.playerName);
     console.log(this.sys.game.playerEmail);
     console.log(this.sys.game.playerContact);
-    console.log(this.sys.game.playerScore);
-    // consoloe.log(this.sys.game.playerContact);
-    // consoloe.log(this.sys.game.playerContact);
-    // consoloe.log(this.sys.game.playerContact);
     for (var i = 0; i < 4; i++) {
       
       top[i] = this.rank.scoreBoard[i].rank+'. '+ this.rank.scoreBoard[i].name+' \t'+this.rank.scoreBoard[i].point+'  PTS';
-      playerRank[i] = this.add.text(this.width/2, height, top[i], this.captionStyle).setOrigin(0.5,0).setDepth(99);
+      column_1[i] = this.rank.scoreBoard[i].rank+'. ';
+      column_2[i] = this.rank.scoreBoard[i].name;
+      column_3[i] = this.rank.scoreBoard[i].point+'\t PTS';
+
+      pRank[i] = this.add.text(this.width/4+50, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
+      pName[i] = this.add.text(this.width/4-20, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
+      pPoints[i] = this.add.text(this.width/2, height, column_3[i], this.captionStyle).setOrigin(0,1).setDepth(99);
+      
+      console.log("player"+i +" : "+this.rank.scoreBoard[i].name+", "+this.rank.scoreBoard[i].email+", "+(this.sys.game.playerContact));
+      console.log();
+      console.log();
+      console.log();
 
       if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
-        &&(this.rank.scoreBoard[i].contact == this.sys.game.playerContact))
+        // &&(this.rank.scoreBoard[i].contact == ('+'+this.sys.game.playerContact)))
+        &&(this.rank.scoreBoard[i].contact == (this.sys.game.playerContact)))
       {
           this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
-          playerRank[i].setFill('#FFF200');
+          pRank[i].setFill('#FFF200');
+          pName[i].setFill('#FFF200');
+          pPoints[i].setFill('#FFF200');
       }
       height +=100;
     }    

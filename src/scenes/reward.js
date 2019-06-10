@@ -114,7 +114,7 @@ export default class Prize extends Phaser.Scene {
         }
     
     });
-}
+  }
 
   update(){
     var d = new Date;

@@ -128,13 +128,6 @@ export default class Game extends Phaser.Scene {
         // delay: 3000,
         callback: () => {
           this.scene.pause();
-          // this.scene.events.on('transitioninit', function(fromScene, duration){});
-          // this.scene.transition({
-          //   duration: 1000, 
-          //   target:"ScoreBoard",
-          //   // moveBelow: false,
-          //   // sleep: false, 
-          // });
           this.saveIntoDB();
 
         },
@@ -143,8 +136,6 @@ export default class Game extends Phaser.Scene {
     )
     // timeBar rescale
     this.timeBarOriginal = this.timeBar.displayWidth ;
-    // console.log(this.timeBar.displayWidth);
-    // console.log(this.timeBarOriginal);
     
     this.timerEvents.push(
       this.time.addEvent({
@@ -152,13 +143,7 @@ export default class Game extends Phaser.Scene {
         repeat: 30,
         callback: () => {
           var scale = this.timerEvents[1].getRepeatCount();
-          // console.log(this.timerEvents[1].getRepeatCount());
-          // this.timeBar.scaleX *= (scale/10);
-          // this.timeBar.displayWidth = this.timeBar.displayWidth-3.33;
           this.timeBar.displayWidth = this.timeBar.displayWidth-(this.timeBarOriginal*1/30);
-          // console.log(this.timeBar.displayWidth-(this.timeBarOriginal*1/30));
-          // console.log(this.timeBar.displayWidth);
-          // console.log(Math.round(this.timeBarOriginal*(scale*10)/100));
         },
         callbackScope: this,
       })  
@@ -255,9 +240,6 @@ export default class Game extends Phaser.Scene {
 
       // });
     }
-    // this.playButton.on('pointerup', function (pointer) {
-
-    // });
 
  
     this.bombs = this.physics.add.group({
