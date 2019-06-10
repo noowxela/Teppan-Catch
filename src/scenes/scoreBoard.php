@@ -32,11 +32,11 @@ if ($result_all->num_rows > 0) {
 
         if($row['user_name'] ==  $name){
             // if($top_4Counter >0){
-                array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter));
+                array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter,$row['user_email'],$row['user_contact']));
                 $top_4Counter-=1;
             // }
         }else if($top_4Counter  >0 ){
-            array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter));
+            array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter,$row['user_email'],$row['user_contact']));
             $top_4Counter-=1;
         }
 
@@ -50,6 +50,8 @@ if(count($rank_top4)==5){
     $rank_top4[3][1] = $rank_top4[4][1] ;
     $rank_top4[3][2] = $rank_top4[4][2] ;
     $rank_top4[3][3] = $rank_top4[4][3] ;
+    $rank_top4[3][4] = $rank_top4[4][4] ;
+    $rank_top4[3][5] = $rank_top4[4][5] ;
 
     array_pop($rank_top4);
 }
@@ -57,7 +59,12 @@ if(count($rank_top4)==5){
 echo ('{"scoreBoard": [');
 
 for ($x = 0; $x < count($rank_top4); $x++) {
-        echo ('{'.'"rank":"'.$rank_top4[$x][3].'", "name":"'.$rank_top4[$x][1].'", "point":"'.$rank_top4[$x][2].'", "player_id":"'.$rank_top4[$x][0].'"}');
+        echo ('{'.'"rank":"'.$rank_top4[$x][3]
+            .'", "name":"'.$rank_top4[$x][1]
+            .'", "point":"'.$rank_top4[$x][2]
+            .'", "player_id":"'.$rank_top4[$x][0]
+            .'", "email":"'.$rank_top4[$x][4]
+            .'", "contact":"'.$rank_top4[$x][5].'"}');
         if($x < count($rank_top4)-1){
             echo ",";
         }

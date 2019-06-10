@@ -16,31 +16,45 @@ export default class ScoreBoard extends Phaser.Scene {
           "rank": null,
           "name": null,
           "point": null,
-          "player_id": null
+          "player_id": null,
+          "email": null,
+          "contact": null
         },
         {
           "rank": null,
           "name": null,
           "point": null,
-          "player_id": null
+          "player_id": null,
+          "email": null,
+          "contact": null
+
         },
         {
           "rank": null,
           "name": null,
           "point": null,
-          "player_id": null
+          "player_id": null,
+          "email": null,
+          "contact": null
+
         },
         {
           "rank": null,
           "name": null,
           "point": null,
-          "player_id": null
+          "player_id": null,
+          "email": null,
+          "contact": null
+
         },
         {
           "rank": null,
           "name": null,
           "point": null,
-          "player_id": null
+          "player_id": null,
+          "email": null,
+          "contact": null
+
         }
       ]
     };
@@ -102,7 +116,7 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(JSON.parse(this.responseText));
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
-      // console.log(vm.rank);
+      console.log(vm.rank);
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
@@ -119,17 +133,26 @@ export default class ScoreBoard extends Phaser.Scene {
     var top =Array(4);
     var playerRank = Array(4);
     var height = 720;
+    console.log(this.sys.game.playerName);
+    console.log(this.sys.game.playerEmail);
+    console.log(this.sys.game.playerContact);
+    console.log(this.sys.game.playerScore);
+    // consoloe.log(this.sys.game.playerContact);
+    // consoloe.log(this.sys.game.playerContact);
+    // consoloe.log(this.sys.game.playerContact);
     for (var i = 0; i < 4; i++) {
       
       top[i] = this.rank.scoreBoard[i].rank+'. '+ this.rank.scoreBoard[i].name+' \t'+this.rank.scoreBoard[i].point+'  PTS';
       playerRank[i] = this.add.text(this.width/2, height, top[i], this.captionStyle).setOrigin(0.5,0).setDepth(99);
 
-      if(this.rank.scoreBoard[i].name == this.sys.game.playerName){
-        this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
-        playerRank[i].setFill('#FFF200');
+      if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
+        &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
+        &&(this.rank.scoreBoard[i].contact == this.sys.game.playerContact))
+      {
+          this.redbar = this.add.image(this.width/2, height+45, 'redbar').setScale(1.3).setDepth(0);
+          playerRank[i].setFill('#FFF200');
       }
       height +=100;
-
     }    
   }
 }
