@@ -126,7 +126,7 @@ export default class Register extends Phaser.Scene {
 	}
 
 	validateName(name){
-		let re = /^[a-zA-Z ]{3,}$/
+		let re = /^[a-zA-Z0-9]{3}$/
 		return re.test(String(name).toLowerCase());
 
 	}
@@ -150,7 +150,7 @@ export default class Register extends Phaser.Scene {
 
 
         if(!this.validateName(this.name)){
-            alert('Name must consist only 3 alphabent')
+            alert('Name must consist only 3 alphabent or number')
             return;
         }
 		else if(!this.validatePhone(this.contact)){

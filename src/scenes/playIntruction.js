@@ -1,9 +1,7 @@
 export default class PlayInstruction extends Phaser.Scene {
   constructor() {
     super({ key: 'PlayInstruction' })
-
-    this.doubleClick = 2;
-
+    this.doubleClick = 1;
   }
 
   preload() {
@@ -30,21 +28,16 @@ export default class PlayInstruction extends Phaser.Scene {
 
         if( this.scene.doubleClick == 0){
             console.log("taptap");
-            this.scene.doubleClick = 2;
-            // console.log(this.doubleClick);
-            // console.log(this.scene.doubleClick);
-            // this.scene.scene.start("ScoreBoard");
+            this.scene.doubleClick = 1;
             this.scene.scene.start("Game");
 
-        }else{
         }
-    
     });
 
   }
 
   update() {
-
+    // something here
   }
 
 }

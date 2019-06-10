@@ -100,8 +100,8 @@ export default class Prize extends Phaser.Scene {
     }) 
 
 
-    var pointer = this.input.activePointer;
-    this.input.on('pointerdown',function(pointer){
+    let pointer = this.input.activePointer;
+    this.input.on('pointerup',function(pointer){
         
         this.scene.doubleClick -= 1;
 

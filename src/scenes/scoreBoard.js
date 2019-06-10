@@ -9,6 +9,7 @@ export default class ScoreBoard extends Phaser.Scene {
         lineSpacing: 20
     };
     this.caption = null;
+    this.pressed = false;
 
     this.rank ={
       "scoreBoard": [
@@ -62,7 +63,6 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 
   preload() {
-
     this.width = this.sys.game.canvas.getAttribute("width");
     this.height = this.sys.game.canvas.getAttribute("height");
     this.load.image('background', 'assets/background.png');
@@ -100,7 +100,11 @@ export default class ScoreBoard extends Phaser.Scene {
 
   update() {
 
-    if(this.sys.input.activePointer.justUp){
+    if(this.sys.input.activePointer.justDown){
+        this.pressed = true;
+      }
+
+    if(this.sys.input.activePointer.justUp && this.pressed){
         this.scene.start("Reward");
       }
 

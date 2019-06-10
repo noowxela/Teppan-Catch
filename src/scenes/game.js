@@ -90,11 +90,13 @@ export default class Game extends Phaser.Scene {
 
     this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
     this.load.audio('collectFailed', ['assets/audios/knockpot.wav','assets/audios/knockpot.ogg']);
+    this.load.audio('background', ['assets/audios/BackgroundMusic01.wav','assets/audios/BackgroundMusic01.ogg']);
   }
 
   create() {
-    // console.log(this.sys.game)
-    //get canvas size
+    this.music = this.sound.add('background',{loop:true});
+    this.music.play();
+
     this.gameWidth = this.sys.game.canvas.getAttribute("width");
     this.gameHeight = this.sys.game.canvas.getAttribute("height");
     
@@ -388,9 +390,12 @@ export default class Game extends Phaser.Scene {
     http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
     console.log("saving done");
+    this.music.stop();
     this.scene.start("ScoreBoard");
 
   }
+
+
 
 
 }
