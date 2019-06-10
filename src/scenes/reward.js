@@ -111,7 +111,7 @@ export default class Prize extends Phaser.Scene {
         if( this.scene.doubleClick == 0){
             console.log("taptap");
             this.scene.doubleClick = 2;
-            this.scene.scene.start("Welcome");
+            window.location = window.location;
 
         }else{
         }
@@ -120,17 +120,17 @@ export default class Prize extends Phaser.Scene {
   }
 
   update(){
-    var d = new Date;
-    // var t = d.getTime();
-    var s = d.getSeconds();
-    // console.log(s);
-    // console.log(Math.sin(t));
-    // console.log(Math.sin(s));
+    // var d = new Date;
+    // // var t = d.getTime();
+    // var s = d.getSeconds();
+    // // console.log(s);
+    // // console.log(Math.sin(t));
+    // // console.log(Math.sin(s));
 
-    // this.product.scaleX *= (1);
-    // this.product.scaleY *= (1);
-    // image.scaleY *= ;
-    // image.rotation += 0.04
+    // // this.product.scaleX *= (1);
+    // // this.product.scaleY *= (1);
+    // // image.scaleY *= ;
+    // // image.rotation += 0.04
   }
 
   sendEmail(email,name,gift){

@@ -119,7 +119,7 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(JSON.parse(this.responseText));
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
-      // console.log(vm.rank);
+      console.log(vm.rank);
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
@@ -153,9 +153,9 @@ export default class ScoreBoard extends Phaser.Scene {
 
     for (var i = 0; i < 4; i++) {
       
-      column_1[i] = this.rank.scoreBoard[i].rank+'. ';
+      column_1[i] = (this.rank.scoreBoard[i].rank) +'. ';
       column_2[i] = this.rank.scoreBoard[i].name;
-      column_3[i] = this.rank.scoreBoard[i].point+' PTS';
+      column_3[i] = (this.rank.scoreBoard[i].point)+' PTS';
 
       pRank[i] = this.add.text(this.width/5+20, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
       pName[i] = this.add.text(this.width/4-20, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
@@ -166,8 +166,10 @@ export default class ScoreBoard extends Phaser.Scene {
       console.log("compareing");
       console.log(this.rank.scoreBoard[i].name + ": " +this.sys.game.playerName);
       console.log(this.rank.scoreBoard[i].email + ": " +this.sys.game.playerEmail);
-      console.log(this.rank.scoreBoard[i].contact + ": " +this.sys.game.playerContact);
+      console.log((this.rank.scoreBoard[i].contact )+ ": " +this.sys.game.playerContact);
       console.log();
+
+      // var pContact = '+'+this.rank.scoreBoard[i].contact;
 
       if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
         &&(this.rank.scoreBoard[i].email == this.sys.game.playerEmail)
