@@ -75,7 +75,7 @@ export default class Game extends Phaser.Scene {
     this.load.image('gift', 'assets/gift.png');
     
     this.load.image('teppan', 'assets/teppan.png');
-    this.load.image('crumpled_paper', 'assets/crumpled_paper.png');
+    this.load.image('crumpled_paper', 'assets/rubbish.png');
     this.load.image('spoon', 'assets/spoon.png');
 
     this.load.spritesheet('vegepack', 'assets/vegepack.png',
