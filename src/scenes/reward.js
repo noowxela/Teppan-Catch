@@ -28,6 +28,7 @@ export default class Prize extends Phaser.Scene {
     this.load.image('background', 'assets/background.png');
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
+    this.load.image('shareButton', 'assets/share_button.png');
 
     this.load.image('set1_normalProduct', 'assets/reward/set1_normalProduct.png');
     this.load.image('set1_expertProduct', 'assets/reward/set1_expertProduct.png');
@@ -44,11 +45,40 @@ export default class Prize extends Phaser.Scene {
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.3);
-    
-    // this.sys.game.playerScore = 100;
+    this.shareButton = this.add.image(this.width/2, 1000, 'shareButton').setScale(1.3).setInteractive();
 
-    // let product = this.add.image(this.width/2, this.height, 'reward_1').setScale(0.5).setOrigin(0.5,1);
-    console.log(this.sys.game.playerScore);
+    var maxscale = 1.39;
+    var minscale = 1.3;
+    var scale = 1.3;
+    var larOrSma = 0;
+    this.time.addEvent({
+      delay: 200,
+      // repeat: 30,
+      callback: () => {
+        if(larOrSma ==0 ){
+          this.shareButton.setScale(scale);
+          scale += 0.005;
+          if(scale >maxscale){
+            larOrSma =1 ;
+          }
+        }else if(larOrSma==1){
+          this.shareButton.setScale(scale);
+          scale -= 0.005;
+          if(scale <minscale){
+            larOrSma =0 ;
+          }
+
+        }
+      },
+      callbackScope: this,
+      loop: -1
+    }) 
+
+
+    this.shareButton.on("pointerup", () => {
+      window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+    });
+
 
     if (this.sys.game.playerScore <=50){
       console.log("reward one");
