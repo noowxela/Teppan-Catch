@@ -364,7 +364,8 @@ export default class Game extends Phaser.Scene {
     var http_request;
     http_request = new XMLHttpRequest();
     http_request.onload = function () { console.log(this.responseText); };
-    http_request.open("POST", "http://localhost/teppan/game.php");
+    http_request.open("POST", "http://pepperlunchgame.com/game.php");
+    // http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -373,7 +374,6 @@ export default class Game extends Phaser.Scene {
     console.log("saving done");
     this.music.stop();
     this.scene.start("ScoreBoard");
-
   }
 
 

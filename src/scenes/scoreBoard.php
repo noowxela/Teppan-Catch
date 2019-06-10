@@ -3,10 +3,10 @@ header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:POST, GET');  
 header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
-$database = "teppan_catch";
+$database = "u233241291_game";
 $host = "127.0.0.1";
-$user = "root";
-$password = "";
+$user = "u233241291_game";
+$password = "N4KrvACxDgy9";
 
 $name = $_POST['name'];
 // $contact = $_POST['contact'];

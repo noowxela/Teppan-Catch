@@ -38,7 +38,8 @@ export default class Prize extends Phaser.Scene {
   }
 
   create() {
-    // var s = time ;
+    // document.getElementById('fb-share-button').style.pointerEvents = "all";
+    // document.getElementById('fb-share-button').style.opacity = "1";
 
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
@@ -56,6 +57,8 @@ export default class Prize extends Phaser.Scene {
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
       this.reward = this.add.image(this.width/2, this.height/2, 'reward_1').setScale(1.3).setOrigin(0.5,0.5);
+
+      this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
       console.log("reward 2");
       this.scoreLV = this.add.text(this.width/2, 350, 'intermediate \n       level', this.captionStyle).setOrigin(0.5,0);
@@ -63,7 +66,7 @@ export default class Prize extends Phaser.Scene {
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
       this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1.3).setOrigin(0.5,0.5);
-
+      this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       console.log("reward 3");
       this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
@@ -71,7 +74,7 @@ export default class Prize extends Phaser.Scene {
       
       this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(1.3).setOrigin(0.5,1);
       this.reward = this.add.image(this.width/2, this.height/2, 'reward_3').setScale(1.3).setOrigin(0.5,0.5);
-
+      this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
     var scale = 1.3;
     var larOrSma = 0;
@@ -128,5 +131,14 @@ export default class Prize extends Phaser.Scene {
     // this.product.scaleY *= (1);
     // image.scaleY *= ;
     // image.rotation += 0.04
+  }
+
+  sendEmail(email,name,gift){
+    let http_request = new XMLHttpRequest();
+    http_request.onload = function () { console.log(this.responseText) };
+    http_request.open("POST", "http://pepperlunchgame.com/sendEmail.php");
+    http_request.withCredentials = false;
+    http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request.send("email=" + email + "&name=" + name + "&gift=" + gift );
   }
 }
