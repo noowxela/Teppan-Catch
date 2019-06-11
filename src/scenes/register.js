@@ -36,7 +36,7 @@ export default class Register extends Phaser.Scene {
 
 	create() {
 		let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
-		let balck_bg = this.add.image(this.width/2, 760, 'balck_bg').setScale(1.35,0.9);
+		// let balck_bg = this.add.image(this.width/2, 760, 'balck_bg').setScale(1.35,0.9);
 		// let balck_bg = this.add.image(this.width/2, this.height/2-90, 'balck_bg').setScale(1.3,0.9);
 		let logo = this.add.image(this.width/2, 230, 'logo').setScale(1.3);
 		let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
@@ -265,6 +265,7 @@ export default class Register extends Phaser.Scene {
 		// http_request_2.withCredentials = false;
 		// http_request_2.send();
 
+		this.blurInput()
 		this.scene.start("PlayInstruction");
 
 	}

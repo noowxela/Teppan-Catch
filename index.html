@@ -11,6 +11,7 @@
       <meta name="mobile-web-app-capable" content="yes">
 
     <style media='screen' type='text/css'>
+    html{position: relative; height: 100%; overflow: hidden;}
       @font-face {
         font-family: heavitas;
         src: url('assets/fonts/Heavitas.ttf');
@@ -64,14 +65,17 @@
       #warning{
         text-align: center;
         font-family: "heavitas";
-        padding: 50px 10px;
+        /*padding: 50px 10px;*/
       }
 	</style>
   </head>
   <body>
     <!-- this.load.audio('background', ['assets/audios/BackgroundMusic01.wav','assets/audios/BackgroundMusic01.ogg']); -->
 
-    <audio src="assets/audios/BackgroundMusic01.ogg" autoplay="autoplay" loop="loop"></audio>
+    <audio id="background" loop="loop">
+      <source src="assets/audios/BackgroundMusic01.ogg" type="audio/ogg">
+      <source src="assets/audios/BackgroundMusic01.wav" type="audio/wav">
+    </audio>
   	<div style="font-family:heavitas; position:absolute; left:-1000px; visibility:hidden;">.</div>
     <div id="phaser-game">
     </div>
@@ -85,7 +89,9 @@
     </div>
 
     <script type="text/javascript">
-      /mobile/i.test(navigator.userAgent) && !location.hash && setTimeout(function () {   window.scrollTo(0, 1); }, 1000);​
+      addEventListener("load", function() {
+          window.scrollTo(1, 0);
+      }, false);
     </script>
 
   </body>
