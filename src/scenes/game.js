@@ -19,6 +19,9 @@ export default class Game extends Phaser.Scene {
 
     this.stateText = null;
     this.scoreText = null;
+    this.score = 0;
+    this.timerText = null;
+    this.timer = 30;
 
 
     this.playButton = null;
@@ -62,6 +65,9 @@ export default class Game extends Phaser.Scene {
     this.scoreBoard = (
       '%1\n' 
       );
+    this.timerBoard = (
+      '%1\n' 
+      );
   }
 
   preload() {
@@ -94,7 +100,6 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    this.score = 0;
     this.music = this.sound.add('background',{loop:true});
     this.music.play();
 
@@ -117,9 +122,10 @@ export default class Game extends Phaser.Scene {
     this.smallbar = this.add.image(this.gameWidth-15, 100, 'smallbar').setScale(1.6).setOrigin(1,0.5).setDepth(100);
     this.smallpot = this.add.image(this.gameWidth-280, 100, 'smallpot').setScale(1.3).setDepth(100);
      
-    //scoretext
+    //scoretext & timerText
     // this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
     this.scoreText = this.add.text(this.gameWidth-205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
+    this.timerText = this.add.text(205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
     
@@ -146,6 +152,8 @@ export default class Game extends Phaser.Scene {
         callback: () => {
           var scale = this.timerEvents[1].getRepeatCount();
           this.timeBar.displayWidth = this.timeBar.displayWidth-(this.timeBarOriginal*1/30);
+          this.timer -= 1;
+
         },
         callbackScope: this,
       })  
@@ -306,7 +314,10 @@ export default class Game extends Phaser.Scene {
   // ]));
     this.scoreText.setText(Phaser.Utils.String.Format(this.scoreBoard, [
       this.score ,
-  ]));
+    ]));
+    this.timerText.setText(Phaser.Utils.String.Format(this.timerBoard, [
+      this.timer ,
+    ]));
 
 // game physic debug
     // this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
