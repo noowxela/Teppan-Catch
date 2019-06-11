@@ -54,7 +54,7 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_1').setScale(1.3).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_1').setScale(1.2).setOrigin(0.5,0.5);
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
@@ -63,7 +63,7 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1.3).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1.2).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       // console.log("reward 3");
@@ -71,7 +71,7 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_3').setScale(1.3).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_3').setScale(1.2).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
     var scale = 1.3;
@@ -117,35 +117,54 @@ export default class Prize extends Phaser.Scene {
     // });
 
 
-    this.shareButton = this.add.image(this.width-this.width/2/2, 1300, 'shareButton').setScale(1.3).setInteractive();
-    this.play_again = this.add.image(this.width/2/2, 1300, 'play_again').setScale(1.3).setInteractive();
+    this.shareButton = this.add.image(this.width-this.width/2/2/2-30, 1250, 'shareButton').setScale(0.6).setInteractive();
+    this.play_again = this.add.image(this.width/2/2+50, 1250, 'play_again').setScale(1.3).setOrigin(1,0.5).setInteractive();
 
-    var maxscale = 1.39;
-    var minscale = 1.3;
-    var scale = 1.3;
-    var larOrSma = 0;
+    var maxscale_shareButton = 0.69;
+    var minscale_shareButton = 0.6;
+    var scale_shareButton = minscale_shareButton ;
+    var larOrSma_shareButton = 0;
+
+    var maxscale_play_again = 1.39;
+    var minscale_play_again = 1.3;
+    var scale_play_again = minscale_play_again ;
+    var larOrSma_play_again = 0;
     this.time.addEvent({
       delay: 200,
       // repeat: 30,
       callback: () => {
-        if(larOrSma ==0 ){
-          this.shareButton.setScale(scale);
-          scale += 0.005;
-          if(scale >maxscale){
-            larOrSma =1 ;
+        if(larOrSma_shareButton ==0 ){
+          this.shareButton.setScale(scale_shareButton);
+          scale_shareButton += 0.005;
+          if(scale_shareButton >maxscale_shareButton){
+            larOrSma_shareButton =1 ;
           }
-        }else if(larOrSma==1){
-          this.shareButton.setScale(scale);
-          scale -= 0.005;
-          if(scale <minscale){
-            larOrSma =0 ;
+        }else if(larOrSma_shareButton==1){
+          this.shareButton.setScale(scale_shareButton);
+          scale_shareButton -= 0.005;
+          if(scale_shareButton <minscale_shareButton){
+            larOrSma_shareButton =0 ;
           }
-
+        }
+        if(larOrSma_play_again ==0 ){
+          this.play_again.setScale(scale_play_again);
+          scale_play_again += 0.005;
+          if(scale_play_again >maxscale_play_again){
+            larOrSma_play_again =1 ;
+          }
+        }else if(larOrSma_play_again==1){
+          this.play_again.setScale(scale_play_again);
+          scale_play_again -= 0.005;
+          if(scale_play_again <minscale_play_again){
+            larOrSma_play_again =0 ;
+          }
         }
       },
       callbackScope: this,
       loop: -1
     }) 
+
+
 
 
     this.shareButton.on("pointerup", () => {
