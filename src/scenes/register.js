@@ -42,7 +42,7 @@ export default class Register extends Phaser.Scene {
 		let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
 		let checkBox1 = this.add.image(300, 990, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
 		let test1 = this.add.image(352, 990, 'test1').setScale(1).setOrigin(0,0).setScale(1.3);
-		let text2 = this.add.image(534, 1011, 'text2').setScale(1).setOrigin(0,0).setScale(1.3);
+		this.text2 = this.add.image(534, 1011, 'text2').setScale(1).setOrigin(0,0).setScale(1.3).setInteractive();
 		let text3 = this.add.image(350, 1050, 'text3').setScale(1).setOrigin(0,0).setScale(1.3);
 		let checkBox2 = this.add.image(300, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
 		let product = this.add.image(this.width/2, 1400, 'product');
@@ -137,7 +137,11 @@ export default class Register extends Phaser.Scene {
 		  callbackScope: this,
 		  loop: -1
 		}) 
-	  
+
+	      this.text2.on("pointerup", () => {
+			  console.log("open");
+			window.open("http://ow.ly/Mfru50uB3OR","_blank")
+		  });
 		this.start_button.on("pointerup", () => {
 			// Save into db
 			this.saveIntoDB();
