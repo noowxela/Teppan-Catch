@@ -96,11 +96,11 @@ export default class Game extends Phaser.Scene {
 
     this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
     this.load.audio('collectFailed', ['assets/audios/knockpot.wav','assets/audios/knockpot.ogg']);
-    this.load.audio('background', ['assets/audios/BackgroundMusic01.wav','assets/audios/BackgroundMusic01.ogg']);
+    // this.load.audio('background', ['assets/audios/BackgroundMusic01.wav','assets/audios/BackgroundMusic01.ogg']);
   }
 
   create() {
-    this.music = this.sound.add('background',{loop:true});
+    // this.music = this.sound.add('background',{loop:true});
     this.music.play();
 
     this.gameWidth = this.sys.game.canvas.getAttribute("width");
