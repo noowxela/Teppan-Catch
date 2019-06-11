@@ -129,6 +129,12 @@ export default class Game extends Phaser.Scene {
     
     // event
     var rangeX = Array(5);
+    var ThiPeen = Array(5);
+    ThiPeen[0] = 0;
+    ThiPeen[1] = 0;
+    ThiPeen[2] = 0;
+    ThiPeen[3] = 0;
+    ThiPeen[4] = 0;
 
     //Game Run Time
     this.timerEvents.push(
@@ -173,6 +179,17 @@ export default class Game extends Phaser.Scene {
           rangeX[4] = Phaser.Math.Between(720, 840);
 
           var i = Phaser.Math.Between(0,4)
+          // while (ThiPeen[i] = 1){
+          //   if(ThiPeen[0]==1 && ThiPeen[1]==1 && ThiPeen[2]==1 && ThiPeen[3]==1 && ThiPeen[4]==1 ){
+          //     ThiPeen[0] = 0;
+          //     ThiPeen[1] = 0;
+          //     ThiPeen[2] = 0;
+          //     ThiPeen[3] = 0;
+          //     ThiPeen[4] = 0;
+          //   }
+          //   i = Phaser.Math.Between(0,4)
+
+          // }
 
           var vegepack = this.veges.get(
               Phaser.Math.Between(120, rangeX[i]), 
@@ -249,6 +266,7 @@ export default class Game extends Phaser.Scene {
             rangeX[4] = Phaser.Math.Between(this.gameWidth/7*5, this.gameWidth/7*6);
 
             var i = Phaser.Math.Between(0,4)
+            console.log(' x :'+rangeX[i]);
 
             var x = Phaser.Math.Between(120, this.gameWidth-120);
             var y = -200;
