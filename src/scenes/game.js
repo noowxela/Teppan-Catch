@@ -128,7 +128,8 @@ export default class Game extends Phaser.Scene {
     this.timerText = this.add.text(205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
-    
+    var rangeX = Array(5);
+
     //Game Run Time
     this.timerEvents.push(
       this.time.addEvent({
@@ -165,8 +166,16 @@ export default class Game extends Phaser.Scene {
         // delay: 200,
         loop: true,
         callback: () => {
+          rangeX[0] = Phaser.Math.Between(120, 240);
+          rangeX[1] = Phaser.Math.Between(240, 480);
+          rangeX[2] = Phaser.Math.Between(480, 600);
+          rangeX[3] = Phaser.Math.Between(600, 720);
+          rangeX[4] = Phaser.Math.Between(720, 840);
+
+          var i = Phaser.Math.Between(0,4)
+
           var vegepack = this.veges.get(
-              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'vegepack',Phaser.Math.Between(0, 3)
           ).setScale(0.9);
@@ -180,8 +189,16 @@ export default class Game extends Phaser.Scene {
         // delay: 500,
         loop: true,
         callback: () => {
+          rangeX[0] = Phaser.Math.Between(120, 240);
+          rangeX[1] = Phaser.Math.Between(240, 480);
+          rangeX[2] = Phaser.Math.Between(480, 600);
+          rangeX[3] = Phaser.Math.Between(600, 720);
+          rangeX[4] = Phaser.Math.Between(720, 840);
+
+          var i = Phaser.Math.Between(0,4)
+
           var meatpack = this.meats.get(
-              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'meatpack',Phaser.Math.Between(0, 1)
           );
@@ -195,24 +212,48 @@ export default class Game extends Phaser.Scene {
           // delay: 200,
           loop: true,
           callback: () => {
-            var x = Phaser.Math.Between(120, this.gameWidth);
-            var y = Phaser.Math.Between(-200, 0);
+
+            rangeX[0] = Phaser.Math.Between(120, 240);
+            rangeX[1] = Phaser.Math.Between(240, 480);
+            rangeX[2] = Phaser.Math.Between(480, 600);
+            rangeX[3] = Phaser.Math.Between(600, 720);
+            rangeX[4] = Phaser.Math.Between(720, 840);
+  
+            var i = Phaser.Math.Between(0,4)
+
+            var x = Phaser.Math.Between(120, this.gameWidth-120);
+            var y = -200;
             
-            var spoon = this.spoon.create(x,y,'spoon').setScale(1);
+            var spoon = this.spoon.create(rangeX[i],y,'spoon').setScale(1);
           }
       })
     )
     // bomb creation
+    console.log(this.gameWidth);
+    console.log(this.gameWidth/7*2);
+    console.log(this.gameWidth/7*3);
+    console.log(this.gameWidth/7*4);
+    console.log(this.gameWidth/7*5);
+    console.log(this.gameWidth/7*6);
+
     this.timerEvents.push(
       this.time.addEvent({
           delay: 1300,
           // delay: 200,
           loop: true,
           callback: () => {
-            var x = Phaser.Math.Between(120, this.gameWidth);
-            var y = Phaser.Math.Between(-200, 0);
+            rangeX[0] = Phaser.Math.Between(this.gameWidth/7, this.gameWidth/7*2);
+            rangeX[1] = Phaser.Math.Between(this.gameWidth/7*2, this.gameWidth/7*3);
+            rangeX[2] = Phaser.Math.Between(this.gameWidth/7*3, this.gameWidth/7*4);
+            rangeX[3] = Phaser.Math.Between(this.gameWidth/7*4, this.gameWidth/7*5);
+            rangeX[4] = Phaser.Math.Between(this.gameWidth/7*5, this.gameWidth/7*6);
+
+            var i = Phaser.Math.Between(0,4)
+
+            var x = Phaser.Math.Between(120, this.gameWidth-120);
+            var y = -200;
             
-            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(1.3);
+            var bomb = this.bombs.create(rangeX[i],y,'crumpled_paper').setScale(1.3);
           }
       })
     )
