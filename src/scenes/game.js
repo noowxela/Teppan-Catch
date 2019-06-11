@@ -19,6 +19,9 @@ export default class Game extends Phaser.Scene {
 
     this.stateText = null;
     this.scoreText = null;
+    this.score = 0;
+    this.timerText = null;
+    this.timer = 30;
 
 
     this.playButton = null;
@@ -62,6 +65,9 @@ export default class Game extends Phaser.Scene {
     this.scoreBoard = (
       '%1\n' 
       );
+    this.timerBoard = (
+      '%1\n' 
+      );
   }
 
   preload() {
@@ -94,7 +100,6 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    this.score = 0;
     this.music = this.sound.add('background',{loop:true});
     this.music.play();
 
@@ -117,12 +122,14 @@ export default class Game extends Phaser.Scene {
     this.smallbar = this.add.image(this.gameWidth-15, 100, 'smallbar').setScale(1.6).setOrigin(1,0.5).setDepth(100);
     this.smallpot = this.add.image(this.gameWidth-280, 100, 'smallpot').setScale(1.3).setDepth(100);
      
-    //scoretext
+    //scoretext & timerText
     // this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
     this.scoreText = this.add.text(this.gameWidth-205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
+    this.timerText = this.add.text(205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
-    
+    var rangeX = Array(5);
+
     //Game Run Time
     this.timerEvents.push(
       this.time.addEvent({
@@ -146,6 +153,8 @@ export default class Game extends Phaser.Scene {
         callback: () => {
           var scale = this.timerEvents[1].getRepeatCount();
           this.timeBar.displayWidth = this.timeBar.displayWidth-(this.timeBarOriginal*1/30);
+          this.timer -= 1;
+
         },
         callbackScope: this,
       })  
@@ -157,8 +166,16 @@ export default class Game extends Phaser.Scene {
         // delay: 200,
         loop: true,
         callback: () => {
+          rangeX[0] = Phaser.Math.Between(120, 240);
+          rangeX[1] = Phaser.Math.Between(240, 480);
+          rangeX[2] = Phaser.Math.Between(480, 600);
+          rangeX[3] = Phaser.Math.Between(600, 720);
+          rangeX[4] = Phaser.Math.Between(720, 840);
+
+          var i = Phaser.Math.Between(0,4)
+
           var vegepack = this.veges.get(
-              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'vegepack',Phaser.Math.Between(0, 3)
           ).setScale(0.9);
@@ -172,8 +189,16 @@ export default class Game extends Phaser.Scene {
         // delay: 500,
         loop: true,
         callback: () => {
+          rangeX[0] = Phaser.Math.Between(120, 240);
+          rangeX[1] = Phaser.Math.Between(240, 480);
+          rangeX[2] = Phaser.Math.Between(480, 600);
+          rangeX[3] = Phaser.Math.Between(600, 720);
+          rangeX[4] = Phaser.Math.Between(720, 840);
+
+          var i = Phaser.Math.Between(0,4)
+
           var meatpack = this.meats.get(
-              Phaser.Math.Between(120, this.gameWidth-120), 
+              Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'meatpack',Phaser.Math.Between(0, 1)
           );
@@ -183,28 +208,52 @@ export default class Game extends Phaser.Scene {
     // spoon creation
     this.timerEvents.push(
       this.time.addEvent({
-          delay: 1300,
+          delay: 2500,
           // delay: 200,
           loop: true,
           callback: () => {
-            var x = Phaser.Math.Between(120, this.gameWidth);
-            var y = Phaser.Math.Between(-200, 0);
+
+            rangeX[0] = Phaser.Math.Between(120, 240);
+            rangeX[1] = Phaser.Math.Between(240, 480);
+            rangeX[2] = Phaser.Math.Between(480, 600);
+            rangeX[3] = Phaser.Math.Between(600, 720);
+            rangeX[4] = Phaser.Math.Between(720, 840);
+  
+            var i = Phaser.Math.Between(0,4)
+
+            var x = Phaser.Math.Between(120, this.gameWidth-120);
+            var y = -200;
             
-            var spoon = this.spoon.create(x,y,'spoon').setScale(1);
+            var spoon = this.spoon.create(rangeX[i],y,'spoon').setScale(1);
           }
       })
     )
     // bomb creation
+    console.log(this.gameWidth);
+    console.log(this.gameWidth/7*2);
+    console.log(this.gameWidth/7*3);
+    console.log(this.gameWidth/7*4);
+    console.log(this.gameWidth/7*5);
+    console.log(this.gameWidth/7*6);
+
     this.timerEvents.push(
       this.time.addEvent({
           delay: 1300,
           // delay: 200,
           loop: true,
           callback: () => {
-            var x = Phaser.Math.Between(120, this.gameWidth);
-            var y = Phaser.Math.Between(-200, 0);
+            rangeX[0] = Phaser.Math.Between(this.gameWidth/7, this.gameWidth/7*2);
+            rangeX[1] = Phaser.Math.Between(this.gameWidth/7*2, this.gameWidth/7*3);
+            rangeX[2] = Phaser.Math.Between(this.gameWidth/7*3, this.gameWidth/7*4);
+            rangeX[3] = Phaser.Math.Between(this.gameWidth/7*4, this.gameWidth/7*5);
+            rangeX[4] = Phaser.Math.Between(this.gameWidth/7*5, this.gameWidth/7*6);
+
+            var i = Phaser.Math.Between(0,4)
+
+            var x = Phaser.Math.Between(120, this.gameWidth-120);
+            var y = -200;
             
-            var bomb = this.bombs.create(x,y,'crumpled_paper').setScale(1);
+            var bomb = this.bombs.create(rangeX[i],y,'crumpled_paper').setScale(1.3);
           }
       })
     )
@@ -306,7 +355,10 @@ export default class Game extends Phaser.Scene {
   // ]));
     this.scoreText.setText(Phaser.Utils.String.Format(this.scoreBoard, [
       this.score ,
-  ]));
+    ]));
+    this.timerText.setText(Phaser.Utils.String.Format(this.timerBoard, [
+      this.timer ,
+    ]));
 
 // game physic debug
     // this.caption.setText(Phaser.Utils.String.Format(this.captionTextFormat, [
@@ -385,12 +437,14 @@ export default class Game extends Phaser.Scene {
   }
 
   saveIntoDB() {
-    console.log("saving score");
+    // console.log("saving score");
     this.sys.game.playerScore = this.score;
 
     var http_request;
     http_request = new XMLHttpRequest();
-    http_request.onload = function () { console.log(this.responseText); };
+    http_request.onload = function () {
+      // console.log(this.responseText); 
+    };
     http_request.open("POST", "http://pepperlunchgame.com/game.php");
     // http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
@@ -398,7 +452,7 @@ export default class Game extends Phaser.Scene {
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
 
-    console.log("saving done");
+    // console.log("saving done");
     this.music.stop();
     this.scene.start("ScoreBoard");
   }

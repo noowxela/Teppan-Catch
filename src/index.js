@@ -37,4 +37,3 @@ if (isMobile) {
 } else {
   element.innerHTML = "Please Use Mobile to play";
 }
-  
