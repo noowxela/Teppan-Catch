@@ -41,9 +41,16 @@ $gift = $_POST['gift'];
         
 		$mail->Body = "
         <p>Hi " .$receipentName. ",</p><br>
-        <p>Congratulations! Here's your gift.</p>
-        <p>Gift 1</p><br>
-        <p>Thanks.</p>
+        <p>Thanks for participating in Teppan Catch.</p><br>
+        <p>Don't forget to use your screenshoot voucher & enjoy at Pepper Lunch Restaurants or Express stores!</p><br>
+        <p><b>Teppan Catch</b></p>
+        <p><b>13 June - 28 July</b></p>
+        <p>Keep playing - Top 3 high scores at campaign end will win $250 Pepper Lunch vouchers</p><br>
+        <p><b>Ready, Steady, Unlock!</b></p>
+        <p><b>13 June - 28 July</b></p>
+        <p>Dine on 8 main dishes for your chance to unlock great prizes on 3 August!</p><br>
+        <p>See you at Pepper Lunch!</p><br/>
+        <p>Many thanks!</p>
 		";
 
 		if ($mail->send()) {
