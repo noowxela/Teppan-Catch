@@ -29,6 +29,7 @@ export default class Prize extends Phaser.Scene {
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
     this.load.image('shareButton', 'assets/share_button.png');
+    this.load.image('play_again', 'assets/play_again.png');
 
     this.load.image('set1_normalProduct', 'assets/reward/set1_normalProduct.png');
     this.load.image('set1_expertProduct', 'assets/reward/set1_expertProduct.png');
@@ -100,23 +101,24 @@ export default class Prize extends Phaser.Scene {
     }) 
 
 
-    let pointer = this.input.activePointer;
-    this.input.on('pointerup',function(pointer){
+    // let pointer = this.input.activePointer;
+    // this.input.on('pointerup',function(pointer){
         
-        this.scene.doubleClick -= 1;
+    //     this.scene.doubleClick -= 1;
 
-        if( this.scene.doubleClick == 0){
-            // console.log("taptap");
-            this.scene.doubleClick = 2;
-            window.location = window.location;
+    //     if( this.scene.doubleClick == 0){
+    //         // console.log("taptap");
+    //         this.scene.doubleClick = 2;
+    //         window.location = window.location;
 
-        }else{
-        }
+    //     }else{
+    //     }
     
-    });
+    // });
 
 
-    this.shareButton = this.add.image(this.width/2, 1300, 'shareButton').setScale(1.3).setInteractive();
+    this.shareButton = this.add.image(this.width-this.width/2/2, 1300, 'shareButton').setScale(1.3).setInteractive();
+    this.play_again = this.add.image(this.width/2/2, 1300, 'play_again').setScale(1.3).setInteractive();
 
     var maxscale = 1.39;
     var minscale = 1.3;
@@ -148,6 +150,9 @@ export default class Prize extends Phaser.Scene {
 
     this.shareButton.on("pointerup", () => {
       window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+    });
+    this.play_again.on("pointerup", () => {
+      window.location = window.location;
     });
   }
 
