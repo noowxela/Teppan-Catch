@@ -47,7 +47,7 @@ export default class Register extends Phaser.Scene {
 		let checkBox2 = this.add.image(300, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
 		let product = this.add.image(this.width/2, 1400, 'product');
 
-		let text = this.add.text(this.width/2, 500, 'User Registeration', {
+		let text = this.add.text(this.width/2, 500, 'User Registration', {
 				fontFamily: 'heavitas',
 				fontSize: 36,
 				color: "black"
@@ -203,7 +203,11 @@ export default class Register extends Phaser.Scene {
             return;
 		}
 		if(this.agree == 0 ){
-			alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy')
+			alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy.')
+			return;
+		}
+		if(this.notice == 0 ){
+			alert('Please indicate that you are agree to receive our latest update in future.')
 			return;
 		}
 

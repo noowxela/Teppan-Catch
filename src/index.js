@@ -11,7 +11,7 @@ let game;
 
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let element = document.getElementById('warning');
-if (isMobile) {
+// if (isMobile) {
     game = new Phaser.Game({
     parent: "phaser-game",
     type: Phaser.AUTO,
@@ -34,6 +34,6 @@ if (isMobile) {
     // scene: [Reward],
   })
 
-} else {
-  element.innerHTML = "Please Use Mobile to play";
-}
+// } else {
+//   element.innerHTML = "Please Use Mobile to play";
+// }
