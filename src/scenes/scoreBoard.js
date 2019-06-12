@@ -116,6 +116,7 @@ export default class ScoreBoard extends Phaser.Scene {
     console.log(this.sys.game.playerName);
     console.log(this.sys.game.playerContact);
     console.log(this.sys.game.playerEmail);
+    console.log(this.sys.game.playerScore);
 
 		let vm = this;
     var http_request_2;
