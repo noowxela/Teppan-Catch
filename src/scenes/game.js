@@ -453,9 +453,12 @@ export default class Game extends Phaser.Scene {
     this.sys.game.playerScore = this.score;
 
     var http_request;
+    var vm = this
     http_request = new XMLHttpRequest();
     http_request.onload = function () {
       // console.log(this.responseText); 
+      document.getElementById("background").pause(); 
+      vm.scene.start("ScoreBoard");
     };
     // http_request.open("POST", "http://pepperlunchgame.com/game.php");
     http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/game.php");
@@ -467,8 +470,7 @@ export default class Game extends Phaser.Scene {
 
     // console.log("saving done");
     // this.music.stop();
-    document.getElementById("background").pause(); 
-    this.scene.start("ScoreBoard");
+    
   }
 
 

@@ -250,8 +250,10 @@ export default class Register extends Phaser.Scene {
 		// console.log(vm.notice)
 		var http_request;
 		http_request = new XMLHttpRequest();
-		http_request.onload = function () { vm.removeForm()
-			// ;console.log(this.responseText); 
+		http_request.onload = function () { 
+			vm.removeForm()
+			vm.blurInput()
+			vm.scene.start("PlayInstruction");
 		};
 		http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/player.php");
     	// http_request.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
@@ -271,8 +273,6 @@ export default class Register extends Phaser.Scene {
 		// http_request_2.withCredentials = false;
 		// http_request_2.send();
 		// vm.removeForm()
-		this.blurInput()
-		this.scene.start("PlayInstruction");
 
 	}
 }

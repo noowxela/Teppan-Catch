@@ -7,14 +7,14 @@ export default class Prize extends Phaser.Scene {
     this.captionStyle = {
         fill: '#000002',
         fontFamily: 'heavitas',
-        fontSize: 70 ,
+        fontSize: 50 ,
         lineSpacrring: 6
     };
 
     this.scoreStlye = {
         fill: '#ee3627',
         fontFamily: 'heavitas',
-        fontSize: 110 ,
+        fontSize: 90 ,
         lineSpacrring: 6
     };
 
@@ -43,7 +43,7 @@ export default class Prize extends Phaser.Scene {
   create() {
     // document.getElementById('fb-share-button').style.pointerEvents = "all";
     // document.getElementById('fb-share-button').style.opacity = "1";
-    var rewardScale = 1;
+    var rewardScale = 0.85;
 
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
@@ -53,31 +53,31 @@ export default class Prize extends Phaser.Scene {
     if (this.sys.game.playerScore <=50){
       // console.log("reward one");
       this.scoreLV = this.add.text(this.width/2, 420, 'rookie level', this.captionStyle).setOrigin(0.5,0);
-      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+20, 'reward_1').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_1').setScale(rewardScale).setOrigin(0.5,0.5);
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
       // console.log("reward 2");
       this.scoreLV = this.add.text(this.width/2, 350, 'intermediate \n       level', this.captionStyle).setOrigin(0.5,0);
-      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+20, 'reward_2').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_2').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       // console.log("reward 3");
       this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
-      this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
+      this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+20, 'reward_3').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_3').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
 
-    var maxscale = rewardScale+0.09;
+    var maxscale = rewardScale+0.06;
 		var minscale = rewardScale;
     var scale = minscale;
     var larOrSma = 0;
@@ -89,7 +89,7 @@ export default class Prize extends Phaser.Scene {
           this.reward.setScale(scale);
           scale += 0.005;
           // console.log(scale);
-          if(scale >1.09){
+          if(scale >1.06){
             larOrSma =1 ;
           }
         }else if(larOrSma==1){
@@ -123,8 +123,8 @@ export default class Prize extends Phaser.Scene {
 
     console.log(this.height);
 
-    this.shareButton = this.add.image(this.width-this.width/2/2/2-40, this.height-500, 'shareButton').setScale(0.6).setInteractive();
-    this.play_again = this.add.image(this.width/2/2+60, this.height-500, 'play_again').setScale(1.3).setOrigin(1,0.5).setInteractive();
+    this.shareButton = this.add.image(this.width-this.width/2/2/2-40, this.height-300, 'shareButton').setScale(0.6).setInteractive();
+    this.play_again = this.add.image(this.width/2/2+60, this.height-300, 'play_again').setScale(1.3).setOrigin(1,0.5).setInteractive();
 
     var maxscale_shareButton = 0.69;
     var minscale_shareButton = 0.6;
