@@ -113,12 +113,17 @@ export default class ScoreBoard extends Phaser.Scene {
   
   getfromDB() {
 
+    console.log(this.sys.game.playerName);
+    console.log(this.sys.game.playerContact);
+    console.log(this.sys.game.playerEmail);
+
 		let vm = this;
     var http_request_2;
     http_request_2 = new XMLHttpRequest();
     http_request_2.onload = function () { 
       // console.log(this.responseText);
       // console.log(JSON.parse(this.responseText));
+      // console.log(vm.sys.game.playerName);
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
       console.log(vm.rank);
@@ -132,7 +137,8 @@ export default class ScoreBoard extends Phaser.Scene {
 
     http_request_2.withCredentials = false;
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request_2.send("name=" + this.sys.game.playerName );
+    http_request_2.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail );
+
 
     // console.log("score Board data");
   }
@@ -155,8 +161,8 @@ export default class ScoreBoard extends Phaser.Scene {
       column_2[i] = this.rank.scoreBoard[i].name;
       column_3[i] = (this.rank.scoreBoard[i].point)+' PTS';
 
-      pRank[i] = this.add.text(this.width/5+20, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
-      pName[i] = this.add.text(this.width/4-20, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
+      pRank[i] = this.add.text(this.width/5, height, column_1[i], this.captionStyle).setOrigin(1,0).setDepth(99);
+      pName[i] = this.add.text(this.width/4-60, height, column_2[i], this.captionStyle).setOrigin(0,0).setDepth(99);
       pPoints[i] = this.add.text(this.width-100, height, column_3[i], this.captionStyle).setOrigin(1,0).setDepth(99);
 
       if((this.rank.scoreBoard[i].name == this.sys.game.playerName )
