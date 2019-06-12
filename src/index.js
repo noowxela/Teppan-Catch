@@ -12,7 +12,7 @@ let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let element = document.getElementById('warning');
 
 console.log(window.innerHeight)
-// if (isMobile) {
+if (isMobile) {
     game = new Phaser.Game({
     parent: "phaser-game",
     type: Phaser.AUTO,
@@ -31,11 +31,11 @@ console.log(window.innerHeight)
       }
     },
 
+    scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
     // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
-    // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
-    scene: [Reward],
+    // scene: [PlayInstruction],
   })
 
-// } else {
-//   element.innerHTML = "Please Use Mobile to play";
-// }
+} else {
+  element.innerHTML = "Please Use Mobile to play";
+}

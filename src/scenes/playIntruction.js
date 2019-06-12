@@ -20,7 +20,7 @@ export default class PlayInstruction extends Phaser.Scene {
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(superScale);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(superScale);
     let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(superScale);
-    let playIntruction = this.add.image(this.width/2, this.height/4+85, 'playIntruction').setScale(1).setOrigin(0.5,0);
+    let playIntruction = this.add.image(this.width/2, this.height/4+85, 'playIntruction').setScale(0.9).setOrigin(0.5,0);
     
     
     this.start_button = this.add.image(this.width/2, this.height-65, 'start_button').setScale(superScale).setOrigin(0.5,1).setInteractive();
