@@ -464,7 +464,8 @@ export default class Game extends Phaser.Scene {
     http_request.onload = function () {
       // console.log(this.responseText); 
     };
-    http_request.open("POST", "http://pepperlunchgame.com/game.php");
+    // http_request.open("POST", "http://pepperlunchgame.com/game.php");
+    http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/game.php");
     // http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
