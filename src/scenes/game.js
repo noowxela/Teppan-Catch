@@ -247,12 +247,6 @@ export default class Game extends Phaser.Scene {
       })
     )
     // bomb creation
-    console.log(this.gameWidth);
-    console.log(this.gameWidth/7*2);
-    console.log(this.gameWidth/7*3);
-    console.log(this.gameWidth/7*4);
-    console.log(this.gameWidth/7*5);
-    console.log(this.gameWidth/7*6);
 
     this.timerEvents.push(
       this.time.addEvent({
@@ -267,8 +261,7 @@ export default class Game extends Phaser.Scene {
             rangeX[4] = Phaser.Math.Between(this.gameWidth/7*5, this.gameWidth/7*6);
 
             var i = Phaser.Math.Between(0,4)
-            console.log(' x :'+rangeX[i]);
-
+            
             var x = Phaser.Math.Between(120, this.gameWidth-120);
             var y = -200;
             

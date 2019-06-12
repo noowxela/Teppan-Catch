@@ -94,9 +94,6 @@ export default class ScoreBoard extends Phaser.Scene {
         ease: 'Power2',
         // repeat: -1,            // -1: infinity
     });
-    // var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
-
-    // var element = this.add.dom(this.width/2, 1200).createFromCache('fbShare').setScale(3);
 
     let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
 
@@ -127,7 +124,6 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
-    // http_request_2.open("POST", "http://localhost/teppan/scoreboard.php");
     http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
     http_request_2.withCredentials = false;
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -145,10 +141,6 @@ export default class ScoreBoard extends Phaser.Scene {
     var pRank = Array(4);
     var pName = Array(4);
     var pPoints = Array(4);
-
-    // this.sys.game.playerName ="D99";
-    // this.sys.game.playerEmail ="noowxela@yahoo.com";
-    // this.sys.game.playerContact ="6585256895";
 
     var height = 720;
 
