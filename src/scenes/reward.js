@@ -55,8 +55,8 @@ export default class Prize extends Phaser.Scene {
       this.scoreLV = this.add.text(this.width/2, 420, 'rookie level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_1').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_1').setScale(rewardScale).setOrigin(0.5,0.5);
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
@@ -64,16 +64,16 @@ export default class Prize extends Phaser.Scene {
       this.scoreLV = this.add.text(this.width/2, 350, 'intermediate \n       level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_2').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_2').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       // console.log("reward 3");
       this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+10, 'reward_3').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_3').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
 
