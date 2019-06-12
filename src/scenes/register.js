@@ -40,11 +40,11 @@ export default class Register extends Phaser.Scene {
 		// let balck_bg = this.add.image(this.width/2, this.height/2-90, 'balck_bg').setScale(1.3,0.9);
 		let logo = this.add.image(this.width/2, 230, 'logo').setScale(1.3);
 		let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
-		let checkBox1 = this.add.image(300, 990, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
-		let test1 = this.add.image(352, 990, 'test1').setScale(1).setOrigin(0,0).setScale(1.3);
-		this.text2 = this.add.image(534, 1011, 'text2').setScale(1).setOrigin(0,0).setScale(1.3).setInteractive();
-		let text3 = this.add.image(350, 1050, 'text3').setScale(1).setOrigin(0,0).setScale(1.3);
-		let checkBox2 = this.add.image(300, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
+		let checkBox1 = this.add.image(265, 990, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
+		let test1 = this.add.image(317, 990, 'test1').setScale(1).setOrigin(0,0).setScale(1.3);
+		this.text2 = this.add.image(499, 1011, 'text2').setScale(1).setOrigin(0,0).setScale(1.3).setInteractive();
+		let text3 = this.add.image(317, 1050, 'text3').setScale(1).setOrigin(0,0).setScale(1.3);
+		let checkBox2 = this.add.image(265, 1050, 'checkBox').setScale(1).setOrigin(0,0).setInteractive().setScale(1.3);
 		let product = this.add.image(this.width/2, 1400, 'product');
 
 		let text = this.add.text(this.width/2, 500, 'User Registration', {
@@ -207,11 +207,11 @@ export default class Register extends Phaser.Scene {
             return;
 		}
 		if(this.agree == 0 ){
-			alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy.')
+			alert('Kindly indicate that you have read and agree to the Terms and Conditions.')
 			return;
 		}
 		if(this.notice == 0 ){
-			alert('Please indicate that you are agree to receive our latest update in future.')
+			alert('Kindly indicate that you agree to receive our latest update in future.')
 			return;
 		}
 
@@ -253,7 +253,9 @@ export default class Register extends Phaser.Scene {
 		http_request.onload = function () { vm.removeForm()
 			// ;console.log(this.responseText); 
 		};
-		http_request.open("POST", "http://pepperlunchgame.com/player.php");
+		http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/player.php");
+    	// http_request.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
+
 		// http_request.open("POST", "http://localhost/teppan/player.php");
 		// http_request.open("POST", "X");
 		http_request.withCredentials = false;
@@ -268,7 +270,7 @@ export default class Register extends Phaser.Scene {
 		// // http_request_2.open("GET", "http://localhost/Teppan-Catch/src/scenes/scoreboard.php");
 		// http_request_2.withCredentials = false;
 		// http_request_2.send();
-
+		// vm.removeForm()
 		this.blurInput()
 		this.scene.start("PlayInstruction");
 

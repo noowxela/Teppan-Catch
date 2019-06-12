@@ -8,15 +8,16 @@ import Reward from "./scenes/reward.js"
 import Test from "./scenes/test.js"
 
 let game;
-
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let element = document.getElementById('warning');
-if (isMobile) {
+
+console.log(window.innerHeight)
+// if (isMobile) {
     game = new Phaser.Game({
     parent: "phaser-game",
     type: Phaser.AUTO,
-    width: '100%',
-    height: '100%',
+    width: window.innerWidth-70,
+    height: window.innerHeight-70,
     mode: Phaser.Scale.NONE,
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
     dom: {
@@ -35,6 +36,6 @@ if (isMobile) {
     scene: [Reward],
   })
 
-} else {
-  element.innerHTML = "Please Use Mobile to play";
-}
+// } else {
+//   element.innerHTML = "Please Use Mobile to play";
+// }

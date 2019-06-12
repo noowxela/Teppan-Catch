@@ -7,14 +7,14 @@ export default class Prize extends Phaser.Scene {
     this.captionStyle = {
         fill: '#000002',
         fontFamily: 'heavitas',
-        fontSize: 80 ,
+        fontSize: 70 ,
         lineSpacrring: 6
     };
 
     this.scoreStlye = {
         fill: '#ee3627',
         fontFamily: 'heavitas',
-        fontSize: 133 ,
+        fontSize: 110 ,
         lineSpacrring: 6
     };
 
@@ -46,7 +46,7 @@ export default class Prize extends Phaser.Scene {
 
     let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
-    let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.3);
+    let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.2);
 
 
     if (this.sys.game.playerScore <=50){
@@ -55,7 +55,7 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_1').setScale(1.2).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_1').setScale(1).setOrigin(0.5,0.5);
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
@@ -64,7 +64,7 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1.2).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_2').setScale(1).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       // console.log("reward 3");
@@ -72,10 +72,10 @@ export default class Prize extends Phaser.Scene {
       this.score = this.add.text(this.width/2, 500, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
       this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(1.3).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2, 'reward_3').setScale(1.2).setOrigin(0.5,0.5);
+      this.reward = this.add.image(this.width/2, this.height/2, 'reward_3').setScale(1).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
-    var scale = 1.3;
+    var scale = 1;
     var larOrSma = 0;
     this.time.addEvent({
       delay: 200,
@@ -85,13 +85,13 @@ export default class Prize extends Phaser.Scene {
           this.reward.setScale(scale);
           scale += 0.005;
           // console.log(scale);
-          if(scale >1.39){
+          if(scale >1.09){
             larOrSma =1 ;
           }
         }else if(larOrSma==1){
           this.reward.setScale(scale);
           scale -= 0.005;
-          if(scale <1.3){
+          if(scale <1){
             larOrSma =0 ;
           }
 
@@ -118,8 +118,8 @@ export default class Prize extends Phaser.Scene {
     // });
 
 
-    this.shareButton = this.add.image(this.width-this.width/2/2/2-30, 1250, 'shareButton').setScale(0.6).setInteractive();
-    this.play_again = this.add.image(this.width/2/2+50, 1250, 'play_again').setScale(1.3).setOrigin(1,0.5).setInteractive();
+    this.shareButton = this.add.image(this.width-this.width/2/2/2-40, 1250, 'shareButton').setScale(0.6).setInteractive();
+    this.play_again = this.add.image(this.width/2/2+60, 1250, 'play_again').setScale(1.3).setOrigin(1,0.5).setInteractive();
 
     var maxscale_shareButton = 0.69;
     var minscale_shareButton = 0.6;
