@@ -31,9 +31,9 @@ if (isMobile) {
       }
     },
 
-    scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
     // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
-    // scene: [PlayInstruction],
+    scene: [Register, PlayInstruction, Game, ScoreBoard, Reward],
+    // scene: [Reward],
   })
 
 } else {

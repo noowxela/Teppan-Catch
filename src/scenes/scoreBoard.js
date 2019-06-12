@@ -121,7 +121,7 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(JSON.parse(this.responseText));
       // console.log(vm.sys.game.playerName);
       vm.rank = JSON.parse(this.responseText) ;
-      // console.log(vm.rank.scoreBoard[0]);
+      console.log(vm.rank);
       vm.updateText();
     };
 
