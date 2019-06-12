@@ -9,8 +9,8 @@ $user = "u233241291_game";
 $password = "N4KrvACxDgy9";
 
 $name = $_POST['name'];
-// $contact = $_POST['contact'];
-// $email = $_POST['email'];
+$contact = $_POST['contact'];
+$email = $_POST['email'];
 // $topScore = $_get['topScore'];
 $user_id = "";
 
@@ -24,28 +24,34 @@ $rank_top4= array();
 
 $sql_all = "SELECT * FROM user ORDER BY score desc";
 $result_all = $con->query($sql_all);
-$rowCounter = 1 ;
+$rankCounter = 1 ;
 $top_4Counter = 4 ;
 
 if ($result_all->num_rows > 0) {
     while($row = $result_all->fetch_assoc()) {
 
-        if($row['user_name'] ==  $name){
-            // if($top_4Counter >0){
-                array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter,$row['user_email'],$row['user_contact']));
+        if( $row['user_name'] ==  $name &&
+            $row['user_contact'] ==  $contact &&
+            $row['user_email'] ==  $email ){
+
+                array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rankCounter,$row['user_email'],$row['user_contact']));
                 $top_4Counter-=1;
-            // }
+
         }else if($top_4Counter  >0 ){
-            array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rowCounter,$row['user_email'],$row['user_contact']));
+            if($rankCounter>4){
+
+            }else{
+                array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rankCounter,$row['user_email'],$row['user_contact']));
+            }
             $top_4Counter-=1;
         }
 
-        $rowCounter+=1;
+        $rankCounter+=1;
     }
 } else {
     die("0 results");
 }
-if(count($rank_top4)==5){
+if(count($rank_top4) == 5){
     $rank_top4[3][0] = $rank_top4[4][0] ;
     $rank_top4[3][1] = $rank_top4[4][1] ;
     $rank_top4[3][2] = $rank_top4[4][2] ;
