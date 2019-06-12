@@ -169,7 +169,8 @@ export default class Prize extends Phaser.Scene {
 
 
     this.shareButton.on("pointerup", () => {
-      window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+      // window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+      window.open("https://www.pepperlunchgame.com/share.html","_blank")
     });
     this.play_again.on("pointerup", () => {
       window.location = window.location;
