@@ -37,7 +37,7 @@ $gift = $_POST['gift'];
 
 		$mail->isHTML(true);
 
-        $mail->Subject = "Pepper Lunch Game";
+        $mail->Subject = "Pepper Lunch Simply Irresistible Campaign";
         
 		$mail->Body = "
         <p>Hi " .$receipentName. ",</p><br>
@@ -52,6 +52,34 @@ $gift = $_POST['gift'];
         <p>See you at Pepper Lunch!</p><br/>
         <p>Many thanks!</p>
 		";
+
+        
+        
+        // Thank you for participating in Pepper Lunch Simply Irresistible Teppan Catch.
+        
+        // Don’t forget to use your screenshot voucher at Pepper Lunch Restaurants or Express stores!
+        
+        // Find your nearest stores here.
+        // (http://www.pepperlunch.com.sg/#/our_locations)
+        
+        // Teppan Catch
+        
+        // 13 June - 28 July
+        
+        // Keep playing! Top 3 high scores at the end of the campaign wins $250 Pepper Lunch vouchers!
+        
+        // Ready, Steady, Unlock!
+        
+        // 13 June - 28 July
+        
+        // Dine on 8 main dishes for your chance to unlock great prizes on 3 August!
+        
+        // Once you have collected all 8 stamps, visit pepperlunch.campaign.sg to RSVP for the Ready, Steady, Unlock event!
+        
+        // See you at Pepper Lunch!
+        
+        // Thank you!
+
 
 		if ($mail->send()) {
 			echo "EmailSent";
