@@ -124,13 +124,10 @@ export default class ScoreBoard extends Phaser.Scene {
       // console.log(vm.rank.scoreBoard[0]);
       vm.updateText();
     };
-<<<<<<< HEAD
-    http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
-=======
+    // http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
     // http_request_2.open("POST", "http://localhost/teppan/scoreboard.php");
     http_request_2.open("POST", window.location.protocol + "//pepperlunchgame.com/scoreBoard.php");
     // http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
->>>>>>> 643e0112208ac33b4eb04d1a6592cf6cc2021921
     http_request_2.withCredentials = false;
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request_2.send("name=" + this.sys.game.playerName );

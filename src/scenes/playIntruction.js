@@ -15,20 +15,22 @@ export default class PlayInstruction extends Phaser.Scene {
   }
 
   create() {
-    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
-    let logo = this.add.image(this.width/2, 230, 'logo').setScale(1.3);
-    let logoTitle = this.add.image(this.width/2, 400, 'logoTitle').setScale(1.3);
-    let playIntruction = this.add.image(this.width/2, this.height/4+85, 'playIntruction').setScale(1,1).setOrigin(0.5,0);
+    var superScale = 1.2;
+
+    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(superScale);
+    let logo = this.add.image(this.width/2, 150, 'logo').setScale(superScale);
+    let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(superScale);
+    let playIntruction = this.add.image(this.width/2, this.height/4+85, 'playIntruction').setScale(1).setOrigin(0.5,0);
     
     
-    this.start_button = this.add.image(this.width/2, this.height-65, 'start_button').setScale(1.3).setOrigin(0.5,1).setInteractive();
+    this.start_button = this.add.image(this.width/2, this.height-65, 'start_button').setScale(superScale).setOrigin(0.5,1).setInteractive();
 
 		this.start_button.on("pointerup", () => {
       this.scene.start("Game");
     });
     
-    var maxscale = 1.39;
-		var minscale = 1.3;
+    var maxscale = superScale+0.09;
+		var minscale = superScale;
 		var scale = minscale;
 		var larOrSma = 0;
 		// this.playButton.setScale(scale);
