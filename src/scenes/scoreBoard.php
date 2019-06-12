@@ -30,9 +30,9 @@ $top_4Counter = 4 ;
 if ($result_all->num_rows > 0) {
     while($row = $result_all->fetch_assoc()) {
 
-        if( $row['user_name'] ==  $name &&
-            $row['user_contact'] ==  $contact &&
-            $row['user_email'] ==  $email ){
+        if( ($row['user_name'] ==  $name) &&
+            ($row['user_contact'] ==  $contact) &&
+            ($row['user_email'] ==  $email) ){
 
                 array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rankCounter,$row['user_email'],$row['user_contact']));
                 $top_4Counter-=1;
