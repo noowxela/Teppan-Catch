@@ -38,7 +38,7 @@ if ($result_all->num_rows > 0) {
                 $top_4Counter-=1;
 
         }else if($top_4Counter  >0 ){
-            if($rankCounter>4){
+            if($rankCounter=>5){
 
             }else{
                 array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rankCounter,$row['user_email'],$row['user_contact']));
