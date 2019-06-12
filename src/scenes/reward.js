@@ -36,6 +36,7 @@ export default class Prize extends Phaser.Scene {
     this.load.image('reward_1', 'assets/reward/set1_reward1.png');
     this.load.image('reward_2', 'assets/reward/set1_reward2.png');
     this.load.image('reward_3', 'assets/reward/set1_reward3.png');
+    this.load.image('shareButton', 'srr/scenes/shareButton.png');
 
   }
 
@@ -173,6 +174,8 @@ export default class Prize extends Phaser.Scene {
     this.play_again.on("pointerup", () => {
       window.location = window.location;
     });
+
+    
   }
 
   update(){

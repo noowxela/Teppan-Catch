@@ -31,9 +31,9 @@ console.log(window.innerHeight)
       }
     },
 
-    scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
     // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
-    // scene: [Reward],
+    // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
+    scene: [Reward],
   })
 
 // } else {

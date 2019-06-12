@@ -1,0 +1,138 @@
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .fbBtn {
+    width:240px;
+    height:35px;
+    display:block;
+    font-family:Arial, "Helvetica", sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    color:#fff;
+    text-decoration:none;
+    text-transform:uppercase;
+    text-align:center;
+    text-shadow:1px 1px 0px #37a69b;
+    padding-top:6px;
+    margin: 29px 0 0 29px;
+    position:relative;
+    cursor:pointer;
+    border: none;  
+    background-color: #4267b2;
+    background-image: linear-gradient(top,#4267b2,#3111);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius:5px;
+    box-shadow: inset 0px 1px 0px #4267b2, 0px 5px 0px 0px #4267b2, 0px 10px 5px #4267b2;
+    }
+    .WhatsappBtn {
+        width:240px;
+    height:35px;
+    display:block;
+    font-family:Arial, "Helvetica", sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    color:#fff;
+    text-decoration:none;
+    text-transform:uppercase;
+    text-align:center;
+    text-shadow:1px 1px 0px #37a69b;
+    padding-top:6px;
+    margin: 29px 0 0 29px;
+    position:relative;
+    cursor:pointer;
+    border: none;  
+    background-color: #1ebea5;
+    background-image: linear-gradient(top,#1ebea5,#3111);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius:5px;
+    box-shadow: inset 0px 1px 0px #1ebea5, 0px 5px 0px 0px #1ebea5, 0px 10px 5px #1ebea5;
+    }
+
+    .fbIcon {
+    background-image: url("Fb.png");
+    /* background-size: auto; */
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    /* background-position: center; Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    }
+    .WhatsAppIcon {
+    background-image: url("whatsapp.jpg");
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    /* background-position: center; Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+    background-color: RoyalBlue;
+    }
+
+    .share {
+    /* background: #eceeee;
+    border: 1px solid #42464b;
+    border-radius: 6px; */
+    height: 160px;
+    margin: 20px auto 0;
+    width: 298px;
+    }
+    .share h1 {
+    background-image: linear-gradient(top, #f1f3f3, #d4dae0);
+    border-bottom: 1px solid #a6abaf;
+    border-radius: 6px 6px 0 0;
+    box-sizing: border-box;
+    color: #727678;
+    display: block;
+    height: 43px;
+    font: 600 14px/1 'Open Sans', sans-serif;
+    padding-top: 14px;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
+    }
+    
+    .shadow {
+    background: #000;
+    border-radius: 12px 12px 4px 4px;
+    box-shadow: 0 0 20px 10px #000;
+    height: 12px;
+    margin: 30px auto;
+    opacity: 0.2;
+    width: 270px;
+    }
+
+    </style>
+</head>
+    <div class="share">
+
+       
+        <!-- <input type="FB" value="FaceBook Share"  onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse')">
+        <input type="Whatsapp" value="Whatsapp Share"  onclick="window.open('https://api.whatsapp.com/send?text=https://pepperlunchgame.com')"> -->
+
+        <button class="fbBtn" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse')">
+            <i class="fbIcon"></i>
+            FaceBook Share
+        </button>
+        <button class="WhatsappBtn" onclick="window.open('https://api.whatsapp.com/send?text=https://pepperlunchgame.com')">
+            <i class="WhatsAppIcon"></i>
+            FaceBook Share
+        </button>
+        
+        <!-- <button class="btn btn-primary" onclick="window.open('https://api.whatsapp.com/send?text=https://pepperlunchgame.com')"><i class="fa fa-css3 icon" aria-hidden="true"></i>BUTTON</button> -->
+        
+    
+    </div>
+    <div class="shadow"></div>
+    
