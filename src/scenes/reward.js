@@ -174,7 +174,8 @@ export default class Prize extends Phaser.Scene {
 
 
     this.shareButton.on("pointerup", () => {
-      window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+      // window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpepperlunchgame.com%2F&amp;src=sdkpreparse","_blank")
+      window.open("https://www.pepperlunchgame.com/share.html","_blank")
     });
     this.play_again.on("pointerup", () => {
       window.location = window.location;
@@ -200,7 +201,8 @@ export default class Prize extends Phaser.Scene {
   sendEmail(email,name,gift){
     let http_request = new XMLHttpRequest();
     http_request.onload = function () { console.log(this.responseText) };
-    http_request.open("POST", "http://pepperlunchgame.com/sendEmail.php");
+    http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/game.php");
+    // http_request.open("POST", "http://pepperlunchgame.com/sendEmail.php");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http_request.send("email=" + email + "&name=" + name + "&gift=" + gift );
