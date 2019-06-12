@@ -40,15 +40,16 @@ $gift = $_POST['gift'];
         $mail->Subject = "Pepper Lunch Simply Irresistible Campaign";
         
 		$mail->Body = "
-        <p>Hi " .$receipentName. ",</p><br>
-        <p>Thanks for participating in Teppan Catch.</p><br>
+        <p>Thank you for participating in Pepper Lunch Simply Irresistible Teppan Catch.</p><br>
         <p>Don't forget to use your screenshoot voucher & enjoy at Pepper Lunch Restaurants or Express stores!</p><br>
+        <p>Find your nearest stores <a href='http://www.pepperlunch.com.sg/#/our_locations'>here</a>.</p>
         <p><b>Teppan Catch</b></p>
         <p><b>13 June - 28 July</b></p>
         <p>Keep playing - Top 3 high scores at campaign end will win $250 Pepper Lunch vouchers</p><br>
         <p><b>Ready, Steady, Unlock!</b></p>
         <p><b>13 June - 28 July</b></p>
         <p>Dine on 8 main dishes for your chance to unlock great prizes on 3 August!</p><br>
+        <p>Once you have collected all 8 stamps, visit <a href='pepperlunch.campaign.sg'>pepperlunch.campaign.sg</a> to RSVP for the Ready, Steady, Unlock event!</p>
         <p>See you at Pepper Lunch!</p><br/>
         <p>Many thanks!</p>
 		";
