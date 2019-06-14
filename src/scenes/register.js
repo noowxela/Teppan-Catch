@@ -145,6 +145,7 @@ export default class Register extends Phaser.Scene {
 		this.start_button.on("pointerup", () => {
 			// Save into db
 			this.saveIntoDB();
+			
 		});
 		
 	}
@@ -241,9 +242,16 @@ export default class Register extends Phaser.Scene {
 		// xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
 		// xhttp.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email);
 
+		var today = new Date();
+		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var dateTime = date+' '+time;
+
 	    this.sys.game.playerName = this.name;
 	    this.sys.game.playerContact = this.contact;
 	    this.sys.game.playerEmail = this.email;
+	    this.sys.game.playerDate = this.date;
+	    this.sys.game.playerTime = this.time;
 
 
 		let vm = this;
@@ -262,7 +270,7 @@ export default class Register extends Phaser.Scene {
 		// http_request.open("POST", "X");
 		http_request.withCredentials = false;
 		http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + vm.notice);
+		http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + vm.notice + "&date=" + date + "&time=" + time );
 		// http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
 
 		// var http_request_2;

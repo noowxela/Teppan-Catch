@@ -13,6 +13,8 @@ $contact = $_POST['contact'];
 $email = $_POST['email'];
 $score = $_POST['score'];
 $subscribe = $_POST['subscribe'];
+$date = $_POST['date'];
+$time = $_POST['time'];
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
@@ -21,7 +23,7 @@ if (!$con)
 mysqli_select_db($con,$database) or die ("Error could not load database" . mysqli_error($con));
 
 // run query
-$sql = "INSERT INTO `user`(`user_name`, `user_contact`, `user_email`, `score`, `subscribe`) VALUES ('".$name."','".$contact."','".$email."','".$score."','" . $subscribe ."')";
+$sql = "INSERT INTO `user`(`user_name`, `user_contact`, `user_email`, `score`, `subscribe`, `date`, `time`) VALUES ('".$name."','".$contact."','".$email."','".$score."','" . $subscribe ."','".$date."','".$time."')";
 $ins = $con->query($sql);
 if (!$ins)
 	die('Error entry already exists ' . mysqli_error($con));
