@@ -13,8 +13,13 @@ $contact = $_POST['contact'];
 $email = $_POST['email'];
 $score = $_POST['score'];
 $subscribe = $_POST['subscribe'];
-$date = $_POST['date'];
-$time = $_POST['time'];
+// $date = $_POST['date'];
+// $time = $_POST['time'];
+date_default_timezone_set('Asia/Singapore');
+$date = date("m-d-Y");
+$time = date("H:i:s");
+//echo $date;
+// echo $time;
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)

@@ -16,8 +16,8 @@ $user_id = "";
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
-	die('Error could not connect: ' . mysql_error());
-	
+    die('Error could not connect: ' . mysql_error());
+    
 mysqli_select_db($con,$database) or die ("Error could not load database" . mysqli_error($con));
 
 $rank_top4= array();
@@ -38,7 +38,7 @@ if ($result_all->num_rows > 0) {
                 $top_4Counter-=1;
 
         }else if($top_4Counter  >0 ){
-            if($rankCounter=>5){
+            if($rankCounter >= 5){
 
             }else{
                 array_push($rank_top4 ,array($row['user_id'],$row['user_name'],$row['score'],$rankCounter,$row['user_email'],$row['user_contact']));
