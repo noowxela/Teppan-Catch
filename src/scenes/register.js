@@ -217,7 +217,7 @@ export default class Register extends Phaser.Scene {
 
 
         if(!this.validateName(this.name)){
-            alert('Name must consist 3 to 8 alphabent')
+            alert('Name must consist 3 to 8 alphabet')
             return;
         }
 		else if(!this.validatePhone(this.contact)){
