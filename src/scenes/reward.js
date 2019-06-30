@@ -25,7 +25,7 @@ export default class Prize extends Phaser.Scene {
   preload() {
     this.width = this.sys.game.canvas.getAttribute("width");
     this.height = this.sys.game.canvas.getAttribute("height");
-    this.load.image('background', 'assets/background.png');
+    this.load.image('background', 'assets/reward_background.png');
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
     this.load.image('shareButton', 'assets/share_button.png');
