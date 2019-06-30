@@ -27,7 +27,7 @@ export default class Prize extends Phaser.Scene {
     this.height = this.sys.game.canvas.getAttribute("height");
     this.load.image('reward_background', 'assets/reward_background.png');
     this.load.image('logo', 'assets/logo.png');
-    this.load.image('logoTitle', 'assets/logo-title.png');
+    this.load.image('reward_logoTitle', 'assets/logo-title.png');
     this.load.image('shareButton', 'assets/share_button.png');
     this.load.image('play_again', 'assets/play_again.png');
 
@@ -47,7 +47,7 @@ export default class Prize extends Phaser.Scene {
 
     let background = this.add.image(this.width/2, this.height/2, 'reward_background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
-    let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.2);
+    let logoTitle = this.add.image(this.width/2, 300, 'reward_logoTitle').setScale(1.2);
 
 
     if (this.sys.game.playerScore <=50){
