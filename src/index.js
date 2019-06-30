@@ -11,7 +11,7 @@ let game;
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let element = document.getElementById('warning');
 
-// if (isMobile) {
+if (isMobile) {
     game = new Phaser.Game({
     parent: "phaser-game",
     type: Phaser.AUTO,
@@ -30,11 +30,11 @@ let element = document.getElementById('warning');
       }
     },
 
-    // scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
+    scene: [Welcome, Register, PlayInstruction, Game, ScoreBoard, Reward],
     // scene: [Register, PlayInstruction, Game, ScoreBoard, Reward],
-    scene: [ScoreBoard, Reward],
+    // scene: [ScoreBoard],
   })
 
- // } else {
- //   element.innerHTML = "Please Use Mobile to play";
- // }
+ } else {
+   element.innerHTML = "Please Use Mobile to play";
+ }
