@@ -25,7 +25,7 @@ export default class Prize extends Phaser.Scene {
   preload() {
     this.width = this.sys.game.canvas.getAttribute("width");
     this.height = this.sys.game.canvas.getAttribute("height");
-    this.load.image('background', 'assets/reward_background.png');
+    this.load.image('reward_background', 'assets/reward_background.png');
     this.load.image('logo', 'assets/logo.png');
     this.load.image('logoTitle', 'assets/logo-title.png');
     this.load.image('shareButton', 'assets/share_button.png');
@@ -45,7 +45,7 @@ export default class Prize extends Phaser.Scene {
     // document.getElementById('fb-share-button').style.opacity = "1";
     var rewardScale = 0.85;
 
-    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3);
+    let background = this.add.image(this.width/2, this.height/2, 'reward_background').setScale(1.3);
     let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
     let logoTitle = this.add.image(this.width/2, 300, 'logoTitle').setScale(1.2);
 
