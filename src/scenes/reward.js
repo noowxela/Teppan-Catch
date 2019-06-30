@@ -12,7 +12,7 @@ export default class Prize extends Phaser.Scene {
     };
 
     this.scoreStlye = {
-        fill: '#ee3627',
+        fill: '#f3ec19',
         fontFamily: 'heavitas',
         fontSize: 90 ,
         lineSpacrring: 6
