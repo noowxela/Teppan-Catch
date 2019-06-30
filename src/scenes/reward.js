@@ -5,7 +5,7 @@ export default class Prize extends Phaser.Scene {
     this.doubleClick = 2;
 
     this.captionStyle = {
-        fill: '#000002',
+        fill: '#FFFFFF',
         fontFamily: 'heavitas',
         fontSize: 50 ,
         lineSpacrring: 6
