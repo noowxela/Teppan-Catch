@@ -113,11 +113,16 @@ export default class ScoreBoard extends Phaser.Scene {
   
   getfromDB() {
 
-    console.log(this.sys.game.playerName);
-    console.log(this.sys.game.playerContact);
-    console.log(this.sys.game.playerEmail);
-    console.log(this.sys.game.playerScore);
+    // console.log(this.sys.game.playerName);
+    // console.log(this.sys.game.playerContact);
+    // console.log(this.sys.game.playerEmail);
+    // console.log(this.sys.game.playerScore);
 
+    var oneForAllArray = [this.sys.game.playerName,this.sys.game.playerContact,this.sys.game.playerEmail];
+		var playerData = JSON.stringify(oneForAllArray); 
+		var encrypted = window.btoa(playerData);
+
+    
 		let vm = this;
     var http_request_2;
     http_request_2 = new XMLHttpRequest();
@@ -131,14 +136,13 @@ export default class ScoreBoard extends Phaser.Scene {
       vm.updateText();
     };
 
-    // http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
     // http_request_2.open("POST", "http://localhost/teppan/scoreboard.php");
+    
     http_request_2.open("POST", window.location.protocol + "//pepperlunchgame.com/scoreBoard.php");
-    // http_request_2.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
-
     http_request_2.withCredentials = false;
     http_request_2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request_2.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail );
+    // http_request_2.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail );
+		http_request_2.send("encrypted=" + encrypted );
 
 
     // console.log("score Board data");

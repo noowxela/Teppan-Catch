@@ -265,14 +265,17 @@ export default class Register extends Phaser.Scene {
 			vm.blurInput()
 			vm.scene.start("PlayInstruction");
 		};
+		var oneForAllArray = [this.name,this.contact,this.email,0,vm.notice,date,time];
+		var playerData = JSON.stringify(oneForAllArray); 
+		var encrypted = window.btoa(playerData);
+
 		http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/player.php");
-    	// http_request.open("POST", "http://pepperlunchgame.com/scoreBoard.php");
 
 		// http_request.open("POST", "http://localhost/teppan/player.php");
 		// http_request.open("POST", "X");
 		http_request.withCredentials = false;
 		http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email + "&score=" + 0 + "&subscribe=" + vm.notice + "&date=" + date + "&time=" + time );
+		http_request.send("encrypted=" + encrypted );
 		// http_request.send("name=" + this.name + "&contact=" + this.contact + "&email=" + this.email );
 
 		// var http_request_2;

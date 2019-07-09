@@ -452,6 +452,12 @@ export default class Game extends Phaser.Scene {
     // console.log("saving score");
     this.sys.game.playerScore = this.score;
 
+		var oneForAllArray = [this.sys.game.playerName,this.sys.game.playerContact,this.sys.game.playerEmail,this.score];
+		var playerData = JSON.stringify(oneForAllArray); 
+		var encrypted = window.btoa(playerData);
+
+    
+
     var http_request;
     var vm = this
     http_request = new XMLHttpRequest();
@@ -460,13 +466,13 @@ export default class Game extends Phaser.Scene {
       document.getElementById("background").pause(); 
       vm.scene.start("ScoreBoard");
     };
-    // http_request.open("POST", "http://pepperlunchgame.com/game.php");
     http_request.open("POST", window.location.protocol + "//pepperlunchgame.com/game.php");
     // http_request.open("POST", "http://localhost/teppan/game.php");
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score + "&key=t");
+    // http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score + "&key=t");
+		http_request.send("encrypted=" + encrypted );
 
     // console.log("saving done");
     // this.music.stop();

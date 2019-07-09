@@ -8,13 +8,24 @@ $host = "127.0.0.1";
 $user = "u233241291_too";
 $password = "Hsilrnmit2Yd";
 
-$name = $_POST['name'];
-$contact = $_POST['contact'];
-$email = $_POST['email'];
-$score = $_POST['score'];
-$subscribe = $_POST['subscribe'];
+// $name = $_POST['name'];
+// $contact = $_POST['contact'];
+// $email = $_POST['email'];
+// $score = $_POST['score'];
+// $subscribe = $_POST['subscribe'];
 // $date = $_POST['date'];
 // $time = $_POST['time'];
+$encrypted = $_POST['encrypted'];
+$decrypt = base64_decode($encrypted);
+$playerdata = json_decode($decrypt, true);
+
+$name 		= $playerdata[0];
+$contact 	= $playerdata[1];
+$email 		= $playerdata[2];
+$score 		= $playerdata[3];
+$subscribe 	= $playerdata[4];
+
+
 date_default_timezone_set('Asia/Singapore');
 $date = date("m-d-Y");
 $time = date("H:i:s");

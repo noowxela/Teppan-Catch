@@ -8,22 +8,29 @@ $host = "127.0.0.1";
 $user = "u233241291_too";
 $password = "Hsilrnmit2Yd";
 
-$key = $_POST['key'];
-if($key != 't'){
+// $key = $_POST['key'];
+// if($key != 't'){
 
-	die('hack failed');
-}
-echo 23;
-$name = $_POST['name'];
-$contact = $_POST['contact'];
-$email = $_POST['email'];
-$score = $_POST['score'];
-$user_id = "";
+// 	die('hack failed');
+// }
+// echo 23;
+// $name = $_POST['name'];
+// $contact = $_POST['contact'];
+// $email = $_POST['email'];
+// $score = $_POST['score'];
+// $user_id = "";
 
-if($score>160){
-    die();
-}
+// if($score>160){
+//     die();
+// }
+$encrypted = $_POST['encrypted'];
+$decrypt = base64_decode($encrypted);
+$playerdata = json_decode($decrypt, true);
 
+$name 		= $playerdata[0];
+$contact 	= $playerdata[1];
+$email 		= $playerdata[2];
+$score 		= $playerdata[3];
 
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
