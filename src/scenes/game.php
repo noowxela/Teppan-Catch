@@ -14,6 +14,11 @@ $email = $_POST['email'];
 $score = $_POST['score'];
 $user_id = "";
 
+if($score>160){
+    die();
+}
+
+
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
 	die('Error could not connect: ' . mysql_error());

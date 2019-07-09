@@ -253,6 +253,8 @@ export default class Register extends Phaser.Scene {
 	    this.sys.game.playerDate = this.date;
 	    this.sys.game.playerTime = this.time;
 
+		
+
 
 		let vm = this;
 		// console.log(vm.notice)
