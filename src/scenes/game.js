@@ -466,7 +466,7 @@ export default class Game extends Phaser.Scene {
     // http_request.open("POST", "X");
     http_request.withCredentials = false;
     http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score);
+    http_request.send("name=" + this.sys.game.playerName + "&contact=" + this.sys.game.playerContact + "&email=" + this.sys.game.playerEmail + "&score=" + this.score + "&key=t");
 
     // console.log("saving done");
     // this.music.stop();
@@ -474,6 +474,27 @@ export default class Game extends Phaser.Scene {
   }
 
 
+  // CaesarCipher(str, num) {
 
+  //     var result = '';
+  //     var charcode = 0;
+
+  //     for (var i = 0; i < str.length; i++) {
+  //         charcode = (str[i].charCodeAt()) + num;
+  //         result += String.fromCharCode(charcode);
+  //     }
+  //     return result;
+
+  // }
+
+  //  makeid(length) {
+  //    var result           = '';
+  //    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //    var charactersLength = characters.length;
+  //    for ( var i = 0; i < length; i++ ) {
+  //       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  //    }
+  //    return result;
+  // }
 
 }

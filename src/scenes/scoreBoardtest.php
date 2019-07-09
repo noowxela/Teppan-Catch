@@ -62,7 +62,7 @@ if(count($rank_top4) == 5){
     array_pop($rank_top4);
 }
 
-echo ('{"scoreBoard": [');
+echo ('{"scoreBoard1": [');
 
 for ($x = 0; $x < count($rank_top4); $x++) {
         echo ('{'.'"rank":"'.$rank_top4[$x][3]

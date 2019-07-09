@@ -3,11 +3,17 @@ header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:POST, GET');  
 header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
-$database = "u233241291_game";
+$database = "u233241291_game2";
 $host = "127.0.0.1";
-$user = "u233241291_game";
-$password = "N4KrvACxDgy9";
+$user = "u233241291_too";
+$password = "Hsilrnmit2Yd";
 
+$key = $_POST['key'];
+if($key != 't'){
+
+	die('hack failed');
+}
+echo 23;
 $name = $_POST['name'];
 $contact = $_POST['contact'];
 $email = $_POST['email'];
