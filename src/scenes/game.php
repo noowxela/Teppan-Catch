@@ -32,6 +32,11 @@ $contact 	= $playerdata[1];
 $email 		= $playerdata[2];
 $score 		= $playerdata[3];
 
+
+if($score > 160){
+    die();
+}
+
 $con = mysqli_connect($host,$user,$password) or ("Cannot connect!" .mysqli_error($con));
 if (!$con)
 	die('Error could not connect: ' . mysql_error());

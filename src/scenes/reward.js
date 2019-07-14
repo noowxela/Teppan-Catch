@@ -25,17 +25,17 @@ export default class Prize extends Phaser.Scene {
   preload() {
     this.width = this.sys.game.canvas.getAttribute("width");
     this.height = this.sys.game.canvas.getAttribute("height");
-    this.load.image('reward_background', 'assets/reward_background.png');
+    this.load.image('reward_background', 'assets/reward_background_3.png');
     this.load.image('logo', 'assets/logo.png');
     this.load.image('reward_logoTitle', 'assets/logo-title-white.png');
     this.load.image('shareButton', 'assets/share_button.png');
     this.load.image('play_again', 'assets/play_again.png');
 
-    this.load.image('set1_normalProduct', 'assets/reward/set1_normalProduct.png');
-    this.load.image('set1_expertProduct', 'assets/reward/set1_expertProduct.png');
-    this.load.image('reward_1', 'assets/reward/set1_reward1.png');
-    this.load.image('reward_2', 'assets/reward/set1_reward2.png');
-    this.load.image('reward_3', 'assets/reward/set1_reward3.png');
+    this.load.image('set03_normalProduct', 'assets/reward/set3_normalProduct.png');
+    this.load.image('set03_expertProduct', 'assets/reward/set3_expertProduct.png');
+    this.load.image('last_low_class_vouncher', 'assets/reward/set3_reward1.png');
+    this.load.image('last_medium_vouncher', 'assets/reward/set3_reward2.png');
+    this.load.image('rice_vouncher', 'assets/reward/set3_reward3.png');
     this.load.image('shareButton', 'srr/scenes/shareButton.png');
 
   }
@@ -55,8 +55,8 @@ export default class Prize extends Phaser.Scene {
       this.scoreLV = this.add.text(this.width/2, 420, 'rookie level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(0.85).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_1').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set03_normalProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'last_low_class_vouncher').setScale(rewardScale).setOrigin(0.5,0.5);
 
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 1")
     }else if(this.sys.game.playerScore <=100){
@@ -64,16 +64,16 @@ export default class Prize extends Phaser.Scene {
       this.scoreLV = this.add.text(this.width/2, 350, 'intermediate \n       level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_normalProduct').setScale(0.85).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_2').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set03_normalProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'last_medium_vouncher').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 2")
     }else{
       // console.log("reward 3");
       this.scoreLV = this.add.text(this.width/2, 420, 'expert level', this.captionStyle).setOrigin(0.5,0);
       this.score = this.add.text(this.width/2, 490, this.sys.game.playerScore+' PTS', this.scoreStlye).setOrigin(0.5,0);
       
-      this.product = this.add.image(this.width/2, this.height, 'set1_expertProduct').setScale(0.85).setOrigin(0.5,1);
-      this.reward = this.add.image(this.width/2, this.height/2+50, 'reward_3').setScale(rewardScale).setOrigin(0.5,0.5);
+      this.product = this.add.image(this.width/2, this.height, 'set03_expertProduct').setScale(0.85).setOrigin(0.5,1);
+      this.reward = this.add.image(this.width/2, this.height/2+50, 'rice_vouncher').setScale(rewardScale).setOrigin(0.5,0.5);
       this.sendEmail(this.sys.game.playerEmail,this.sys.game.playerName,"Gift 3")
     }
 
