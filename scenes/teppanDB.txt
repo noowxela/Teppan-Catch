@@ -1,0 +1,9 @@
+CREATE TABLE user(
+    user_id int unsigned NOT NULL AUTO_INCREMENT,
+    user_name varchar(255) NOT NULL,
+    user_contact varchar(255) NOT NULL,
+    user_email varchar(255) NOT NULL,
+    score int unsigned NOT NULL,
+    subscribe bool NOT NULL,
+    PRIMARY KEY (user_id)
+)
