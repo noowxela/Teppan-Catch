@@ -1,98 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-     <meta property="og:url"           content="http://pepperlunchgame.com/" />
-      <meta property="og:type"          content="website" />
-      <meta property="og:title"         content="Pepper Lunch Game" />
-      <meta property="og:description"   content="Collect as many as ingredients as possible within the time limit. Top 3 Players will stand to win $250 worth of pepper lunch vouchers" />
-      <meta property="og:image"         content="http://pepperlunchgame.com/banner.jpg" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="mobile-web-app-capable" content="yes">
 
-    <style media='screen' type='text/css'>
-    html{position: relative; height: 100%; overflow: hidden;}
-      @font-face {
-        font-family: heavitas;
-        src: url('assets/fonts/Heavitas.ttf');
-        font-weight: 400;
-        font-weight: normal;
-      }
-      body{
-      	margin: 0;
-        background: #333333;
-      }
-      input {
-        border: none;
-        overflow: auto;
-        outline: none;
-        opacity: 0;
-        pointer-events: none;
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <title>Tappen Catch</title>
 
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
+  <meta property="og:url" content="http://pepperlunchgame.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Pepper Lunch Game" />
+  <meta property="og:description"
+    content="Collect as many as ingredients as possible within the time limit. Top 3 Players will stand to win $250 worth of pepper lunch vouchers" />
+  <meta property="og:image" content="http://pepperlunchgame.com/banner.jpg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes">
 
-        resize: none; /*remove the resize handle on the bottom right*/
-        border-radius: 20px;
-        text-align: center;
-        font-size: 36px;
+  <style media='screen' type='text/css'>
+    #form {
+      background: black;
+      width: 600px;
+      height: 390px;
+      position: fixed;
+      left: 200px;
+      top: 585px;
+      border-radius: 20px;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        padding: 15px 2px;
-        position: relative;
-        left: 50%;
-        margin: 30px 0 15px 0;
-        transform: translateX(-50%);
-      }
-      input[type="text"] {
-        width: 455px;
-        min-width: 455px;
-        max-width: 455px;
-      }
-      #form{
-        background: black;
-        width: 600px;
-        height: 390px;
-        position: fixed;
-        left: 200px;
-        top: 585px;
-        border-radius: 20px;
-        opacity: 0;
-        pointer-events: none;
-      }
-      #warning{
-        text-align: center;
-        font-family: "heavitas";
-        /*padding: 50px 10px;*/
-      }
-      #phaser-game{
-        margin: 35px;
-      }
-	</style>
-  </head>
-  <body>
+    #warning {
+      text-align: center;
+      font-family: "heavitas";
+      /*padding: 50px 10px;*/
+    }
+  </style>
+</head>
 
-    <audio id="background" loop="loop">
-      <source src="assets/audios/BackgroundMusic01.ogg" type="audio/ogg">
-      <source src="assets/audios/BackgroundMusic01.wav" type="audio/wav">
-    </audio>
-  	<div style="font-family:heavitas; position:absolute; left:-1000px; visibility:hidden;">.</div>
-    <div id="phaser-game">
-    </div>
-    <div id="warning">
-      
-    </div>
-    <div id="form">
-      <input type="text" autocomplete="off" id="name" placeholder="Name" ></input>
-      <input type="text" autocomplete="off" id="contact" placeholder="Phone(e.g.XXXXXXXX)"></input>
-      <input type="text" autocomplete="off" id="email" placeholder="Email" ></input>
-    </div>
+<body>
 
-    <script type="text/javascript">
-      addEventListener("load", function() {
-          window.scrollTo(1, 0);
-      }, false);
-    </script>
+  <div id="form">
+    <input type="text" autocomplete="off" id="name" placeholder="Name"></input>
+    <input type="text" autocomplete="off" id="contact" placeholder="Phone(e.g.XXXXXXXX)"></input>
+    <input type="text" autocomplete="off" id="email" placeholder="Email"></input>
+  </div>
 
-  </body>
+  <div id="game"></div>
+  <div id="warning"></div>
+
+  <script src="libs/phaser.min.js"></script>
+  <script src="libs/scrollcam.umd.js"></script>
+  <script type="module" src="src/main.js"></script>
+
+
+  <script type="text/javascript">
+    addEventListener("load", function () {
+      window.scrollTo(1, 0);
+    }, false);
+  </script>
+
+</body>
+
 </html>

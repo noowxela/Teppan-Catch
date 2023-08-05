@@ -11,80 +11,122 @@ export default class ScoreBoard extends Phaser.Scene {
     };
     this.caption = null;
 
+    
     this.rank ={
       "scoreBoard": [
         {
-          "rank": null,
-          "name": null,
-          "point": null,
-          "player_id": null,
-          "email": null,
-          "contact": null
+          "rank": 1,
+          "name": "alee",
+          "point": 2568,
+          "player_id": 1,
+          "email": "em1",
+          "contact": "0149101991"
         },
         {
-          "rank": null,
-          "name": null,
-          "point": null,
-          "player_id": null,
-          "email": null,
-          "contact": null
+          "rank": 2,
+          "name": "dustinpor",
+          "point": 888,
+          "player_id": 2,
+          "email": "em2",
+          "contact": "0149101992"
 
         },
         {
-          "rank": null,
-          "name": null,
-          "point": null,
-          "player_id": null,
-          "email": null,
-          "contact": null
+          "rank": 3,
+          "name": "jonwee",
+          "point": 666,
+          "player_id": 3,
+          "email": "em3",
+          "contact": "0149101993"
 
         },
         {
-          "rank": null,
-          "name": null,
-          "point": null,
-          "player_id": null,
-          "email": null,
-          "contact": null
+          "rank": 4,
+          "name": "olivera",
+          "point": 456,
+          "player_id": 4,
+          "email": "em4",
+          "contact": "0149101994"
 
         },
         {
-          "rank": null,
-          "name": null,
-          "point": null,
-          "player_id": null,
-          "email": null,
-          "contact": null
+          "rank": 5,
+          "name": "theRock",
+          "point": 123,
+          "player_id": 5,
+          "email": "em5",
+          "contact": "0149101999"
 
         }
       ]
     };
+
+    // this.rank ={
+    //   "scoreBoard": [
+    //     {
+    //       "rank": null,
+    //       "name": null,
+    //       "point": null,
+    //       "player_id": null,
+    //       "email": null,
+    //       "contact": null
+    //     },
+    //     {
+    //       "rank": null,
+    //       "name": null,
+    //       "point": null,
+    //       "player_id": null,
+    //       "email": null,
+    //       "contact": null
+
+    //     },
+    //     {
+    //       "rank": null,
+    //       "name": null,
+    //       "point": null,
+    //       "player_id": null,
+    //       "email": null,
+    //       "contact": null
+
+    //     },
+    //     {
+    //       "rank": null,
+    //       "name": null,
+    //       "point": null,
+    //       "player_id": null,
+    //       "email": null,
+    //       "contact": null
+
+    //     },
+    //     {
+    //       "rank": null,
+    //       "name": null,
+    //       "point": null,
+    //       "player_id": null,
+    //       "email": null,
+    //       "contact": null
+
+    //     }
+    //   ]
+    // };
 
   }
 
   preload() {
     this.width = this.sys.game.canvas.getAttribute("width");
     this.height = this.sys.game.canvas.getAttribute("height");
-    this.load.image('background', 'assets/background.png');
-    this.load.image('logo', 'assets/logo.png');
-    this.load.image('logoTitle', 'assets/logo-title.png');
-    this.load.image('welcomeTitle', 'assets/welcome-title.png');
-    this.load.image('scoreboard', 'assets/scoreboard.png');
-    this.load.image('redbar', 'assets/redbar.png');
-    this.load.image('product', 'assets/product.png');
     // this.load.html('fbShare', 'src/scenes/fbShare.html');
-
   }
-// 
+
   create() {
     
     this.pressed = false;
-    let background = this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
-    let logo = this.add.image(this.width/2, 150, 'logo').setScale(1.3);
-    let logoTitle = this.add.image(this.width/2, 320, 'logoTitle').setScale(1.3);
+    this.add.image(this.width/2, this.height/2, 'background').setScale(1.3,1.27);
+    this.add.image(this.width/2, 150, 'logo').setScale(1);
+    this.add.image(this.width/2, 320, 'logoTitle').setScale(0.5);
+    this.add.image(this.width/2, 470, 'welcomeTitle').setScale(0.6);
 
-    let welcomeTitle = this.add.image(this.width/2, 470, 'welcomeTitle').setScale(0.6);
-    let scoreboard = this.add.sprite(0, 620, 'scoreboard').setScale(1.3);
+    let scoreboard = this.add.sprite(0, 620, 'scoreboard').setScale(1);
     
     this.tweens.add({ 
         targets: scoreboard,
@@ -95,9 +137,8 @@ export default class ScoreBoard extends Phaser.Scene {
         // repeat: -1,            // -1: infinity
     });
 
-    let product = this.add.image(this.width/2, 1440, 'product').setScale(1);
-
-    this.getfromDB();
+    // this.getfromDB();
+    this.updateText();
   }
 
   update() {

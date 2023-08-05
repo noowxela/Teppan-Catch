@@ -1,3 +1,13 @@
+import {
+  GRAVITY_LEVELS,
+  MILLISECONDS_PER_FRAME,
+  SOFTDROP_DELAY,
+  PIECE_TYPES,
+  COOKIE_LAST,
+  COOKIE_TOP
+} from '../prefabs/constants.js';
+import * as h from '../prefabs/helpers.js';
+
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' })
@@ -44,7 +54,7 @@ export default class Game extends Phaser.Scene {
     this.scoreStyle = {
       fill: '#ffffff',
       fontFamily: 'heavitas',
-      fontSize: 60 ,
+      fontSize: 20 ,
       lineSpacrring: 6
   };
 
@@ -71,62 +81,64 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background', 'assets/background.png');
-    
-    this.load.image('heart', 'assets/heart.png');
-    this.load.image('timeBase', 'assets/timeBase.png');
-    this.load.image('timeBar', 'assets/100bar.png');
-    this.load.image('smallbar', 'assets/smallbar.png');
-    this.load.image('smallpot', 'assets/smallpot.png');
-    this.load.image('gift', 'assets/gift.png');
-    
-    this.load.image('teppan', 'assets/teppan.png');
-    this.load.image('crumpled_paper', 'assets/rubbish.png');
-    this.load.image('spoon', 'assets/spoon.png');
-
-    this.load.spritesheet('vegepack', 'assets/vegepack.png',
-         { frameWidth: 237, frameHeight: 203 }    );
-    this.load.spritesheet('meatpack', 'assets/steakv2.png',
-         { frameWidth: 222, frameHeight: 127 }    );
-
-    this.load.image('playButton', 'assets/play-button.png');
-    
-    // this.load.image('blackBar', 'assets/blackBar.png');
-
-
-    this.load.audio('collectSuccess', ['assets/audios/bubble.wav','assets/audios/bubble.ogg']);
-    this.load.audio('collectFailed', ['assets/audios/knockpot.wav','assets/audios/knockpot.ogg']);
-    // this.load.audio('background', ['assets/audios/BackgroundMusic01.wav','assets/audios/BackgroundMusic01.ogg']);
+    this.gameWidth = this.sys.game.canvas.getAttribute("width");
+    this.gameHeight = this.sys.game.canvas.getAttribute("height");
+    this.gamerun = 1;
   }
 
   create() {
-    // this.music = this.sound.add('background',{loop:true});
-    // this.music.play();
-    document.getElementById("background").play(); 
-
-    this.gameWidth = this.sys.game.canvas.getAttribute("width");
-    this.gameHeight = this.sys.game.canvas.getAttribute("height");
-    
-    this.gamerun = 1;
-    
+    // Background
     this.add.image(
       this.gameWidth/2,
-      this.gameHeight/2, 'background').setScale(1.5);
+      this.gameHeight/2, 'background').setScale(1);
       
+    // Music
+    this.music_gameover = this.sound.add('gameover');
+    this.music_ingame = this.sound.add('gameBGM', { volume: 1, loop: true });
+    this.music_ingame.play();
+    
+    // UI GAME OVER
+    this.ui_gameover_1 = this.add.text(330, 446, 'GAME OVER', { fontSize: 52, align: 'center', fill: '#000000', fontStyle: 'bold' })
+        .setOrigin(0.5).setDepth(102)
+        .setVisible(false);
+    this.ui_gameover_2 = this.add.text(330, 510, '-SCORE-', { fontSize: 48, align: 'center', fill: '#000000' })
+        .setOrigin(0.5).setDepth(102)
+        .setVisible(false);
+    this.ui_gameover_score = this.add.text(330, 580, '', { fontSize: 48, align: 'center', fill: '#000000', fontStyle: 'bold' })
+        .setOrigin(0.5).setDepth(100)
+        .setVisible(false);
+    this.ui_gameover_click = this.add.text(330, 900, 'click to continue', { fontSize: 24, align: 'center', fill: '#000000' })
+        .setOrigin(0.5).setDepth(102)
+        .setVisible(false);
+    this.ui_higscore = this.add.image(330, 740, 'highscore')
+        .setScale(0.9).setDepth(102)
+        .setAngle(-20)
+        .setAlpha(0.5)
+        .setVisible(false);
+
+        
+    //// Sounds
+    this.snd_explosion = this.sound.add('explosion');
+    this.snd_line = this.sound.add('line');
+    this.snd_spin = this.sound.add('spin').setVolume(0.8);
+    this.snd_down = this.sound.add('knock').setVolume(0.4);
+    this.snd_levelup = this.sound.add('levelup');
+    this.snd_score4 = this.sound.add('score4');
+    this.snd_move = this.sound.add('move').setVolume(0.4);
+
   // foods produce logic
     // this.caption = this.add.text(50, this.gameHeight/4*1, '', this.captionStyle);
-
-    this.heart = this.add.image(30, 50, 'heart').setScale(1.3).setOrigin(0,0).setDepth(101);
-    this.timeBase = this.add.image(300, 100, 'timeBase').setScale(0.3).setDepth(100);
-    this.timeBar = this.add.image(100, 65, 'timeBar').setScale(0.3).setOrigin(0,0).setDepth(100);
     
-    this.smallbar = this.add.image(this.gameWidth-15, 100, 'smallbar').setScale(1.6).setOrigin(1,0.5).setDepth(100);
-    this.smallpot = this.add.image(this.gameWidth-280, 100, 'smallpot').setScale(1.3).setDepth(100);
-     
-    //scoretext & timerText
-    // this.stateText = this.add.text(this.gameWidth/2, this.gameHeight/2, '', this.stateStyle).setOrigin(0.5,0);
-    this.scoreText = this.add.text(this.gameWidth-205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
-    this.timerText = this.add.text(205, 100, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
+    this.heart = this.add.image(30, 50, 'heart').setScale(0.8).setOrigin(0,0).setDepth(101);
+    this.timeBase = this.add.image(200, 80, 'timeBase').setScale(0.15).setDepth(100);
+    this.timeBar = this.add.image(100, 62, 'timeBar').setScale(0.15).setOrigin(0,0).setDepth(100);
+    // timerText
+    this.timerText = this.add.text(185, 80, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
+    
+    this.smallpot = this.add.image(this.gameWidth-190, 80, 'smallpot').setScale(0.8).setDepth(101);
+    this.smallbar = this.add.image(this.gameWidth-15, 80, 'smallbar').setScale(1).setOrigin(1,0.5).setDepth(100);
+    // scoretext
+    this.scoreText = this.add.text(this.gameWidth-110, 80, '', this.scoreStyle).setOrigin(0,0.3).setDepth(100);
     
     // event
     var rangeX = Array(5);
@@ -141,11 +153,10 @@ export default class Game extends Phaser.Scene {
     this.timerEvents.push(
       this.time.addEvent({
         delay: 30000,
-        // delay: 3000,
         callback: () => {
           this.scene.pause();
-          this.saveIntoDB();
-
+          // this.saveIntoDB();
+          this.onGameOver();
         },
         callbackScope: this,
       })  
@@ -192,11 +203,11 @@ export default class Game extends Phaser.Scene {
 
           // }
 
-          var vegepack = this.veges.get(
+          this.veges.get(
               Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'vegepack',Phaser.Math.Between(0, 3)
-          ).setScale(0.9);
+          ).setScale(0.5);
         }
       })
     )
@@ -215,11 +226,11 @@ export default class Game extends Phaser.Scene {
 
           var i = Phaser.Math.Between(0,4)
 
-          var meatpack = this.meats.get(
+          this.meats.get(
               Phaser.Math.Between(120, rangeX[i]), 
               Phaser.Math.Between(-200, 0),
               'meatpack',Phaser.Math.Between(0, 1)
-          );
+          ).setScale(0.5);
         }
       })
     )
@@ -242,7 +253,7 @@ export default class Game extends Phaser.Scene {
             var x = Phaser.Math.Between(120, this.gameWidth-120);
             var y = -200;
             
-            var spoon = this.spoon.create(rangeX[i],y,'spoon').setScale(1);
+            var spoon = this.spoon.create(rangeX[i],y,'spoon').setScale(0.5);
           }
       })
     )
@@ -265,7 +276,7 @@ export default class Game extends Phaser.Scene {
             var x = Phaser.Math.Between(120, this.gameWidth-120);
             var y = -200;
             
-            var bomb = this.bombs.create(rangeX[i],y,'crumpled_paper').setScale(1.3);
+            var bomb = this.bombs.create(rangeX[i],y,'crumpled_paper').setScale(1);
           }
       })
     )
@@ -335,7 +346,7 @@ export default class Game extends Phaser.Scene {
     });
 
     // create player tappen
-    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight - 10, 'teppan').setScale(0.2);
+    this.player = this.physics.add.sprite(this.gameWidth/2, this.gameHeight - 10, 'teppan').setScale(0.1);
     this.player.setCollideWorldBounds(true);
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -503,4 +514,57 @@ export default class Game extends Phaser.Scene {
   //    return result;
   // }
 
+  //// Event handlers
+  onGameOver() {
+    this.isGameOver = true;
+
+    this.input.keyboard.removeAllKeys();
+
+    this.music_ingame.stop();
+
+    this.music_gameover.play();
+    this.music_gameover.on('complete', () => {
+      this.onExplodeAll();
+    });
+  }
+
+  onExplodeAll() {
+    // Print game over
+    this.ui_gameover_1.setVisible(true);
+    this.ui_gameover_2.setVisible(true);
+    this.ui_gameover_score.setText(this.scoreText.text);
+    this.ui_gameover_score.setVisible(true);
+
+    this.snd_levelup.play();
+
+    let t = this;
+    this.tweens.add({
+        targets: [t.ui_gameover_1, t.ui_gameover_2, t.ui_gameover_score],
+        scale: 1.2,
+        yoyo: true,
+        duration: 100,
+        delay: 0
+    });
+
+    // Check scores
+    let topScore = h.getCookie(COOKIE_TOP);
+    topScore = topScore ? parseInt(topScore) : 0;
+    if (this.score > topScore) {
+        h.setCookie(COOKIE_TOP, this.score, 365);
+        setTimeout(() => {
+            this.ui_higscore.setVisible(true);
+            this.snd_line.play();
+            this.cameras.main.shake(60, 0.03);
+            setTimeout(() => {
+                this.snd_score4.play();
+                this.ui_gameover_click.setVisible(true);
+                this.scene.start('ScoreBoard');
+            }, 500);
+        }, 1500);
+    } else {
+        this.ui_gameover_click.setVisible(true);
+        this.scene.start('ScoreBoard');
+    }
+    h.setCookie(COOKIE_LAST, this.score, 365);
+  }
 }
