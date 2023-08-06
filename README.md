@@ -14,7 +14,8 @@ Loading images via JavaScript module `import` is also supported.
 | Command | Description |
 |---------|-------------|
 | `npm install` | Install project dependencies |
-| `npm start` | Build project and open web server running project |
+| `npm deploy` | Deploy to github page |
+| `npm start` | Build project and open web server running project on http://localhost:8080 |
 | `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
 
 ## Writing Code
